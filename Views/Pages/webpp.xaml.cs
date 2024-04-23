@@ -81,7 +81,7 @@ namespace Awake.Views.Pages
                 GetSystemInfo();
                 File.WriteAllText(@".AI_launther_log\startpath.txt", "暂未设置部署路径");
                 磁盘剩余显示.Text = "磁盘剩余空间：未知";
-              
+
                 工作路径展示.Text = initialize.工作路径;
 
                 if (initialize.gitPath != "")
@@ -585,6 +585,31 @@ namespace Awake.Views.Pages
             下载组.Visibility = Visibility.Visible;
             WebUI下载按钮.Content = "安装完毕，点击一键启动";
             initialize.已安装WebUI = true;
+
+            if (File.Exists(initialize.工作路径 + @"\WebUIpackcatch.7z"))
+            {
+
+                File.Delete(initialize.工作路径 + @"\WebUIpackcatch.7z");
+
+            }
+            if (File.Exists(initialize.工作路径 + @"WebUIpackcatch.7z"))
+            {
+
+                File.Delete(initialize.工作路径 + @"WebUIpackcatch.7z");
+
+            }
+
+            if (Directory.Exists(initialize.工作路径 + @"\2.0.9"))
+            {
+                // 3.1、删除文件夹
+                Directory.Delete((initialize.工作路径 + @"\2.0.9"), true);
+            }
+            if (Directory.Exists(initialize.工作路径 + @"2.0.9"))
+            {
+                // 3.1、删除文件夹
+                Directory.Delete((initialize.工作路径 + @"2.0.9"), true);
+            }
+
 
         }
 

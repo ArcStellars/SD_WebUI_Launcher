@@ -85,7 +85,7 @@
                             <ui:Card Width="450"  Height="100" Margin="0,0,0,2" Background="#0FFFFFFF" >
                                 <StackPanel Height="100">
                                     <TextBlock Text="常用设置" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                                    <TextBlock Text="WebUI通用设置" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
+                                    <TextBlock Text="WebUI通用设置(旧版本中部分参数并不生效,请删减参数)" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
                                 </StackPanel>
 
                             </ui:Card>
@@ -129,7 +129,7 @@
                             <ui:Card Width="450"  Height="100" Margin="0,0,0,2" Background="#0FFFFFFF" >
                                 <StackPanel Height="100">
                                     <TextBlock Text="性能设置" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                                    <TextBlock Text="WebUI性能设置" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
+                                    <TextBlock Text="WebUI性能设置(旧版本中部分优化并不生效,请删减参数)" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
                                 </StackPanel>
 
                             </ui:Card>

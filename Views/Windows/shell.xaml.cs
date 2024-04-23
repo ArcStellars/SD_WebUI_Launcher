@@ -114,13 +114,12 @@ namespace Awake.Views.Windows
   
             }
             //这里开始从initilize中被处理过的参数变量进行初始化
-            参数列表 += " --log-startup";
 
             if (浏览器启动 == true) { 参数列表 += " --autolaunch"; }
 
             if (关闭模型hash计算 == true) { 参数列表 += " --no-hashing "; }
 
-            if (启动api == true) { 参数列表 += "  --api"; }
+            if (启动api == true) { 参数列表 += " --api"; }
 
             if (快速启动 == true) { 参数列表 += " --ui-debug-mode --disable-safe-unpickle "; }
 

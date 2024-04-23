@@ -1,20 +1,12 @@
-﻿using 光源AI绘画盒子.Views.Windows;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media;
-using System.Windows.Navigation;
-using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
-using 光源AI绘画盒子;
-using 光源AI绘画盒子.Views.Pages;
 
-namespace 光源AI绘画盒子.ViewModels
+namespace Awake.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {
@@ -41,7 +33,7 @@ namespace 光源AI绘画盒子.ViewModels
             initialize.相册计数();//获取相册数量
             if (!_isInitialized)
                 InitializeViewModel();
-           
+
         }
 
         private void InitializeViewModel()
@@ -52,14 +44,12 @@ namespace 光源AI绘画盒子.ViewModels
             {
                 new NavigationItem()
                 {
-                          //Background = new SolidColorBrush(Color.FromRgb(255,61,72)),
-   
-            Width = 140,
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "盒子首页",
                     PageTag = "dashboard",
                     Icon = SymbolRegular.Desktop24,
-                    PageType = typeof(DashboardPage)
+                    PageType = typeof(Views.Pages.DashboardPage)
                 },
                 //                new NavigationItem()
                 //{
@@ -78,7 +68,7 @@ namespace 光源AI绘画盒子.ViewModels
                     Content = "高级选项",
                     PageTag = "data",
                     Icon = SymbolRegular.Wrench24,
-                    PageType = typeof(DataPage)
+                    PageType = typeof(Views.Pages.DataPage)
                 },
                 new NavigationItem()
                 {
@@ -87,8 +77,8 @@ namespace 光源AI绘画盒子.ViewModels
                     Content = "安装中心",
                     PageTag = "web",
                     Icon = SymbolRegular.WrenchScrewdriver24,
-                    PageType = typeof(webpp)
-       
+                    PageType = typeof(Views.Pages.webpp)
+
                 }
             };
             //NavigationItem _change_ui_color = new NavigationItem()
@@ -105,7 +95,7 @@ namespace 光源AI绘画盒子.ViewModels
             NavigationFooter = new ObservableCollection<INavigationControl>
             {
 
-       
+
                 new NavigationItem()
                 {
                     Width = 140,
@@ -113,7 +103,7 @@ namespace 光源AI绘画盒子.ViewModels
                     Content = "关于盒子",
                     PageTag = "settings",
                     Icon = SymbolRegular.Info24,
-                    PageType = typeof(SettingsPage)
+                    PageType = typeof(Views.Pages.SettingsPage)
                 }
             };
 
@@ -131,6 +121,6 @@ namespace 光源AI绘画盒子.ViewModels
 
         }
 
-      
+
     }
 }

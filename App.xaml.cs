@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Awake.Models;
+using Awake.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
@@ -7,11 +9,8 @@ using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.Mvvm.Services;
-using 光源AI绘画盒子.Models;
-using 光源AI绘画盒子.Services;
-using 光源AI绘画盒子.Views.Pages;
 
-namespace 光源AI绘画盒子
+namespace Awake
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -48,13 +47,12 @@ namespace 光源AI绘画盒子
                 services.AddScoped<ViewModels.MainWindowViewModel>();
 
                 // Views and ViewModels
-                services.AddScoped<DashboardPage>();
+                services.AddScoped<Views.Pages.DashboardPage>();
                 services.AddScoped<ViewModels.DashboardViewModel>();
-                services.AddScoped<DataPage>();
+                services.AddScoped<Views.Pages.DataPage>();
                 services.AddScoped<ViewModels.DataViewModel>();
-                services.AddScoped<SettingsPage>();
-                services.AddScoped<webpp>();
-                services.AddScoped<a2>();
+                services.AddScoped<Views.Pages.SettingsPage>();
+                services.AddScoped<Views.Pages.webpp>();
                 services.AddScoped<ViewModels.SettingsViewModel>();
 
                 // Configuration

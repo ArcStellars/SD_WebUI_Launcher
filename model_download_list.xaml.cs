@@ -1,31 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using static System.Net.WebRequestMethods;
-
-namespace 光源AI绘画盒子
+namespace Awake
 {
-
-
-
 
 
     /// <summary>
@@ -45,21 +28,17 @@ namespace 光源AI绘画盒子
 
         string downloadUrl = string.Empty;
         string modelNme = string.Empty;
-        private Thread downloadThread;
-        private int progress = 0;
-
-        private long _downloadedBytes = 0;
-        private long _totalBytes = 0;
-        private DateTime _startTime;
         DateTime startTime = DateTime.Now;
         long totalBytesRead = 0;
         string 模型保存路径 = string.Empty;
         string 模型保存名称 = string.Empty;
         string _uuid = string.Empty;
-        public model_download_list(string uuid, string _模型名, string _modelname, string _modelVersionId, string _modelSourceName, string _modelSource, string _modelSourceSize, string _modelSourceHash, string _modelType)
+        string _Hash = "";
+        public model_download_list(string _versionDesc, string uuid, string _模型名, string _modelname, string _modelVersionId, string _modelSourceName, string _modelSource, string _modelSourceSize, string _modelSourceHash, string _modelType)
         {
             InitializeComponent();
             _uuid = uuid;
+            _Hash = GenerateHash(initialize.工作路径);
             if (_modelType == "Checkpoint")
             {
                 模型保存路径 = initialize.工作路径 + "\\models\\Stable-diffusion";
@@ -103,14 +82,36 @@ namespace 光源AI绘画盒子
 
 
 
-
             模型名称.Text = _modelname;
             模型版本ID.Text = "模型版本ID：" + _modelVersionId;
             模型文件名称.Text = "模型文件名称：" + _modelSourceName;
             模型下载源.Text = "模型下载地址：" + _modelSource;
             模型大小.Text = "模型文件大小：" + _modelSourceSize;
             模型hash.Text = "模型文件Hash：" + _modelSourceHash;
-
+            if (模型名称.Text == "")
+            {
+                模型名称.Text = "未知";
+            }
+            if (模型版本ID.Text == "模型版本ID：")
+            {
+                模型版本ID.Text = "模型版本ID：" + "未知";
+            }
+            if (模型文件名称.Text == "模型文件名称：")
+            {
+                模型文件名称.Text = "模型文件名称：" + "未知";
+            }
+            if (模型下载源.Text == "模型下载地址：")
+            {
+                模型下载源.Text = "模型下载地址：" + "未知";
+            }
+            if (模型大小.Text == "模型文件大小：")
+            {
+                模型大小.Text = "模型文件大小：" + "未知";
+            }
+            if (模型hash.Text == "模型文件Hash：")
+            {
+                模型hash.Text = "模型文件Hash：" + "未知\n\n\n";
+            }
             downloadUrl = _modelSource;
             modelNme = _modelname + _modelSourceName;
         }
@@ -129,13 +130,13 @@ namespace 光源AI绘画盒子
             request2.Headers.Add("Accept", "*/*");
             request2.Headers.Add("User-Agent", "Open-SD-WebUI-Launcher");
 
-            var bodyString = "{\"cid\":\"Open-SD-WebUI-Launcher\",\"e\":\"model.view.download\",  \"pageUrl\":\"Open-SD-WebUI-Launcher模型下载页\", \"sys\":\"Windows\",  \"ua\":\"Open-SD-WebUI-Launcher\",   \"var\":{},    \"var.download\":\"start\",     \"var.model_id\":\"" + _uuid + "\",     \"var.version_id\":\"1\"}";
+            var bodyString = "{\"cid\":\"" + _Hash + "\",\"e\":\"model.view.download\",  \"pageUrl\":\"Open-SD-WebUI-Launcher\", \"sys\":\"Windows\",  \"ua\":\"Open-SD-WebUI-Launcher\",   \"var\":{},    \"var.download\":\"start\",     \"var.model_id\":\"" + _uuid + "\",     \"var.version_id\":\"1\"}";
             var content = new StringContent(bodyString, Encoding.UTF8, "application/json");
             request2.Content = content;
 
             var response = await client.SendAsync(request2);
             var result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(result);
+
 
             if (is_downloaded == false)
             {
@@ -150,8 +151,8 @@ namespace 光源AI绘画盒子
                         Directory.CreateDirectory(模型保存路径);
                     }
                     下载按钮.IsEnabled = false;
-
-                    string modelpath = System.IO.Path.Combine(模型保存路径, 模型保存名称);
+                    string 模型特殊名称过滤 = 模型保存名称.Replace("[", "").Replace("]", "").Replace("(", "").Replace(")", "").Replace("!", "").Replace("@", "").Replace("#", "").Replace("%", "").Replace("^", "").Replace("&", "").Replace("*", "").Replace("(", "").Replace(")", "").Replace("+", "").Replace("|", "").Replace("~", "");
+                    string modelpath = System.IO.Path.Combine(模型保存路径, 模型特殊名称过滤);
                     WebRequest request = WebRequest.Create(downloadUrl);
                     WebResponse respone = request.GetResponse();
                     progressBar.Maximum = respone.ContentLength;
@@ -210,7 +211,7 @@ namespace 光源AI绘画盒子
                                 {
                                     下载按钮.Content = speedInfo;
                                     is_downloaded = true;
-                                    下载按钮.Content = "下载完成,保存在:" + initialize.工作路径 + " 点击打开";
+                                    下载按钮.Content = "下载完成,点击打开";
                                     下载按钮.IsEnabled = true;
 
                                 }), null);
@@ -297,11 +298,18 @@ namespace 光源AI绘画盒子
 
         }
 
+        public static string GenerateHash(string input)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            }
+        }
 
+        private void progressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
 
-
-
-
-
+        }
     }
 }

@@ -1,29 +1,20 @@
-﻿using 光源AI绘画盒子.Views.Pages;
+﻿using Awake.Views.Windows;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using 光源AI绘画盒子.Views.Windows;
 
-namespace 光源AI绘画盒子
+namespace Awake
 {
     /// <summary>
     /// modelCardshow.xaml 的交互逻辑
     /// </summary>
     public partial class modelCardshow : UserControl
     {
+        public static bool 允许打开模型 = true;
 
         string 模型_UUID = "";
         string _nickname = "";
@@ -36,43 +27,78 @@ namespace 光源AI绘画盒子
 
 
             //模型名称.Text = modelName;
-            LoadImageFromUrl(imageUrl, avatar);
-            void LoadImageFromUrl(string imageUrl, string avatar)
+            LoadImageFromUrlAsync(imageUrl, avatar);
+            async Task LoadImageFromUrlAsync(string imageUrl, string avatar)
             {
-                //HttpClient client1 = new HttpClient();
 
-                //var imageBytes1 = await client1.GetByteArrayAsync(imageUrl);
-                //var image1 = new BitmapImage();
-                //image1.BeginInit();
-                //image1.CacheOption = BitmapCacheOption.OnLoad;
-                //image1.CreateOptions = BitmapCreateOptions.DelayCreation;
-                //image1.StreamSource = new MemoryStream(imageBytes1);
-                //image1.EndInit();
 
                 // 将图片设置为Image控件的Source
-                // 
-                try
-                {
-                    BitmapImage 模型封面图 = new BitmapImage(new Uri(imageUrl));
-                    模型封面.ImageSource = 模型封面图;
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);//开发中调试窗口
-
-                }
 
                 try
                 {
-                    BitmapImage 作者头像图 = new BitmapImage(new Uri(avatar));
-                    作者头像.ImageSource = 作者头像图;
+                    HttpClient client1 = new HttpClient();
+                    try
+                    {
+                        var imageBytes1 = await client1.GetByteArrayAsync(imageUrl);
+                        var image1 = new BitmapImage();
+                        image1.BeginInit();
+                        image1.CacheOption = BitmapCacheOption.OnLoad;
+                        image1.CreateOptions = BitmapCreateOptions.DelayCreation;
+                        image1.StreamSource = new MemoryStream(imageBytes1);
+                        image1.EndInit();
+                        //BitmapImage 模型封面图 = new BitmapImage(new Uri(imageUrl));
+                        模型封面.ImageSource = image1;
+                    }
+                    catch (Exception error)
+                    {
+                        string str1 = error.Message;
+                        File.WriteAllText(@".\logs\error.txt", str1);
+                        throw;
+                    }
+
+
+                }
+                catch (System.IO.IOException ex)
+                {
+                    string str1 = ex.Message;
+                    File.WriteAllText(@".\logs\error.txt", str1);
+                    throw;
+
+                }
+
+                try
+                {
+                    HttpClient client1 = new HttpClient();
+
+                    var imageBytes1 = await client1.GetByteArrayAsync(avatar);
+                    try
+                    {
+                        var image1 = new BitmapImage();
+                        image1.BeginInit();
+                        image1.CacheOption = BitmapCacheOption.OnLoad;
+                        image1.CreateOptions = BitmapCreateOptions.DelayCreation;
+                        image1.StreamSource = new MemoryStream(imageBytes1);
+                        image1.EndInit();
+                        作者头像.ImageSource = image1;
+                    }
+                    catch (Exception error)
+                    {
+                        string str1 = error.Message;
+                        File.WriteAllText(@".\logs\error.txt", str1);
+                        throw;
+                    }
+
+
+                    //BitmapImage _avatarimage= new BitmapImage(new Uri(avatar));
+
 
                 }
                 catch (
-                Exception ex)
+             System.IO.IOException ex)
                 {
-                    MessageBox.Show(ex.Message);//开发中调试窗口
+                    string str1 = ex.Message;
+                    File.WriteAllText(@".\logs\error.txt", str1);
+                    throw;
                 }
 
             }
@@ -89,11 +115,8 @@ namespace 光源AI绘画盒子
 
         private void _modelCard_Click(object sender, RoutedEventArgs e)
         {
-
-
             Model_content model_Content = new Model_content(模型_UUID, _nickname, _avatar, _modelType, _imageURL);//继续传递模型的UUID参数，以便在详情页中继续请求简介/下载地址等
             model_Content.Show();
-
         }
     }
 }

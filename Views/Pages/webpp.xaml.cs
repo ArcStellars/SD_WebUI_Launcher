@@ -1,33 +1,16 @@
-﻿using System;
+﻿using Awake.Views.Windows;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static 光源AI绘画盒子.initialize;
-
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Threading;
+using static Awake.initialize;
 
-using Microsoft.Web.WebView2.Core.DevToolsProtocolExtension;
-using static System.Net.Mime.MediaTypeNames;
-using 光源AI绘画盒子;
-using 光源AI绘画盒子.Views.Windows;
-
-namespace 光源AI绘画盒子.Views.Pages
+namespace Awake.Views.Pages
 {
     /// <summary>
     /// webpp.xaml 的交互逻辑
@@ -42,8 +25,33 @@ namespace 光源AI绘画盒子.Views.Pages
 
         }
         public string speedInfo = "";
+
+        private void Read_setting_01()
+        {
+            string filePath = @".AI_launther_log\setting.txt"; // 文本文件路径
+
+            try
+            {
+                List<string> lines_setting = new List<string>();
+
+                // 使用 File.ReadAllLines 方法读取文本文件的所有行
+                lines_setting.AddRange(File.ReadAllLines(filePath));
+
+                // 在这里使用列表
+                if (lines_setting[7] == "True")
+                {
+                    启用自定义路径.IsChecked = true;
+                }
+
+            }
+            catch { }
+
+        }
+
         public async void GetSystemInfo()
         {
+            Read_setting_01();    //读取配置
+
             string cpuname = await Task.Run(() => hardinfo.GetCpuName());
             string Machinename = await Task.Run(() => hardinfo.GetComputerName());
             string systemType = await Task.Run(() => hardinfo.GetSystemType());
@@ -59,185 +67,243 @@ namespace 光源AI绘画盒子.Views.Pages
         }
         string downloadUrl = "https://liblibai-online.vibrou.com/web/SD_WebUI_Pack/2.0.9.7z";
         string Packname = "WebUIpackcatch.7z";//这里指定默认下载名称
-        private int progress = 0;
 
-        private long _downloadedBytes = 0;
-        private long _totalBytes = 0;
-        private DateTime _startTime;
         DateTime startTime = DateTime.Now;
         long totalBytesRead = 0;
 
-
         public webpp()
         {
-            InitializeComponent();
-            GetSystemInfo();
-            double freeSpaceGB = GetFreeSpaceGB(工作路径);
-            磁盘剩余显示.Text = $"磁盘剩余空间：{freeSpaceGB:0.00} GB";
-            if (freeSpaceGB == 0)
+
+            if (File.Exists(@".AI_launther_log\startpath.txt") == false)
             {
-                磁盘剩余显示.Text = $"";
 
-                磁盘剩余显示.Text += "";
-                return;
+                InitializeComponent();
+                GetSystemInfo();
+                File.WriteAllText(@".AI_launther_log\startpath.txt", "暂未设置部署路径");
+                磁盘剩余显示.Text = "磁盘剩余空间：未知";
+              
+                工作路径展示.Text = initialize.工作路径;
+
+                if (initialize.gitPath != "")
+                {
+                    Git路径展示.Text = initialize.gitPath;
+                }
+                else
+                {
+                    Git路径展示.Text = "暂未设置部署路径";
+                }
+
+                if (initialize.venvPath != "")
+                {
+                    VENV路径展示.Text = initialize.venvPath;
+
+                }
+                else
+                {
+                    VENV路径展示.Text = "暂未设置部署路径";
+                }
+
+                if (initialize.本地路径 != "")
+                {
+                    本地工作路径展示.Text = initialize.本地路径;
+
+                }
+                else
+                {
+                    本地工作路径展示.Text = "暂未设置部署路径";
+                }
+
+
             }
-            // 读取工作路径然后展示
-            CheckStartPathFile();
-            CheckPythonPathFile();
-            CheckgitPathFile();
-            CheckVENVPathFile();
 
+            try
+            {
+                InitializeComponent();
+                GetSystemInfo();
+                double freeSpaceGB = GetFreeSpaceGB(initialize.工作路径);
+                磁盘剩余显示.Text = $"磁盘剩余空间：{freeSpaceGB:0.00} GB";
+                if (freeSpaceGB == 0)
+                {
+                    磁盘剩余显示.Text = $"";
+
+                    磁盘剩余显示.Text += "";
+                    return;
+                }
+            }
+            catch
+            {
+                磁盘剩余显示.Text = "磁盘剩余空间：未知";
+            }
+
+
+            工作路径展示.Text = initialize.工作路径;
+            if (initialize.gitPath != "")
+            {
+                Git路径展示.Text = initialize.gitPath;
+            }
+            else
+            {
+                Git路径展示.Text = "暂未设置部署路径";
+            }
+
+            if (initialize.venvPath != "")
+            {
+                VENV路径展示.Text = initialize.venvPath;
+
+            }
+            else
+            {
+                VENV路径展示.Text = "暂未设置部署路径";
+            }
+
+            if (initialize.本地路径 != "")
+            {
+                本地工作路径展示.Text = initialize.本地路径;
+
+            }
+            else
+            {
+                本地工作路径展示.Text = "暂未设置部署路径";
+            }
 
             //检查WebUI安装状态
-            已下载WebUI = CheckWebUIdownloaded();
-            已安装WebUI = CheckWebUIinstelled();
-            已解压WebUI = CheckWebUIunzip();
-            if (已下载WebUI == true)
+            initialize.已下载WebUI = initialize.CheckWebUIdownloaded();
+            initialize.已安装WebUI = initialize.CheckWebUIinstelled();
+            initialize.已解压WebUI = initialize.CheckWebUIunzip();
+            if (initialize.已下载WebUI == true)
             {
-                if (已解压WebUI == false)//未解压：解压安装组控件
+                if (initialize.已解压WebUI == false)//未解压：解压安装组控件
                 {
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         下载组.Visibility = Visibility.Collapsed;//隐藏下载组控件
                         解压组.Visibility = Visibility.Visible;//显示解压组控件
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
-                if (已解压WebUI == true)
+                if (initialize.已解压WebUI == true)
                 {
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         下载组.Visibility = Visibility.Collapsed;//隐藏下载组控件
                         安装组.Visibility = Visibility.Visible;//显示解压组控件
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
 
             }
-            if (已下载WebUI == false)
+            if (initialize.已下载WebUI == false)
             {
 
-                if (已解压WebUI == false)//未解压：解压安装组控件
+                if (initialize.已解压WebUI == false)//未解压：解压安装组控件
                 {
 
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         WebUI下载按钮.Content = "一键下载";
 
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
-                if (已解压WebUI == true)
+                if (initialize.已解压WebUI == true)
                 {
 
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         磁盘剩余显示.Text += "未安装WebUI ";
 
                         下载组.Visibility = Visibility.Collapsed;//隐藏下载组控件
                         安装组.Visibility = Visibility.Visible;//显示解压组控件
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
 
             }
-
-
-
-            工作路径展示.Text = 工作路径;
-            Python路径展示.Text = pythonPath;
-            Git路径展示.Text = gitPath;
-            VENV路径展示.Text = venvPath;
-
-
-
 
         }
-
-
-
         private void 运行路径选择_Click(object sender, RoutedEventArgs e)
         {
-            选择工作路径();
+            initialize.选择工作路径();
             //检查WebUI安装状态
-            已下载WebUI = CheckWebUIdownloaded();
-            已安装WebUI = CheckWebUIinstelled();
-            已解压WebUI = CheckWebUIunzip();
-            if (已下载WebUI == true)
+            initialize.已下载WebUI = initialize.CheckWebUIdownloaded();
+            initialize.已安装WebUI = initialize.CheckWebUIinstelled();
+            initialize.已解压WebUI = initialize.CheckWebUIunzip();
+            if (initialize.已下载WebUI == true)
             {
-                if (已解压WebUI == false)//未解压：解压安装组控件
+                if (initialize.已解压WebUI == false)//未解压：解压安装组控件
                 {
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         下载组.Visibility = Visibility.Collapsed;//隐藏下载组控件
                         解压组.Visibility = Visibility.Visible;//显示解压组控件
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
-                if (已解压WebUI == true)
+                if (initialize.已解压WebUI == true)
                 {
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         下载组.Visibility = Visibility.Collapsed;//隐藏下载组控件
                         安装组.Visibility = Visibility.Visible;//显示解压组控件
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
 
             }
-            if (已下载WebUI == false)
+            if (initialize.已下载WebUI == false)
             {
 
-                if (已解压WebUI == false)//未解压：解压安装组控件
+                if (initialize.已解压WebUI == false)//未解压：解压安装组控件
                 {
 
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         WebUI下载按钮.Content = "一键下载";
 
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
-                if (已解压WebUI == true)
+                if (initialize.已解压WebUI == true)
                 {
 
-                    if (已安装WebUI == false)
+                    if (initialize.已安装WebUI == false)
                     {
                         磁盘剩余显示.Text += "未安装WebUI ";
 
                         下载组.Visibility = Visibility.Collapsed;//隐藏下载组控件
                         安装组.Visibility = Visibility.Visible;//显示解压组控件
                     }
-                    if (已安装WebUI == true)
+                    if (initialize.已安装WebUI == true)
                     {
                         WebUI下载按钮.Content = "一键启动";
                     }
                 }
 
             }
-            工作路径展示.Text = 工作路径;
-            double freeSpaceGB = GetFreeSpaceGB(工作路径);
+
+            工作路径展示.Text = initialize.工作路径;
+            double freeSpaceGB = GetFreeSpaceGB(initialize.工作路径);
             磁盘剩余显示.Text = $"磁盘剩余空间：{freeSpaceGB:0.00} GB";
             if (freeSpaceGB < 5)
             {
@@ -248,23 +314,38 @@ namespace 光源AI绘画盒子.Views.Pages
 
         }
 
-        private void Python路径选择_Click(object sender, RoutedEventArgs e)
+        private void 启用自定义路径_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            选择Python路径();
-            Python路径展示.Text = pythonPath;
+
+            if (启用自定义路径.IsChecked == true)
+            {
+                initialize.启用自定义路径 = true;
+            }
+            else
+            {
+                initialize.启用自定义路径 = false;
+
+            }
         }
 
         private void Git路径选择_Click(object sender, RoutedEventArgs e)
         {
-            选择Git路径();
+            initialize.选择Git路径();
             Git路径展示.Text = gitPath;
         }
 
         private void VENV路径选择_Click(object sender, RoutedEventArgs e)
         {
-            选择VENV路径();
+            initialize.选择VENV路径();
             VENV路径展示.Text = venvPath;
         }
+
+        private void 本地运行路径_Click(object sender, RoutedEventArgs e)
+        {
+            initialize.本地运行路径();
+            本地工作路径展示.Text = 本地路径;
+        }
+
 
         bool is_downloaded = false;
 
@@ -279,17 +360,17 @@ namespace 光源AI绘画盒子.Views.Pages
                 {
                     try
                     {
-                        if (Directory.Exists(工作路径))
+                        if (Directory.Exists(initialize.工作路径))
                         {
 
                         }
                         else
                         {
-                            Directory.CreateDirectory(工作路径);
+                            Directory.CreateDirectory(initialize.工作路径);
                         }
                         WebUI下载按钮.IsEnabled = false;
 
-                        string modelpath = System.IO.Path.Combine(工作路径, Packname);
+                        string modelpath = System.IO.Path.Combine(initialize.工作路径, Packname);
                         WebRequest request = WebRequest.Create(downloadUrl);
                         WebResponse respone = request.GetResponse();
                         progressBar.Maximum = respone.ContentLength;
@@ -315,7 +396,7 @@ namespace 光源AI绘画盒子.Views.Pages
                                 double elapsedSeconds = (currentTime - startTime).TotalSeconds;
                                 if (elapsedSeconds > 0)
                                 {
-                                    double downloadSpeed = totalBytesRead / elapsedSeconds / 1024; // KB/s
+                                    double downloadSpeed = (totalBytesRead / elapsedSeconds) / 1024; // KB/s
                                     if (downloadSpeed > 0)
                                     {
                                         speedInfo = $" 当前速度：{downloadSpeed:F2}  KB/s";
@@ -339,7 +420,7 @@ namespace 光源AI绘画盒子.Views.Pages
                             WebUI下载按钮.Dispatcher.BeginInvoke(new Action(() => WebUI下载按钮.Content = speedInfo), null);
                             WebUI下载按钮.Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                double freeSpaceGB = GetFreeSpaceGB(工作路径);
+                                double freeSpaceGB = GetFreeSpaceGB(initialize.工作路径);
                                 磁盘剩余显示.Text = $"磁盘剩余空间：{freeSpaceGB:0.00} GB";
                                 if (freeSpaceGB < 5)
                                 {
@@ -348,22 +429,22 @@ namespace 光源AI绘画盒子.Views.Pages
                                 }
                                 WebUI下载按钮.Content = speedInfo;
                                 下载组.Visibility = Visibility.Collapsed;
-                                WebUI下载按钮.Content = "下载完成,保存在:" + 工作路径 + " 点击解压";
-                                string filePath = 工作路径 + @"\WebUIpackcatch.7z";
+                                WebUI下载按钮.Content = "下载完成,保存在:" + initialize.工作路径 + " 点击解压";
+                                string filePath = initialize.工作路径 + @"\WebUIpackcatch.7z";
                                 if (File.Exists(filePath))
                                 {
                                     // 如果文件存在，将其改名为WebUIpack.7z  
                                     string renamedFilePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(filePath), "WebUIpack.7z");
                                     File.Move(filePath, renamedFilePath);
-                                    MessageBox.Show("文件已成功重命名！");
+
                                 }
-                                string filePath2 = 工作路径 + @"\WebUIpack.7z";
+                                string filePath2 = initialize.工作路径 + @"\WebUIpack.7z";
                                 if (File.Exists(filePath2))
                                 {
                                     {
                                         WebUI下载按钮.IsEnabled = true;
                                         is_downloaded = true;
-                                        已下载WebUI = true;
+                                        initialize.已下载WebUI = true;
                                         解压组.Visibility = Visibility.Visible;
                                     }
                                 }
@@ -382,7 +463,7 @@ namespace 光源AI绘画盒子.Views.Pages
 
 
             }
-            if (已安装WebUI == true)
+            if (initialize.已安装WebUI == true)
             {
                 WebUI下载按钮.Content = "一键启动";
                 //AI,启动！
@@ -397,7 +478,7 @@ namespace 光源AI绘画盒子.Views.Pages
         private void 打开部署文件夹_Click(object sender, RoutedEventArgs e)
         {
             //用文件资源管理器打开工作路径
-            Process.Start("explorer.exe", 工作路径);
+            System.Diagnostics.Process.Start("explorer.exe", 工作路径);
         }
 
 
@@ -407,14 +488,14 @@ namespace 光源AI绘画盒子.Views.Pages
         {
 
             // 设置7zip.exe的路径，确保路径是正确的  
-            string SevenZipPath = @"7z.exe";
+            string SevenZipPath = @".AI_launther_log\7z.exe";
             标准输出流.Text = "";
             // 创建一个新的进程  
             Process 解压魔法 = new Process();
             ProcessStartInfo 解压术式 = new ProcessStartInfo();
 
             解压术式.FileName = SevenZipPath;
-            解压术式.Arguments = $"x -y {工作路径 + "//WebUIpack.7z"} -o{工作路径}";
+            解压术式.Arguments = $"x -y {initialize.工作路径 + "//WebUIpack.7z"} -o{initialize.工作路径}";
             解压术式.UseShellExecute = false;
             解压术式.RedirectStandardOutput = true;
             解压术式.CreateNoWindow = true;
@@ -426,7 +507,8 @@ namespace 光源AI绘画盒子.Views.Pages
             // 启动
             解压魔法.Start();
             WebUI安装按钮.IsEnabled = false;
-            WebUI安装按钮.Content = "正在解压资源，请不要关闭窗口";
+            WebUI安装按钮.Content = "正在解压资源，需要较长时间（8分钟），请不要关闭窗口";
+            安装progressBar.Value = 100;
             解压魔法.BeginOutputReadLine();//开始读取输出流
             解压魔法.BeginErrorReadLine();//开始读取错误流
 
@@ -442,19 +524,23 @@ namespace 光源AI绘画盒子.Views.Pages
                 Dispatcher.Invoke(() =>
                 {
 
-                    标准输出流.Text += e.Data + Environment.NewLine;
+                    标准输出流.Text += (e.Data + Environment.NewLine);
                     命令行区域.ScrollToEnd();
                     if (标准输出流.Text.Contains("Everything is Ok"))
                     {
                         解压组.Visibility = Visibility.Collapsed;
                         安装组.Visibility = Visibility.Visible;
-                        double freeSpaceGB = GetFreeSpaceGB(工作路径);
+                        double freeSpaceGB = GetFreeSpaceGB(initialize.工作路径);
                         磁盘剩余显示.Text = $"磁盘剩余空间：{freeSpaceGB:0.00} GB";
                         if (freeSpaceGB < 5)
                         {
                             磁盘剩余显示.Text += "磁盘空间不足";
                             return;
                         }
+                    }
+                    if (标准输出流.Text.Contains("Errors"))
+                    {
+                        WebUI安装按钮.Content = "解压失败，请重启盒子或手动解压   =>";
                     }
 
                 });
@@ -466,7 +552,7 @@ namespace 光源AI绘画盒子.Views.Pages
             {
                 Dispatcher.Invoke(() =>
                 {
-                    标准报错流.Text += e.Data + Environment.NewLine;
+                    标准报错流.Text += (e.Data + Environment.NewLine);
                     命令行区域.ScrollToEnd();
 
                 });
@@ -475,26 +561,30 @@ namespace 光源AI绘画盒子.Views.Pages
 
         private async void WebUI复制按钮_Click(object sender, RoutedEventArgs e)
         {
-            WebUI复制按钮.Content = "正在拼命安装，请稍候....";
+            WebUI复制按钮.Content = "正在拼命安装，（8分钟）请稍候....";
             WebUI复制按钮.IsEnabled = false;
             // 源文件夹路径  
-            string sourceDirectory = 工作路径 + @"\2.0.9\stable-diffusion-webui";
+            string sourceDirectory = initialize.工作路径 + @"\2.0.9\stable-diffusion-webui";
             // 目标文件夹路径  
-            string destinationDirectory = 工作路径;
+            string destinationDirectory = initialize.工作路径;
             // 使用异步方法移动文件夹  
             try
             {
                 await MoveFolderAsync(sourceDirectory, destinationDirectory);
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
+
+                string str1 = error.Message;
+                File.WriteAllText(@".\logs\error.txt", str1);
+                throw;
                 // 处理或显示异常信息  
             }
 
             安装组.Visibility = Visibility.Collapsed;
             下载组.Visibility = Visibility.Visible;
-            WebUI下载按钮.Content = "一键启动";
-            已安装WebUI = true;
+            WebUI下载按钮.Content = "安装完毕，点击一键启动";
+            initialize.已安装WebUI = true;
 
         }
 
@@ -529,9 +619,11 @@ namespace 光源AI绘画盒子.Views.Pages
                     {
                         Directory.CreateDirectory(destPath);
                     }
-                    catch (Exception ex)
+                    catch (Exception error)
                     {
-
+                        string str1 = error.Message;
+                        File.WriteAllText(@".\logs\error.txt", str1);
+                        throw;
                     }
                 }
 

@@ -1,15 +1,15 @@
-﻿<ui:UiPage x:Class="光源AI绘画盒子.Views.Pages.DashboardPage"
+﻿<ui:UiPage x:Class="Awake.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:光源AI绘画盒子.Views.Pages"
+    xmlns:local="clr-namespace:Awake.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="DashboardPage"
      Loaded="firstloded"
 
     xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
-
+    d:DataContext="{d:DesignInstance local:DashboardPage, IsDesignTimeCreatable=False}"
     d:DesignHeight="650"
     d:DesignWidth="1010"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -72,7 +72,7 @@
 
 
 
-        <ScrollViewer x:Name="总滚动列表"  ScrollChanged="总滚动列表_ScrollChanged" >
+        <ScrollViewer x:Name="总滚动列表"  ScrollChanged="总滚动列表_ScrollChanged" Margin="0,7,0,-7" >
 
             <Grid Margin="0,0,0,0" >
                 <StackPanel>
@@ -115,7 +115,7 @@
                                                 <ui:SymbolIcon Symbol="ImageMultiple32" FontSize="30" Width="30" Height="30"/>
 
                                                 <TextBlock Text="统计图片数量" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="3" Canvas.Top="60"/>
-                                                <TextBlock x:Name="图片数量展示" Foreground="#FFFEFF8D" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="8" Canvas.Top="81" TextAlignment="Center" FontWeight="Bold" FontFamily="Alimama ShuHeiTi Bold"/>
+                                                <TextBlock x:Name="图片数量展示" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="8" Canvas.Top="81" TextAlignment="Center" FontWeight="Bold" FontFamily="Alimama ShuHeiTi Bold"/>
                                                 <TextBlock Text="统计生成图片数量 &#xA;点击刷新统计数据" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="7" Canvas.Top="80" Opacity="0.6"/>
                                                 <ui:SymbolIcon Symbol="ArrowCounterclockwise16" FontSize="30" Canvas.Left="100" Canvas.Top="100" Height="30"/>
 
@@ -169,7 +169,7 @@
 
                                                     <StackPanel VerticalAlignment="Center">
                                                         <TextBlock Text="SD模型文件夹" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="35" Canvas.Top="10"/>
-                                                        <TextBlock TextWrapping="Wrap" Text="StableDiffusion模型也称SD模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="35" Canvas.Top="30" Width="90" Opacity="0.6"/>
+                                                        <TextBlock TextWrapping="Wrap" Text="StableDiffusion模型也称扩散模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="35" Canvas.Top="30" Width="90" Opacity="0.6"/>
                                                     </StackPanel>
                                                     <ui:SymbolIcon Symbol="Share16" FontSize="30" HorizontalAlignment="Center" Canvas.Left="55" Canvas.Top="100" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -180,7 +180,7 @@
                                                     <ui:SymbolIcon Symbol="PlugConnectedAdd20" Width="35" Height="35" FontSize="35" Margin="0,0,5,0"/>
                                                     <StackPanel>
                                                         <TextBlock Text="LoRA文件夹" FontSize="14" HorizontalAlignment="Left" Canvas.Left="82" Canvas.Top="16"/>
-                                                        <TextBlock TextWrapping="Wrap" Text="Lora模型的使用需要依赖SD模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="80" Canvas.Top="41" Width="90" Opacity="0.6"/>
+                                                        <TextBlock TextWrapping="Wrap" Text="Lora模型使用需要依赖对应的扩散模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="80" Canvas.Top="41" Width="90" Opacity="0.6"/>
                                                     </StackPanel>
                                                     <ui:SymbolIcon Symbol="Share16" FontSize="30" HorizontalAlignment="Center" Canvas.Left="55" Canvas.Top="100" VerticalAlignment="Center"/>
 
@@ -271,9 +271,9 @@
                             </ui:Button>
                             <TextBlock Text="排序方式" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
                             <StackPanel x:Name="排序表" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
-                                <RadioButton x:Name="推荐" IsChecked="True"  Content="推荐" Click="推荐_Click" Background="#FFFF3D48"  />
-                                <RadioButton x:Name="最新" Content="最新" Margin="-45,0,0,0" Click="最新_Click" Background="#FFFF3D48"/>
-                                <RadioButton x:Name="最热" Content="最热" Margin="-45,0,0,0" Click="最热_Click" Background="#FFFF3D48" />
+                                <RadioButton x:Name="推荐" IsChecked="True"  Content="推荐" Click="推荐_Click"  />
+                                <RadioButton x:Name="最新" Content="最新" Margin="-45,0,0,0" Click="最新_Click"/>
+                                <RadioButton x:Name="最热" Content="最热" Margin="-45,0,0,0" Click="最热_Click" />
                             </StackPanel>
                         </StackPanel>
                         <!--<TextBlock x:Name="调试" TextWrapping="Wrap" Height="250"></TextBlock>-->
@@ -282,19 +282,19 @@
 
                             <WrapPanel   x:Name="模型资源列表" HorizontalAlignment="Left"/>
                             <StackPanel Width="900">
-                                <Button x:Name="加载更多" Content="刷新更多"  Click="加载更多_Click" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="35" Width="300"/>
+                                <Button x:Name="加载更多" Content="刷新更多"  Click="加载更多_Click" FontSize="18" HorizontalAlignment="Stretch" Height="35" Width="427"/>
 
 
                             </StackPanel>
-                            <StackPanel Margin="0,50,0,20">
+                            <StackPanel Margin="0,150,0,0">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="TagQuestionMark32" Width="20" Height="20" FontSize="20"/>
-                                    <ui:Hyperlink NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki" FontSize="14" HorizontalAlignment="Center" Content="获取帮助" Foreground="#FFFF3D48"/>
+                                    <ui:Hyperlink NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki" FontSize="14" HorizontalAlignment="Center" Content="获取帮助"/>
 
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="CommentCheckmark24" Width="20" Height="20" FontSize="20"/>
-                                    <ui:Hyperlink FontSize="14" HorizontalAlignment="Center" NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues" Content="提供反馈" Foreground="#FFFF3D48"/>
+                                    <ui:Hyperlink FontSize="14" NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues" Content="提供反馈"/>
 
                                 </StackPanel>
                             </StackPanel>
@@ -324,40 +324,12 @@
             </Grid>
         </ScrollViewer>
 
-        <StackPanel   x:Name="搜索栏2"   Height="70"  HorizontalAlignment="Center"  Margin="0,0,0,8" VerticalAlignment="Top" Background="Black" Visibility="Collapsed" >
+        <StackPanel   x:Name="搜索栏2"   Height="60"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" >
 
-            <StackPanel Height="70" Width="1000" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFFF3D48">
-                <ui:Button VerticalAlignment="Center" Height="70" Width="1000"/>
-                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="1000" Margin="0,-70,0,0"  >
-                    <ComboBox x:Name="模型类型选择器2"  SelectedIndex="0" Width="200" VerticalAlignment="Center" DropDownClosed="模型类型选择器2_DropDownClosed" Margin="8,0,0,0" Background="#33FFFFFF" >
-                        <ComboBoxItem Content="模型类型：全部类型"/>
-                        <ComboBoxItem Content="LoRA"/>
-                        <ComboBoxItem Content="LyCORIS"/>
-                        <ComboBoxItem Content="Controlnet"/>
-                        <ComboBoxItem Content="Checkpoint"/>
-                        <ComboBoxItem Content="Textual Inversion"/>
-                    </ComboBox>
+            <StackPanel Height="60" Width="1000" HorizontalAlignment="Center"/>
 
-                    <ui:TextBox x:Name="搜索框2"  PlaceholderText="搜索模型关键词,作者或模型类型"  Width="300" Margin="5,0,10,0"   LostFocus="搜索框2_LostFocus" SelectionTextBrush="#FF375398" Background="#33FFFFFF" Height="36" Cursor="IBeam"/>
-                    <ui:Button  x:Name="搜素按钮2" Height="35" Click="搜素按钮2_Click" Background="#33FFFFFF">
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="Search24" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
-                            <TextBlock Text="搜索模型"/>
-                        </StackPanel>
-                    </ui:Button>
-                    <TextBlock Text="排序方式" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
-                    <StackPanel x:Name="排序表2" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
 
-                        <RadioButton x:Name="推荐2" IsChecked="True"  Content="推荐" Click="推荐_Click" Background="White"  />
-                        <RadioButton x:Name="最新2" Content="最新" Margin="-45,0,0,0" Click="最新_Click" Background="White"/>
-                        <RadioButton x:Name="最热2" Content="最热" Margin="-45,0,0,0" Click="最热_Click" Background="White" />
-                    </StackPanel>
-                </StackPanel>
-
-            </StackPanel>
-         
-
-            </StackPanel>
+        </StackPanel>
 
 
 

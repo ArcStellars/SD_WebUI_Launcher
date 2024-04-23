@@ -2,36 +2,47 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <TargetFramework>net7.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>10.0</LangVersion>
     <UseWPF>true</UseWPF>
 	  <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationIcon>Ray_Source.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <SignAssembly>False</SignAssembly>
-    <FileVersion>3.0.0.6</FileVersion>
-    <Version>3.0.5</Version>
-    <Company>Ray_Source光源</Company>
-    <Copyright>©Ray_Source光源</Copyright>
+    <FileVersion>3.0.0.8</FileVersion>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <Version>3.0.9</Version>
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <Authors>Ray_Source光源</Authors>
+    <Company>绘梦</Company>
+    <Product>光源绘梦</Product>
+    <DelaySign>True</DelaySign>
+    <AssemblyName>Launcher</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,10 +53,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="logo.ico" />
+    <Content Include="Ray_Source.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2.DevToolsProtocolExtension" Version="1.0.824" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="8.0.0-preview.7.23375.6" />
@@ -55,15 +70,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assets\applicationIcon-1024.png" />
     <None Remove="Assets\applicationIcon-256.png" />
     <None Remove="Assets\git_logo.png" />
     <None Remove="Assets\python_logo.png" />
-    <None Remove="download.png" />
-    <None Remove="mainlogo2.png" />
-    <None Remove="Resources\AlimamaShuHeiTi-Bold.ttf" />
-    <None Remove="Resources\CascadiaCode.ttf" />
-    <None Remove="Resources\站酷快乐体.ttf" />
+    <None Remove="Ray_Source.png" />
     <None Remove="Views\Pages\.net.png" />
     <None Remove="Views\Pages\001.png" />
     <None Remove="Views\Pages\002.png" />
@@ -77,85 +87,48 @@
     <None Remove="Views\Pages\010.png" />
     <None Remove="Views\Pages\011.png" />
     <None Remove="Views\Pages\012.png" />
-    <None Remove="Views\Pages\0363b961c260d191d5340dd487-04.png" />
-    <None Remove="Views\Pages\3.png" />
-    <None Remove="Views\Pages\aigodlike.png" />
-    <None Remove="Views\Pages\bg.e72c38e1.jpg" />
+    <None Remove="Views\Pages\github.png" />
     <None Remove="Views\Pages\mainlogo.png" />
     <None Remove="Views\Pages\Newtonsoft.png" />
-    <None Remove="Views\Pages\NM.png" />
     <None Remove="Views\Pages\python_logo.jpg" />
+    <None Remove="Views\Pages\Ray_Source.png" />
     <None Remove="Views\Pages\toolkit.png" />
-    <None Remove="Views\Windows\00015-3239534484.png" />
-    <None Remove="Views\Windows\contentshow.png" />
-    <None Remove="Views\Windows\design.png" />
-    <None Remove="Views\Windows\gsqd.png" />
-    <None Remove="Views\Windows\lable.png" />
-    <None Remove="Views\Windows\mainlogo.png" />
-    <None Remove="Views\Windows\pagecontent.png" />
+    <None Remove="Views\Windows\backui.png" />
+    <None Remove="Views\Windows\SD启动.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\applicationIcon-256.png" />
+    <Resource Include="Ray_Source.png" />
+    <Resource Include="Views\Pages\006.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\git_logo.png" />
     <Resource Include="Assets\python_logo.png" />
-    <Resource Include="download.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\applicationIcon-1024.png" />
-    <Resource Include="Assets\applicationIcon-256.png" />
-    <Resource Include="mainlogo2.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\AlimamaShuHeiTi-Bold.ttf" />
-    <Resource Include="Resources\CascadiaCode.ttf" />
-    <Resource Include="Resources\站酷快乐体.ttf" />
     <Resource Include="Views\Pages\.net.png" />
-    <Resource Include="Views\Pages\012.png" />
-    <Resource Include="Views\Pages\011.png" />
-    <Resource Include="Views\Pages\010.png" />
-    <Resource Include="Views\Pages\009.png" />
-    <Resource Include="Views\Pages\008.png" />
-    <Resource Include="Views\Pages\007.png" />
+    <Resource Include="Views\Pages\001.png" />
     <Resource Include="Views\Pages\002.png" />
     <Resource Include="Views\Pages\003.png" />
-    <Resource Include="Views\Pages\006.png" />
-    <Resource Include="Views\Pages\005.png" />
     <Resource Include="Views\Pages\004.png" />
-    <Resource Include="Views\Pages\001.png" />
-    <Resource Include="Views\Pages\0363b961c260d191d5340dd487-04.png" />
-    <Resource Include="Views\Pages\3.png" />
-    <Resource Include="Views\Pages\aigodlike.png" />
-    <Resource Include="Views\Pages\bg.e72c38e1.jpg" />
-    <Resource Include="Views\Pages\mainlogo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Views\Pages\005.png" />
+    <Resource Include="Views\Pages\007.png" />
+    <Resource Include="Views\Pages\008.png" />
+    <Resource Include="Views\Pages\009.png" />
+    <Resource Include="Views\Pages\010.png" />
+    <Resource Include="Views\Pages\011.png" />
+    <Resource Include="Views\Pages\012.png" />
+    <Resource Include="Views\Pages\github.png" />
+    <Resource Include="Views\Pages\mainlogo.png" />
     <Resource Include="Views\Pages\Newtonsoft.png" />
-    <Resource Include="Views\Pages\NM.png" />
     <Resource Include="Views\Pages\python_logo.jpg" />
+    <Resource Include="Views\Pages\Ray_Source.png" />
     <Resource Include="Views\Pages\toolkit.png" />
-    <Resource Include="Views\Windows\00015-3239534484.png" />
-    <Resource Include="Views\Windows\contentshow.png" />
-    <Resource Include="Views\Windows\design.png" />
-    <Resource Include="Views\Windows\gsqd.png" />
-    <Resource Include="Views\Windows\lable.png" />
-    <Resource Include="Views\Windows\mainlogo.png" />
-    <Resource Include="Views\Windows\pagecontent.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Resource Include="Views\Windows\backui.png" />
+    <Resource Include="Views\Windows\SD启动.png" />
   </ItemGroup>
 
 </Project>

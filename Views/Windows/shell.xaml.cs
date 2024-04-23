@@ -1,30 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Management;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Policy;
-using System.Text;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Xml.Linq;
 using Wpf.Ui.Controls;
-using static 光源AI绘画盒子.initialize;//这里引入全局参数库
-namespace 光源AI绘画盒子.Views.Windows
+using static Awake.initialize;//这里引入全局参数库
+namespace Awake.Views.Windows
 {
-
     public partial class shell : UiWindow
     {
-
         public string 启动文件 = "launch.py";//这里是默认的启动文件
         string cpuname = "";
         string Machinename = "";
@@ -35,15 +24,73 @@ namespace 光源AI绘画盒子.Views.Windows
         private DispatcherTimer _timer;
         private Process _process;
         private Process 启动魔法;
+        private string 工作路径_start;
 
         public shell()
         {
-
             InitializeComponent();
+            if (_SD启动 == true)
+            {
+                this.WindowState = WindowState.Maximized;
+                _loadpage();
+            }
+            else
+            {
+                启动前摇.Visibility = Visibility.Collapsed;
+                SD启动.Visibility = Visibility.Collapsed;
+                背景淡出.Visibility = Visibility.Collapsed;
+            }
             GetSystemInfo();
             参数列表 = "";
-
-            string 设备支持列表 = "";
+            async Task _loadpage()
+            {
+                // 加载页的背景图计时器
+                await Task.Delay(TimeSpan.FromSeconds(2));
+                // 在UI线程中更改grid的visibility  
+                Dispatcher.Invoke(() =>
+                {
+                    // 创建动画  
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 1; // 从100%开始  
+                    doubleAnimation.To = 0; // 结束时为0%  
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(1)); // 动画时间为1秒  
+                    doubleAnimation.AutoReverse = false; // 动画结束后自动反转回原来的状态  
+                    // 将动画应用到grid的透明度属性上  
+                    启动前摇.BeginAnimation(Grid.OpacityProperty, doubleAnimation);
+                });
+                await Task.Delay(TimeSpan.FromSeconds(3));
+                Dispatcher.Invoke(() =>
+                {
+                    // 创建动画  
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 1; // 从100%开始  
+                    doubleAnimation.To = 0; // 结束时为0%  
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(2)); // 动画时间为1秒  
+                    doubleAnimation.AutoReverse = false; // 动画结束后自动反转回原来的状态  
+                    // 将动画应用到grid的透明度属性上  
+                    SD启动.BeginAnimation(Grid.OpacityProperty, doubleAnimation);
+                });
+                await Task.Delay(TimeSpan.FromSeconds(3));
+                Dispatcher.Invoke(() =>
+                {
+                    // 创建动画  
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 1; // 从100%开始  
+                    doubleAnimation.To = 0; // 结束时为0%  
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.5)); // 动画时间为1秒  
+                    doubleAnimation.AutoReverse = false; // 动画结束后自动反转回原来的状态  
+                    // 将动画应用到grid的透明度属性上  
+                    背景淡出.BeginAnimation(Grid.OpacityProperty, doubleAnimation);
+                });
+                await Task.Delay(TimeSpan.FromSeconds(3));
+                Dispatcher.Invoke(() =>
+                {
+                    this.WindowState = WindowState.Minimized;
+                    启动前摇.Visibility = Visibility.Visible;
+                    SD启动.Visibility = Visibility.Collapsed;
+                    背景淡出.Visibility = Visibility.Collapsed;
+                });
+            }
             async Task GetSystemInfo()
             {
                 cpuname = await Task.Run(() => hardinfo.GetCpuName());
@@ -54,7 +101,7 @@ namespace 光源AI绘画盒子.Views.Windows
                 memorynum = await Task.Run(() => hardinfo.MemoryNumberCount());
                 gpuname = await Task.Run(() => hardinfo.GPUName());
                 标准输出流.AppendText("StableDiffusionWebUI正在启动，请耐心等待" + Environment.NewLine);
-                标准输出流.AppendText("光源AI绘画启动核心版本：3.0.5-7 2023/11/16" + Environment.NewLine);
+                标准输出流.AppendText("光源AI绘画启动核心版本：Release Version 2024/4/8" + Environment.NewLine);
                 标准输出流.AppendText("关注bilibili@Ray_Source光源 获取最新支持" + Environment.NewLine);
 
                 标准输出流.AppendText("<光源AI绘画启动器核心 | [硬件检测]>" + Environment.NewLine);
@@ -62,95 +109,192 @@ namespace 光源AI绘画盒子.Views.Windows
                 标准输出流.AppendText("系统名称：" + Machinename + "   系统类型：" + systemType + Environment.NewLine);
                 标准输出流.AppendText("内存信息：" + memorynum + " 插槽" + "  共计" + memorysize + " GB" + Environment.NewLine);
                 标准输出流.AppendText("显卡信息：" + gpuname + Environment.NewLine);
-
+                标准输出流.AppendText("当前使用的生成引擎：" + _GPUname + Environment.NewLine);
+                标准输出流.AppendText("正在运行，请耐心等待，运行速度由电脑性能决定\n");
+  
             }
             //这里开始从initilize中被处理过的参数变量进行初始化
-            if (浏览器启动 == true)
-            {
-                参数列表 += " --autolaunch";
+            参数列表 += " --log-startup";
 
-            }
-            if (分享WebUI到公网 == true) { 参数列表 += " --autolaunch --share"; }
-            if (关闭模型hash计算 == true) { 参数列表 += " --no-hashing"; }
-            if (无卡调试模式 == true) { 参数列表 += " --UItest"; }
+            if (浏览器启动 == true) { 参数列表 += " --autolaunch"; }
+
+            if (关闭模型hash计算 == true) { 参数列表 += " --no-hashing "; }
+
+            if (启动api == true) { 参数列表 += "  --api"; }
+
+            if (快速启动 == true) { 参数列表 += " --ui-debug-mode --disable-safe-unpickle "; }
+
+            if (分享WebUI到公网 == true) { 参数列表 += " --share"; }
+
+            if (使用CPU进行推理 == true) { 参数列表 = " --use-cpu all --precision full --no-half --skip-torch-cuda-test"; }
+
+            if (启用InvokeAI == true) { 参数列表 = " --opt-split-attention-invokeai"; }
+
+            if (上投采样 == true) { 参数列表 = " --upcast-sampling"; }
+
+            if (启用替代布局 == true) { 参数列表 += " --opt-channelslast "; }
+
+            if (缩放点积 == true) { 参数列表 += " --opt-sdp-attention "; }
+ 
+            if (启用xformers == true){参数列表 += " --xformers --xformers-flash-attention";}  
+
+            if (关闭半精度计算 == true) { 参数列表 += " --no-half"; }
+
+            if (内存优化 == true) { 参数列表 += " --opt-sub-quad-attention"; }
+            
+            if (冻结设置 == true) { 参数列表 += " --freeze - settings"; }
 
 
-            if (A卡模式 == true)
-            {
-                参数列表 += " --precision full --upcast-sampling --device-name directml --use-cpu interrogate --no-gradio-queue --opt-sub-quad-attention ";
-            }
-            if (N卡模式 == true)
-            {
-                if (XF加速模式 == true)
-                {
-                    参数列表 += " --xformers --xformers-flash-attention ";
-                }
-                else
-                {
-                    参数列表 += " --opt-channelslast --no-gradio-queue --opt-sdp-no-mem-attention ";
 
-                }
-            }
-            if (使用CPU进行推理 == true) { 参数列表 = " --autolaunch --use-cpu all --precision full --no-half --skip-torch-cuda-test"; }
-            //if (_WebUI显存压力优化设置 == "低")
-            //{
-            //    参数列表 = " --autolaunch --lowvram";
-            //}
-            //if (_WebUI显存压力优化设置 == "中")
-            //{
-            //    参数列表 = " --autolaunch --medvram";
-            //}
             try
             {
-
-
-
-
                 //这里开始创建启动进程
-
-                标准输出流.Text = "";
-                标准报错流.Text = "";
+                标准输出流.Text = " ";
+                标准报错流.Text = " ";
                 //下面开始施法！！！！
-
-
                 启动魔法 = new Process();
                 ProcessStartInfo startinfo = new ProcessStartInfo();
-                string 启动参数 = 参数列表;
-                startinfo.FileName = 工作路径 + @"\Python3.10\python.exe"/*initialize.工作路径+ @"\webui-user.bat"*/;
-                startinfo.Arguments = 工作路径 + @"\launch.py" + 参数列表;
-                startinfo.WorkingDirectory = 工作路径;
+                string 启动参数 = 参数列表;  
 
-                startinfo.EnvironmentVariables["GIT"] = 工作路径 + @"\Git\mingw64\libexec\git-core\git.exe";
-                startinfo.EnvironmentVariables["PYTHON"] = 工作路径 + @"\Python3.10\python.exe";
-                startinfo.EnvironmentVariables["TRANSFORMERS_CACHE"] = 工作路径 + @"\deploy\.cache\huggingface\transformers";
-                startinfo.EnvironmentVariables["GIT_PYTHON_REFRESH"] = "quiet";
-                startinfo.EnvironmentVariables["HUGGINGFACE_HUB_CACHE"] = 工作路径 + @"\deploy\.cache\huggingface\hub";
-                startinfo.EnvironmentVariables["GIT_SSL_NO_VERIFY"] = "true";
+                try
+                {
+                    venvPath = File.ReadAllText(@".AI_launther_log\venvpath.txt");
+                    gitPath = File.ReadAllText(@".AI_launther_log\gitpath.txt");
+                }
+                catch
+                {
+                    venvPath = "";
+                    gitPath = "";
+                }
+
+                if (启用自定义路径 == true)
+                {
+
+                    if (本地路径.Length == 3)
+                    {
+                        工作路径_start = 本地路径.Substring(0, 本地路径.Length - 1);
+                    }
+                    else
+                    {
+                        工作路径_start = 本地路径;
+                    }
+
+                    if (File.Exists(venvPath + @"\python.exe"))
+                    {
+                        startinfo.FileName = (venvPath + @"\python.exe");
+                    }
+                    else
+                    {
+                        startinfo.FileName = (venvPath + @"\Scripts\python.exe");
+                    }
+
+                    if (显卡类型名 == "NVIDIA")
+                    {
+
+                        启动参数 += " --device - id " + (_UseGPUindex - 1);
+
+                    }
+                    else
+                    {
+
+                        System.Windows.MessageBox.Show("非本启动器的SD整合包只支持N卡,程序退出!");
+                        Environment.Exit(0);
+
+                    }
 
 
-                startinfo.RedirectStandardOutput = true;
-                startinfo.RedirectStandardError = true;
-                startinfo.CreateNoWindow = true;
-                startinfo.UseShellExecute = false;//不使用终端打开
+                    标准输出流.AppendText(工作路径_start + @"\launch.py" + 启动参数 +  _WebUI显存压力优化设置 + _WebUI主题颜色 + "\n");
+                    startinfo.Arguments = 工作路径_start + @"\launch.py" + 参数列表 + _WebUI显存压力优化设置 + _WebUI主题颜色;
+                    startinfo.WorkingDirectory = 工作路径_start;
 
-                启动魔法.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);//绑定标准输出流的事件处理函数
-                启动魔法.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);//绑定标准错误流的事件处理函数
-                启动魔法.StartInfo = startinfo;
-                启动魔法.Start();//启动进程
-                启动魔法.BeginOutputReadLine();//开始读取输出流
-                启动魔法.BeginErrorReadLine();//开始读取错误流
-                _process = Process.GetProcessesByName("光源AI绘画盒子")[0];
-                _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) }; // 设置每秒更新一次  
-                _timer.Tick += TimerTick;
-                _timer.Start();
+                    // 设置临时环境变量  
+                    Environment.SetEnvironmentVariable("Path", Environment.GetEnvironmentVariable("Path") + ";" + gitPath + @"\bin", EnvironmentVariableTarget.Process);//确保整个系统可以使用到Git
+                    startinfo.EnvironmentVariables["TF_CPP_MIN_LOG_LEVEL"] = "3";//屏蔽Tensorflow中的Warning
+                    startinfo.EnvironmentVariables["GIT"] = gitPath + @"\mingw64\libexec\git-core\git.exe";//保证WenUI可以使用到git
+                    startinfo.EnvironmentVariables["GIT_PYTHON_REFRESH"] = "quiet";
+                    startinfo.EnvironmentVariables["GIT_SSL_NO_VERIFY"] = "true";
+
+                    startinfo.RedirectStandardOutput = true;
+                    startinfo.RedirectStandardError = true;
+                    startinfo.CreateNoWindow = true;
+                    startinfo.UseShellExecute = false;//不使用终端打开
+                    启动魔法.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);//绑定标准输出流的事件处理函数
+                    启动魔法.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);//绑定标准错误流的事件处理函数
+                    启动魔法.StartInfo = startinfo;
+                    启动魔法.Start();//启动进程
+                    启动魔法.BeginOutputReadLine();//开始读取输出流
+                    启动魔法.BeginErrorReadLine();//开始读取错误流
+                    _process = Process.GetProcessesByName("Launcher")[0];
+                    _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) }; // 设置每秒更新一次  
+                    _timer.Tick += TimerTick;
+                    _timer.Start();
+
+                }
+
+                else
+                {
+
+                    if (工作路径.Length == 3)
+                    {
+                        工作路径_start = 工作路径.Substring(0, 工作路径.Length - 1);
+                    }
+                    else
+                    {
+                        工作路径_start = 工作路径;
+                    }
+
+                    标准输出流.AppendText(工作路径_start + @"\launch.py" + 参数列表  + _WebUI显存压力优化设置 + _WebUI主题颜色 + "\n");
+                    startinfo.FileName = 工作路径_start + @"\Python3.10\python.exe";
+                    startinfo.Arguments = 工作路径_start + @"\launch.py" + 参数列表 +  _WebUI显存压力优化设置 + _WebUI主题颜色;
+                    startinfo.WorkingDirectory = 工作路径_start;
+
+                    if (显卡类型名 == "NVIDIA")
+                    {
+
+                        启动参数 += " --device - id " + (_UseGPUindex - 1);
+
+                    }
+                    else
+                    {
+
+                        启动参数 += " --device-name directml --skip-torch-cuda-test";
+
+                    }
+
+                    // 设置临时环境变量  
+                    Environment.SetEnvironmentVariable("Path", Environment.GetEnvironmentVariable("Path") + ";" + 工作路径_start + "\\Git\\bin", EnvironmentVariableTarget.Process);//确保整个系统可以使用到Git
+                    startinfo.EnvironmentVariables["TF_CPP_MIN_LOG_LEVEL"] = "3";//屏蔽Tensorflow中的Warning
+                    startinfo.EnvironmentVariables["GIT"] = 工作路径_start + @"\Git\mingw64\libexec\git-core\git.exe";//保证WenUI可以使用到git
+                    startinfo.EnvironmentVariables["TRANSFORMERS_CACHE"] = 工作路径_start + @"\deploy\.cache\huggingface\transformers";
+                    startinfo.EnvironmentVariables["GIT_PYTHON_REFRESH"] = "quiet";
+                    startinfo.EnvironmentVariables["HUGGINGFACE_HUB_CACHE"] = 工作路径_start + @"\deploy\.cache\huggingface\hub";
+                    startinfo.EnvironmentVariables["GIT_SSL_NO_VERIFY"] = "true";
+
+                    startinfo.RedirectStandardOutput = true;
+                    startinfo.RedirectStandardError = true;
+                    startinfo.CreateNoWindow = true;
+                    startinfo.UseShellExecute = false;//不使用终端打开
+                    启动魔法.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);//绑定标准输出流的事件处理函数
+                    启动魔法.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);//绑定标准错误流的事件处理函数
+                    启动魔法.StartInfo = startinfo;
+                    启动魔法.Start();//启动进程
+                    启动魔法.BeginOutputReadLine();//开始读取输出流
+                    启动魔法.BeginErrorReadLine();//开始读取错误流
+                    _process = Process.GetProcessesByName("Launcher")[0];
+                    _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) }; // 设置每秒更新一次  
+                    _timer.Tick += TimerTick;
+                    _timer.Start();
+                }
 
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show("请选择正确WebUI的工作路径");
+                System.Windows.MessageBox.Show("进程出现问题,请查看报错日志!");
+                string str1 = ex.Message;
+                File.WriteAllText(@".\logs\error.txt", str1);
+                throw;
             }
         }
-
         private void TimerTick(object sender, EventArgs e)
         {
             var cpuUsage = _process.TotalProcessorTime.TotalSeconds;
@@ -158,9 +302,6 @@ namespace 光源AI绘画盒子.Views.Windows
             string text = $"CPU 内核时间: {cpuUsage}  |  内存使用： {memoryUsage}MB";
             系统占用.Dispatcher.Invoke(() => 系统占用.Text = text); // 在UI线程更新TextBlock  
         }
-
-
-
         int ExtractProgress(string text)
         {
             int nums = 1;
@@ -171,10 +312,6 @@ namespace 光源AI绘画盒子.Views.Windows
 
             return nums;// 将提取的字符串转为整数   
         }
-
-
-
-
         int ExtractProgressf2(string text)
         {
             Match match = Regex.Match(text, @"\s*(\d+)%");
@@ -182,16 +319,23 @@ namespace 光源AI绘画盒子.Views.Windows
 
             return int.Parse(matchedString); // 将提取的字符串转为整数  
         }
-
         string ExtractTimeInfo(string text)
         {
             // 找到最后一个 [ 的索引  
             int index = text.LastIndexOf("[");
             if (index != -1)
             {
-                // 提取 [ 和下一个 ] 之间的信息  
-                string timeInfo = text.Substring(index, text.IndexOf("]", index) - index + 1);
-                return timeInfo;
+                try
+                {
+                    // 提取 [ 和下一个 ] 之间的信息  
+                    string timeInfo = text.Substring(index, text.IndexOf("]", index) - index + 1);
+                    return timeInfo;
+                }
+                catch
+                {
+
+                }
+
             }
             return ""; // 如果未找到 [，则返回空字符串  
         }
@@ -288,6 +432,8 @@ namespace 光源AI绘画盒子.Views.Windows
         }
         protected override void OnClosed(EventArgs e)
         {//在控制台关闭后结束跑图用的Python进程
+         // 清理临时环境变量  
+            Environment.SetEnvironmentVariable("GIT", null);
             base.OnClosed(e);
             启动魔法.Kill();
             //启动魔法.WaitForExit();//屏蔽掉这些是因为可能导致主窗口卡死

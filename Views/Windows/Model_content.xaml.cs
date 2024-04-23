@@ -2,28 +2,17 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net.Http;
-using System.Net.Mail;
 using System.Numerics;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using static Awake.initialize;
 
-namespace 光源AI绘画盒子.Views.Windows
+namespace Awake.Views.Windows
 {
     /// <summary>
     /// model_content.xaml 的交互逻辑
@@ -45,48 +34,56 @@ namespace 光源AI绘画盒子.Views.Windows
         string _modelSourceName = "";
         string _modelSourceSize = "";
         string _modelSourceHash = "";
+        string _versionDesc = "";
+
+
         public Model_content(string uuid, string nickname, string avatar, string modelType, string imageURL)
         {
+
+
             InitializeComponent();
             if (initialize.背景颜色 == "Mica")
             {
-
                 modelwindow.WindowBackdropType = BackgroundType.Mica;
-                主题背景图.Opacity = 0;
+                图片亮度.Value = initialize.图片亮度;
+                主题背景图.Opacity = 图片亮度.Value / 100;
 
 
             }
             if (initialize.背景颜色 == "Acrylic")
             {
                 modelwindow.WindowBackdropType = BackgroundType.Acrylic;
-                主题背景图.Opacity = 0;
+                图片亮度.Value = initialize.图片亮度;
+                主题背景图.Opacity = 图片亮度.Value / 100;
+
 
             }
             if (initialize.背景颜色 == "Tabbed")
             {
                 modelwindow.WindowBackdropType = BackgroundType.Tabbed;
-                主题背景图.Opacity = 0;
-
+                图片亮度.Value = initialize.图片亮度;
+                主题背景图.Opacity = 图片亮度.Value / 100;
             }
+
+
             if (initialize.背景颜色 == "Auto")
             {
                 modelwindow.WindowBackdropType = BackgroundType.Auto;
-                主题背景图.Opacity = 0;
+                图片亮度.Value = initialize.图片亮度;
+                主题背景图.Opacity = 图片亮度.Value / 100;
 
             }
             if (initialize.背景颜色 == "None")
             {
                 modelwindow.WindowBackdropType = BackgroundType.None;
-                主题背景图.Opacity = 0;
+                图片亮度.Value = initialize.图片亮度;
+                主题背景图.Opacity = 图片亮度.Value / 100;
 
             }
             if (initialize.背景颜色 == "Picture")
             {
-
-
-
-
-                图片亮度.Value = initialize.背景亮度;
+                modelwindow.WindowBackdropType = BackgroundType.None;
+                图片亮度.Value = initialize.图片亮度;
                 主题背景图.Opacity = 图片亮度.Value / 100;
                 string imagepath = initialize.背景图片; // 获取选择的文件路径+文件名  
                 ImageSource imageSource = new BitmapImage(new Uri(imagepath)); // 设置Image的ImageSource为选择的图片  
@@ -104,23 +101,41 @@ namespace 光源AI绘画盒子.Views.Windows
             作者名称.Text = "模型作者：" + _模型作者名称;
             模型类型.Text = "模型类型：" + _模型种类名称;
             _GetModelDetals(_UUID);//开始执行异步任务
-            LoadImageFromUrl(imageURL, avatar);
+            LoadImageFromUrlAsync(imageURL, avatar);
         }
-        void LoadImageFromUrl(string imageUrl, string avatar)//开始加载模型封面图和作者头像
+        async Task LoadImageFromUrlAsync(string imageUrl, string avatar)//开始加载模型封面图和作者头像
         {
             try
             {
-                BitmapImage 模型封面图 = new BitmapImage(new Uri(imageUrl));
-                模型封面.ImageSource = 模型封面图;
+                HttpClient client1 = new HttpClient();
+
+                var imageBytes1 = await client1.GetByteArrayAsync(imageUrl);
+                var image1 = new BitmapImage();
+                image1.BeginInit();
+                image1.CacheOption = BitmapCacheOption.OnLoad;
+                image1.CreateOptions = BitmapCreateOptions.DelayCreation;
+                image1.StreamSource = new MemoryStream(imageBytes1);
+                image1.EndInit();
+                模型封面.ImageSource = image1;
+
+
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);//开发中调试窗口
+
             }
             try
             {
-                BitmapImage 作者头像图 = new BitmapImage(new Uri(avatar));
-                作者头像.ImageSource = 作者头像图;
+                HttpClient client1 = new HttpClient();
+
+                var imageBytes1 = await client1.GetByteArrayAsync(avatar);
+                var image1 = new BitmapImage();
+                image1.BeginInit();
+                image1.CacheOption = BitmapCacheOption.OnLoad;
+                image1.CreateOptions = BitmapCreateOptions.DelayCreation;
+                image1.StreamSource = new MemoryStream(imageBytes1);
+                image1.EndInit();
+                作者头像.ImageSource = image1;
             }
             catch (
             Exception ex)
@@ -150,10 +165,26 @@ namespace 光源AI绘画盒子.Views.Windows
                 _模型名称 = JObjectlist["name"].ToString();
 
                 模型名称.Text = _模型名称.ToString();
+
                 string 模型富文本简介内容 = JObjectlist["remark"].ToString();
-                string utf8text = "meta charset =\"UTF-8\"";//使用UTF8格式化富文本
-                string htmlContent = "<" + utf8text + ">" + 模型富文本简介内容;
-                富文本简介.Source = new Uri("data:text/html," + htmlContent);
+                if (模型富文本简介内容 == "")
+                {
+                    简介.Visibility = Visibility.Visible;
+                    模型富文本简介内容 = "作者暂未介绍模型";
+                    string utf8text = "meta charset =\"UTF-8\"";//使用UTF8格式化富文本
+                    string htmlContent = "<" + utf8text + ">" + 模型富文本简介内容;
+                    富文本简介.Source = new Uri("data:text/html," + htmlContent);
+                    简介.Visibility = Visibility.Visible;
+
+                }
+                else
+                {
+
+                    string utf8text = "meta charset =\"UTF-8\"";//使用UTF8格式化富文本
+                    string htmlContent = "<" + utf8text + ">" + 模型富文本简介内容;
+                    富文本简介.Source = new Uri("data:text/html," + htmlContent);
+                    简介.Visibility = Visibility.Visible;
+                }
 
 
                 //开始解析模型的版本有多少个，并分别展示
@@ -168,7 +199,7 @@ namespace 光源AI绘画盒子.Views.Windows
                     {
 
                         _modelname = infolist[i]["name"].ToString();
-
+                        _versionDesc = infolist[i]["versionDesc"].ToString();
                         string _Attachment = infolist[i]["attachment"].ToString();//这是一个嵌套的{}对象，这样解析
 
 
@@ -177,27 +208,34 @@ namespace 光源AI绘画盒子.Views.Windows
                         _modelSourceName = JObjectlist3["modelSourceName"].ToString();
                         _modelSource = JObjectlist3["modelSource"].ToString();
                         string size = JObjectlist3["modelSourceSize"].ToString();
-                        BigInteger numsize = BigInteger.Parse(size) / 64 / 64 / 64 / 4;//单位化为MB
-                        _modelSourceSize = numsize.ToString();
+                        BigInteger numsize = BigInteger.Parse(size);//单位化为MB
+                        if (numsize < 1024)
+                        {
+                            _modelSourceSize = numsize.ToString() + "B";
+                        }
+                        if (numsize < 1024 * 1024 && numsize > 1024)
+                        {
+                            _modelSourceSize = (numsize / 1024).ToString() + "KB";
+                        }
+                        if (numsize < 1024 * 1024 * 1024 && numsize > 1024 * 1024)
+                        {
+                            _modelSourceSize = (numsize / 1024 / 1024).ToString() + "MB";
+                        }
+                        if (numsize > 1024 * 1024 * 1024)
+                        {
+                            _modelSourceSize = (numsize / 1024 / 1024 / 1024).ToString() + "GB";
+                        }
                         _modelSourceHash = JObjectlist3["modelSourceHash"].ToString();
-                        model_download_list model_Download_List = new model_download_list(_UUID, _模型名称, _modelname, _modelVersionId, _modelSourceName, _modelSource, _modelSourceSize, _modelSourceHash, _modelType);
+                        model_download_list model_Download_List = new model_download_list(_versionDesc, _UUID, _模型名称, _modelname, _modelVersionId, _modelSourceName, _modelSource, _modelSourceSize, _modelSourceHash, _modelType);
                         模型下载列表.Children.Add(model_Download_List);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     报错指示器.Visibility = Visibility.Visible;
-                    报错指示器.Text = "该模型下载未开放";
+
 
                 }
-
-
-
-
-
-
-
-
 
             }
             catch (Exception ex)//捕获异常拿去调试或者控制404一类的UI动画逻辑
@@ -205,7 +243,13 @@ namespace 光源AI绘画盒子.Views.Windows
                 System.Windows.MessageBox.Show(ex.Message);//开发中调试窗口
             }
         }
-
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            modelCardshow.允许打开模型 = true;
+            介绍.Child = null;
+        }
 
     }
+
 }

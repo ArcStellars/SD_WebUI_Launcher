@@ -5,9 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Mvvm.Contracts;
-using 光源AI绘画盒子.Views.Pages;
 
-namespace 光源AI绘画盒子.Services
+namespace Awake.Services
 {
     /// <summary>
     /// Managed host of the application.
@@ -52,7 +51,7 @@ namespace 光源AI绘画盒子.Services
                 _navigationWindow = (_serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
                 _navigationWindow!.ShowWindow();
 
-                _navigationWindow.Navigate(typeof(DashboardPage));
+                _navigationWindow.Navigate(typeof(Views.Pages.DashboardPage));
             }
 
             await Task.CompletedTask;

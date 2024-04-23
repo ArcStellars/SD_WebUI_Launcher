@@ -1,28 +1,23 @@
-﻿using System.Net.Http;
-using System.Text;
+﻿using Awake.Views.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using Wpf.Ui.Common.Interfaces;
-using Wpf.Ui.Controls;
-using Newtonsoft.Json.Linq;
-using System.Linq;
 using System.Windows.Media.Imaging;
-using System.Collections.Generic;
-using System.Text.Json.Nodes;
-using Newtonsoft.Json;
-using System.Windows.Markup;
-using static Microsoft.Web.WebView2.Core.DevToolsProtocolExtension.Network;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Windows.Threading;
-using 光源AI绘画盒子.Views.Windows;
+using static Microsoft.Web.WebView2.Core.DevToolsProtocolExtension.CSS;
 
-namespace 光源AI绘画盒子.Views.Pages
+namespace Awake.Views.Pages
 {
-
     public partial class DashboardPage/* : INavigableView<ViewModels.DashboardViewModel>*/
     {
         public ViewModels.DashboardViewModel ViewModel
@@ -48,25 +43,32 @@ namespace 光源AI绘画盒子.Views.Pages
 
         public DashboardPage(ViewModels.DashboardViewModel viewModel)
         {
-            ViewModel = viewModel;
-            InitializeComponent();
-            _imagePaths = new List<string> { "pack://application:,,,/Views/Pages/001.png",
+            try
+            {
+                ViewModel = viewModel;
+                InitializeComponent();
+                _imagePaths = new List<string> { "pack://application:,,,/Views/Pages/001.png",
                 "pack://application:,,,/Views/Pages/002.png",
                 "pack://application:,,,/Views/Pages/003.png",
                 "pack://application:,,,/Views/Pages/004.png",
-             "pack://application:,,,/Views/Pages/005.png",
-             "pack://application:,,,/Views/Pages/006.png",
-             "pack://application:,,,/Views/Pages/007.png",
-             "pack://application:,,,/Views/Pages/008.png",
-             "pack://application:,,,/Views/Pages/009.png",
-             "pack://application:,,,/Views/Pages/010.png",
-             "pack://application:,,,/Views/Pages/011.png",
-             "pack://application:,,,/Views/Pages/012.png"
+                "pack://application:,,,/Views/Pages/005.png",
+                "pack://application:,,,/Views/Pages/006.png",
+                "pack://application:,,,/Views/Pages/007.png",
+                "pack://application:,,,/Views/Pages/008.png",
+                "pack://application:,,,/Views/Pages/009.png",
+                "pack://application:,,,/Views/Pages/010.png",
+                "pack://application:,,,/Views/Pages/011.png",
+                "pack://application:,,,/Views/Pages/012.png"
             };
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
-            _timer.Tick += TimerTick;
-            _timer.Start();
-            loatmodel(0, "", "[]", 1);
+                _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+                _timer.Tick += TimerTick;
+                _timer.Start();
+                loatmodel(0, "", "[]", 1);
+            }
+            catch (Exception ex)
+            {
+            }
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -196,10 +198,10 @@ namespace 光源AI绘画盒子.Views.Pages
         }
         private void 搜素按钮2_Click(object sender, RoutedEventArgs e)
         {
-            if (搜索框2.Text != null)
+            if (搜索框.Text != null)
             {
                 模型资源列表.Children.Clear();
-                _searchName = 搜索框2.Text;
+                _searchName = 搜索框.Text;
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
         }
@@ -323,37 +325,37 @@ namespace 光源AI绘画盒子.Views.Pages
         private void 模型类型选择器2_DropDownClosed(object sender, EventArgs e)
 
         {
-            if (模型类型选择器2.SelectedIndex == 0)
+            if (模型类型选择器.SelectedIndex == 0)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器2.SelectedIndex == 1)
+            if (模型类型选择器.SelectedIndex == 1)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[5]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器2.SelectedIndex == 2)
+            if (模型类型选择器.SelectedIndex == 2)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[6]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器2.SelectedIndex == 3)
+            if (模型类型选择器.SelectedIndex == 3)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[7]";
                 loatmodel(模型排列, "", 模型种类, 1);
             }
-            if (模型类型选择器2.SelectedIndex == 4)
+            if (模型类型选择器.SelectedIndex == 4)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[1]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器2.SelectedIndex == 5)
+            if (模型类型选择器.SelectedIndex == 5)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[2]";
@@ -362,13 +364,13 @@ namespace 光源AI绘画盒子.Views.Pages
 
         }
 
+        string programpath = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.IndexOf(':'));
+        //获取执行文件所在盘符
+
         private void firstloded(object sender, RoutedEventArgs e)
         {
             搜索栏2.Visibility = Visibility.Collapsed;
         }
-
-
-
         private void 打开WebUI文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Process.Start("explorer.exe", initialize.工作路径);
@@ -376,71 +378,130 @@ namespace 光源AI绘画盒子.Views.Pages
 
         private void 打开文生图文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string 文生图文件路径 = initialize.工作路径 + "\\outputs\\txt2img-images";
-            Process.Start("explorer.exe", 文生图文件路径);
+            if (programpath.Length == 1)
+            {
+                string 文生图文件路径 = initialize.工作路径 + "outputs\\txt2img-images";
+                Process.Start("explorer.exe", 文生图文件路径);
+            }
+            else
+            {
+                string 文生图文件路径 = initialize.工作路径 + "\\outputs\\txt2img-images";
+                Process.Start("explorer.exe", 文生图文件路径);
+            }
         }
 
         private void 打开图生图文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string 图生图文件路径 = initialize.工作路径 + "\\outputs\\img2img-images";
-            Process.Start("explorer.exe", 图生图文件路径);
+            if (programpath.Length == 1)
+            {
+                string 图生图文件路径 = initialize.工作路径 + "outputs\\img2img-images";
+                Process.Start("explorer.exe", 图生图文件路径);
+            }
+            else
+            {
+                string 图生图文件路径 = initialize.工作路径 + "\\outputs\\img2img-images";
+                Process.Start("explorer.exe", 图生图文件路径);
+            }
+
         }
 
         private void 统计生成图片数量_MouseDown(object sender, MouseButtonEventArgs e)
         {
             initialize.相册计数();
-            图片数量展示.Text = "图片数量：";
-        }
-
-
-
-
-
-        private void Can1_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-            Process.Start(new ProcessStartInfo("https://www.bilibili.com/video/BV1H24y147wu/") { UseShellExecute = true });
-
-
+            图片数量展示.Text = initialize.相册图片数量;
         }
 
         private void 打开SD模型文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string SD模型文件路径 = initialize.工作路径 + "\\models\\Stable-diffusion";
-            Process.Start("explorer.exe", SD模型文件路径);
+            if (programpath.Length == 1)
+            {
+                string SD模型文件路径 = initialize.工作路径 + "models\\Stable-diffusion";
+                Process.Start("explorer.exe", SD模型文件路径);
+            }
+            else
+            {
+                string SD模型文件路径 = initialize.工作路径 + "\\models\\Stable-diffusion";
+                Process.Start("explorer.exe", SD模型文件路径);
+            }
+
         }
 
         private void 打开lora模型文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string LORA模型文件路径 = initialize.工作路径 + "\\models\\Lora";
-            Process.Start("explorer.exe", LORA模型文件路径);
+            if (programpath.Length == 1)
+            {
+                string LORA模型文件路径 = initialize.工作路径 + "models\\Lora";
+                Process.Start("explorer.exe", LORA模型文件路径);
+            }
+            else
+            {
+                string LORA模型文件路径 = initialize.工作路径 + "\\models\\Lora";
+                Process.Start("explorer.exe", LORA模型文件路径);
+            }
+
         }
 
         private void 打开VAE模型文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string VAE模型文件路径 = initialize.工作路径 + "\\models\\VAE";
-            Process.Start("explorer.exe", VAE模型文件路径);
+            if (programpath.Length == 1)
+            {
+                string VAE模型文件路径 = initialize.工作路径 + "models\\VAE";
+                Process.Start("explorer.exe", VAE模型文件路径);
+            }
+            else
+            {
+                string VAE模型文件路径 = initialize.工作路径 + "\\models\\VAE";
+                Process.Start("explorer.exe", VAE模型文件路径);
+            }
+
 
         }
 
         private void 打开EMB模型文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string EMB模型文件路径 = initialize.工作路径 + "\\embeddings";
-            Process.Start("explorer.exe", EMB模型文件路径);
+            if (programpath.Length == 1)
+            {
+                string EMB模型文件路径 = initialize.工作路径 + "embeddings";
+                Process.Start("explorer.exe", EMB模型文件路径);
+            }
+            else
+            {
+                string EMB模型文件路径 = initialize.工作路径 + "\\embeddings";
+                Process.Start("explorer.exe", EMB模型文件路径);
+            }
+
 
         }
 
         private void 打开HYP模型文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string HYP模型文件路径 = initialize.工作路径 + "\\models\\hypernetworks";
-            Process.Start("explorer.exe", HYP模型文件路径);
+            if (programpath.Length == 1)
+            {
+                string HYP模型文件路径 = initialize.工作路径 + "models\\hypernetworks";
+                Process.Start("explorer.exe", HYP模型文件路径);
+            }
+            else
+            {
+                string HYP模型文件路径 = initialize.工作路径 + "\\models\\hypernetworks";
+                Process.Start("explorer.exe", HYP模型文件路径);
+            }
+
 
         }
 
         private void 打开扩展模型文件夹_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string VAE模型文件路径 = initialize.工作路径 + "\\extensions";
-            Process.Start("explorer.exe", VAE模型文件路径);
+            if (programpath.Length == 1)
+            {
+                string 扩展模型文件夹 = initialize.工作路径 + "extensions";
+                Process.Start("explorer.exe", 扩展模型文件夹);
+            }
+            else
+            {
+                string 扩展模型文件夹 = initialize.工作路径 + "\\extensions";
+                Process.Start("explorer.exe", 扩展模型文件夹);
+            }
+
 
         }
 
@@ -457,4 +518,5 @@ namespace 光源AI绘画盒子.Views.Pages
 
 
     }
+
 }

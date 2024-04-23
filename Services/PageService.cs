@@ -2,7 +2,7 @@
 using System.Windows;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace 光源AI绘画盒子.Services
+namespace Awake.Services
 {
     /// <summary>
     /// Service that provides pages for navigation.

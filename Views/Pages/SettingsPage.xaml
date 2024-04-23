@@ -1,44 +1,48 @@
 ﻿<ui:UiPage
-    x:Class="光源AI绘画盒子.Views.Pages.SettingsPage"
+    x:Class="Awake.Views.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:helpers="clr-namespace:光源AI绘画盒子.Helpers"
-    xmlns:local="clr-namespace:光源AI绘画盒子.Views.Pages"
+    xmlns:helpers="clr-namespace:Awake.Helpers"
+    xmlns:local="clr-namespace:Awake.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SettingsPage"
-  
+    d:DataContext="{d:DesignInstance local:SettingsPage,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="700"
     d:DesignWidth="980"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
     <ui:UiPage.Resources>
-       
+        <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </ui:UiPage.Resources>
     <ScrollViewer HorizontalAlignment="Center">
-        
-        <StackPanel Width="980" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,50">
-            <TextBlock Text="Release 3.0.5" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="White" Margin="15,5,15,0"></TextBlock>
 
-            <Border CornerRadius="5" Height="150" Margin="15,15,15,0">
+        <StackPanel Width="980" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,50">
+            <TextBlock Text="光源绘梦Release Version" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,5,15,0"/>
+
+            <Border CornerRadius="5" Margin="15,0,15,0">
                 <Border.Background>
                     <ImageBrush Stretch="UniformToFill"/>
                 </Border.Background>
-                
+
                 <StackPanel Margin="0,0,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <ui:SymbolIcon Symbol="Apps20" Width="120" Height="120" FontSize="120"/>
-
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel>
-                                <TextBlock Text="光源AI绘画盒子        盒子在手,AI我有" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="15,0,0,0"></TextBlock>
-                                <TextBlock Text="开源免费的AI绘画启动器/工具箱" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
-                                <TextBlock Text="基于GPL v3许可证开源" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
-                                <ui:Hyperlink NavigateUri="https://space.bilibili.com/666714573" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="#FFFF3D48">关注作者@Ray_Source光源</ui:Hyperlink>
+                            <Border BorderThickness="1"  CornerRadius="65" Height="130" Width="130">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Views/Pages/Ray_Source.png"/>
+                                </Border.Background>
+                                <ui:SymbolIcon Symbol="Group20" FontSize="85" HorizontalAlignment="Left" Margin="56,52,0,0" VerticalAlignment="Top"/>
 
-                                <ui:Hyperlink NavigateUri="https://github.com/Ray-Source-X/Open-SD-WebUI-Launcher" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="#FFFF3D48">https://github.com/Ray-Source-X/Open-SD-WebUI-Launcher</ui:Hyperlink>
+                            </Border>
+                            <StackPanel Width="704">
+                                <TextBlock Text="光源绘梦-SD-WebUI-启动器" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="5,0,0,0"/>
+                                <TextBlock Text="开源的AI绘画启动器|工具箱|基于GPL v3许可证开源" FontSize="16" Width="396" Height="18"/>
+                                <ui:Hyperlink NavigateUri="https://space.bilibili.com/666714573" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Content="Astro Artistry | 绘梦星空"/>
+                                <ui:Hyperlink NavigateUri="https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher" FontSize="16" FontWeight="Bold" Width="677" Content="https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher" Margin="25,0,0,0"/>
 
                             </StackPanel>
                         </StackPanel>
@@ -47,8 +51,132 @@
 
                 </StackPanel>
             </Border>
-            <TextBlock Text="和小伙伴一起绘画我们的世界！" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,20" ></TextBlock>
-            <TextBlock Text="开放源代码许可" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,20,0,20" ></TextBlock>
+            <TextBlock Text="用算法雕琢AI世界，用技术一同改变生活" FontSize="22" HorizontalAlignment="Center" Margin="160,0,0,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ui:CardAction x:Name="光源的魔法小镇" Width="480" Click="光源的魔法小镇_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="ChannelShare20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0">
+                            <TextBlock Text="[社区]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="https://pd.qq.com/s/g4et2xo0m" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+
+                            <TextBlock Text="BUG故障反馈与功能建议" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+                <ui:CardAction x:Name="光源的AI魔法小镇" Width="480" Margin="2,0,0,0" Click="光源的AI魔法小镇_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="Fluid20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="[反馈]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="227356139" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Text="BUG故障反馈与功能建议" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <ui:CardAction x:Name="AIGC炼丹技术交流群" Width="480" Click="AIGC炼丹技术交流群_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="DatabasePlugConnected20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0">
+                            <TextBlock Text="[群组]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="720697178" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+
+                            <TextBlock Text="模型制作与技术交流" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+                <ui:CardAction x:Name="NovelAI中文频道" Width="480" Margin="2,0,0,0" Click="NovelAI中文频道_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="ChannelShare20" FontSize="63"/>
+
+                        </Border>
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="[社区]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="https://pd.qq.com/s/eqo0vw7yi" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Text="最大的AI绘画中文社区" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <ui:CardAction x:Name="参与建设" Width="480" Click="参与建设_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="Apps20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="[项目]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock TextWrapping="Wrap" Text="https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher" FontSize="14" HorizontalAlignment="Center" Width="266"/>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+                <ui:CardAction x:Name="支持光源盒子开发" Width="480" Margin="2,0,0,0" Click="支持光源盒子开发_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="MoneyHand20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="[捐助]  支持光源绘梦开发" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock TextWrapping="Wrap" Text="[爱发电]  https://afdian.net/a/Ray_Source" FontSize="14" HorizontalAlignment="Center"/>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <ui:CardAction x:Name="解构原典" Width="480" Click="解构原典_Click" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+                            <ui:SymbolIcon Symbol="BookmarkAdd20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="[网站]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock TextWrapping="Wrap" Text="解构原典——NAI3.0进阶魔法书" FontSize="14" HorizontalAlignment="Center"/>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+
+                <ui:CardAction x:Name="元素法典" Width="480" Click="元素法典_Click" Margin="2,0,0,0" Background="#0FFFFFFF">
+                    <StackPanel Orientation="Horizontal">
+                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
+
+                            <ui:SymbolIcon Symbol="Bookmark20" FontSize="63"/>
+                        </Border>
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="[网站]元素法典" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock TextWrapping="Wrap" Text="Novel AI 元素魔法全收录" FontSize="14" HorizontalAlignment="Center" Width="266"/>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ui:CardAction>
+            </StackPanel>
+            <ui:Hyperlink NavigateUri="https://www.kdocs.cn/l/cre0TwbMkdx3" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" Margin="0,16,0,0">NovelAI信息并联计划</ui:Hyperlink>
+            <ui:Hyperlink NavigateUri="https://www.114514123.xyz" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold">NovelAI资源站</ui:Hyperlink>
+
+            <TextBlock Text="开放源代码许可" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,20" ></TextBlock>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                 <StackPanel Orientation="Horizontal">

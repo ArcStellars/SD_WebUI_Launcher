@@ -1,11 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Awake.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
 using Wpf.Ui.Common.Interfaces;
-using 光源AI绘画盒子.Models;
 
-namespace 光源AI绘画盒子.ViewModels
+namespace Awake.ViewModels
 {
     public partial class DataViewModel : ObservableObject, INavigationAware
     {

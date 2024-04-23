@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
-using System.Windows.Input;
 using Wpf.Ui.Common.Interfaces;
 
-namespace 光源AI绘画盒子.ViewModels
+namespace Awake.ViewModels
 {
     public partial class SettingsViewModel : ObservableObject, INavigationAware
     {

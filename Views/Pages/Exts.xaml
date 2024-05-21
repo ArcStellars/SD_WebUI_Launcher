@@ -1,0 +1,43 @@
+﻿<Page x:Class="Awake.Views.Pages.Exts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Awake.Views.Pages"
+      mc:Ignorable="d" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      d:DesignHeight="700" d:DesignWidth="980"
+      Title="Exts">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="5" Orientation="Horizontal" Width="auto">
+                <ui:SymbolIcon Symbol="Folder16" Width="20" />
+                <Button  Margin="5" Content="打开目录" Click="Button_Click"></Button>
+                <ui:SymbolIcon Symbol="ArrowSync20" Width="20" />
+                <Button  Margin="5" Content="刷新列表" Click="Refresh_Click"></Button>
+                <ui:SymbolIcon Symbol="ArrowSortDown20" Width="20" />
+                <Button  Margin="5" Content="安装扩展" Click="Setup_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+        <DataGrid x:Name="exts"
+                 AutoGenerateColumns="False" MaxHeight="720">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="插件名称" Binding="{Binding Name}" CanUserResize="False" IsReadOnly="True"  Width="200"/>
+                <DataGridTextColumn Header="云端地址" Binding="{Binding GitUrl}" CanUserResize="False" IsReadOnly="True"  Width="*"/>
+                <DataGridTextColumn Header="短hash" Binding="{Binding Hash}" CanUserResize="False" IsReadOnly="True"  Width="80"/>
+                <DataGridTextColumn Header="日期" Binding="{Binding Date}" CanUserResize="False" IsReadOnly="True"  Width="140"/>
+                <DataGridTemplateColumn Header="操作" Width="190">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Button Content="更新" Tag="{Binding Path}" IsEnabled="{Binding hasUpdate}" Click="checkUpdateExt_Click"/>
+                                <Button Content="版本管理" Tag="{Binding Index}" Click="verManager_Click"/>
+                                <Button Content="打开" Tag="{Binding Path}" Click="openExt_Click" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Page>

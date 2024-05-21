@@ -169,7 +169,7 @@
 
                                                     <StackPanel VerticalAlignment="Center">
                                                         <TextBlock Text="SD模型文件夹" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="35" Canvas.Top="10"/>
-                                                        <TextBlock TextWrapping="Wrap" Text="StableDiffusion模型也称扩散模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="35" Canvas.Top="30" Width="90" Opacity="0.6"/>
+                                                        <TextBlock TextWrapping="Wrap" Text="StableDiffusion模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="35" Canvas.Top="30" Width="90" Opacity="0.6"/>
                                                     </StackPanel>
                                                     <ui:SymbolIcon Symbol="Share16" FontSize="30" HorizontalAlignment="Center" Canvas.Left="55" Canvas.Top="100" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -180,7 +180,7 @@
                                                     <ui:SymbolIcon Symbol="PlugConnectedAdd20" Width="35" Height="35" FontSize="35" Margin="0,0,5,0"/>
                                                     <StackPanel>
                                                         <TextBlock Text="LoRA文件夹" FontSize="14" HorizontalAlignment="Left" Canvas.Left="82" Canvas.Top="16"/>
-                                                        <TextBlock TextWrapping="Wrap" Text="Lora模型使用需要依赖对应的扩散模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="80" Canvas.Top="41" Width="90" Opacity="0.6"/>
+                                                        <TextBlock TextWrapping="Wrap" Text="Lora模型使用的扩散模型" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="80" Canvas.Top="41" Width="90" Opacity="0.6"/>
                                                     </StackPanel>
                                                     <ui:SymbolIcon Symbol="Share16" FontSize="30" HorizontalAlignment="Center" Canvas.Left="55" Canvas.Top="100" VerticalAlignment="Center"/>
 

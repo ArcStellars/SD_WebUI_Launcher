@@ -31,7 +31,7 @@ namespace Awake.Views.Pages
                 // 在这里使用列表
                 if (lines_setting[0] == "True")
                 {
-          
+
                     启动后自动打开浏览器开关.IsChecked = true;
 
                 }
@@ -42,68 +42,68 @@ namespace Awake.Views.Pages
                 }
                 if (lines_setting[2] == "True")
                 {
-             
+
                     分享WebUI到公网.IsChecked = true;
                 }
                 if (lines_setting[3] == "True")
                 {
-                 
+
                     使用CPU进行推理.IsChecked = true;
                 }
                 if (lines_setting[4] == "True")
                 {
-                   
+
                     关闭模型hash计算.IsChecked = true;
                 }
                 if (lines_setting[5] == "True")
                 {
-             
+
                     冻结设置.IsChecked = true;
                 }
                 if (lines_setting[6] == "True")
                 {
-                  
+
                     快速启动.IsChecked = true;
                 }
                 if (lines_setting[8] == "True")
                 {
-                 
+
                     上投采样.IsChecked = true;
 
                 }
                 if (lines_setting[9] == "True")
                 {
-                    
+
                     关闭半精度计算.IsChecked = true;
                 }
                 if (lines_setting[10] == "True")
                 {
-        
+
                     启用InvokeAI.IsChecked = true;
                 }
                 if (lines_setting[11] == "True")
                 {
-                   
+
                     内存优化.IsChecked = true;
                 }
                 if (lines_setting[12] == "True")
                 {
-          
+
                     SDP优化.IsChecked = true;
                 }
                 if (lines_setting[13] == "True")
                 {
-                    
+
                     缩放点积.IsChecked = true;
                 }
                 if (lines_setting[14] == "True")
                 {
-          
+
                     启用xformers.IsChecked = true;
                 }
                 if (lines_setting[15] == "True")
                 {
-                   
+
                     启用替代布局.IsChecked = true;
                 }
 
@@ -121,14 +121,14 @@ namespace Awake.Views.Pages
                 {
                     显卡类型.SelectedIndex = 2;
                 }
-     
+
                 if (lines_setting[18] == " --lowvram")
-                   { WebUI显存压力优化设置.SelectedIndex = 0; }
+                { WebUI显存压力优化设置.SelectedIndex = 0; }
                 if (lines_setting[18] == " --medvram")
-                   { WebUI显存压力优化设置.SelectedIndex = 1; }
+                { WebUI显存压力优化设置.SelectedIndex = 1; }
                 if (lines_setting[18] == "")
-                   { WebUI显存压力优化设置.SelectedIndex = 2; }
- 
+                { WebUI显存压力优化设置.SelectedIndex = 2; }
+
                 if (initialize._WebUI主题颜色 == "")
                 {
                     WebUI主题颜色设置.SelectedIndex = 0;
@@ -140,6 +140,11 @@ namespace Awake.Views.Pages
                 if (initialize._WebUI主题颜色 == " --theme dark")
                 {
                     WebUI主题颜色设置.SelectedIndex = 2;
+                }
+                if (lines_setting[20] == "True")
+                {
+
+                    Doggettx启用.IsChecked = true;
                 }
 
             }
@@ -249,6 +254,13 @@ namespace Awake.Views.Pages
             { initialize.关闭半精度计算 = true; }
         }
 
+        private void 内存优化_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (内存优化.IsChecked == false)
+            { initialize.内存优化 = false; }
+            else
+            { initialize.内存优化 = true; }
+        }
 
         //A卡|I卡
         private void 启用InvokeAI_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -258,15 +270,6 @@ namespace Awake.Views.Pages
             else
             { initialize.启用InvokeAI = true; }
         }
-
-        private void 内存优化_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (内存优化.IsChecked == false)
-            { initialize.内存优化 = false; }
-            else
-            { initialize.内存优化 = true; }
-        }
-
 
 
 
@@ -316,6 +319,18 @@ namespace Awake.Views.Pages
             else
             {
                 initialize.启用替代布局 = true;
+            }
+        }
+
+        private void Doggettx启用_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (Doggettx启用.IsChecked == false)
+            {
+                initialize.Doggettx优化 = false;
+            }
+            else
+            {
+                initialize.Doggettx优化 = true;
             }
         }
 

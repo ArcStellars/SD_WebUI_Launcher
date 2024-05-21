@@ -178,7 +178,7 @@ namespace Awake.Views.Windows
 
                     }
                 }
-             
+
 
 
                 SetPageService(pageService);
@@ -267,6 +267,7 @@ namespace Awake.Views.Windows
         #endregion INavigationWindow methods
         protected override void OnClosed(EventArgs e)
         {
+            
             base.OnClosed(e);
             File.WriteAllText(@".AI_launther_log\UIalpha.txt", initialize.图片亮度.ToString());
             File.WriteAllText(@".AI_launther_log\UI.txt", initialize.背景颜色);
@@ -277,8 +278,8 @@ namespace Awake.Views.Windows
                 initialize.分享WebUI到公网 + "\n" +
                 initialize.使用CPU进行推理 + "\n" +
                 initialize.关闭模型hash计算 + "\n" +
-                initialize.冻结设置 + "\n"+
-                initialize.快速启动 + "\n"+
+                initialize.冻结设置 + "\n" +
+                initialize.快速启动 + "\n" +
                 initialize.启用自定义路径 + "\n" +
 
                 initialize.上投采样 + "\n" +
@@ -295,10 +296,16 @@ namespace Awake.Views.Windows
                 initialize.显卡类型名 + "\n" +
                 initialize._显卡类型 + "\n" +
                 initialize._WebUI显存压力优化设置 + "\n" +
-                initialize._WebUI主题颜色 + "\n");
+                initialize._WebUI主题颜色 + "\n" +
+
+                initialize.Doggettx优化 + "\n"
 
 
-        File.WriteAllText(@".AI_launther_log\setting.txt", 参数设置);
+
+                );
+
+
+            File.WriteAllText(@".AI_launther_log\setting.txt", 参数设置);
             Application.Current.Shutdown();
         }
 

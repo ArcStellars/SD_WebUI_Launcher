@@ -1,0 +1,94 @@
+﻿<ui:UiWindow  x:Class="Awake.Views.Windows.VerManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        d:Background="{DynamicResource ApplicationBackgroundBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        mc:Ignorable="d"
+        Title="扩展版本管理" Height="650" Width="1000" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <ui:Card Margin="5">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <ui:SymbolIcon Symbol="CloudArchive20" Width="40" />
+                    <Label FontSize="16" >拉取仓库地址 :</Label>
+                    <Label x:Name="lblCurrGit"></Label>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <ui:SymbolIcon Symbol="Info20" Width="40" />
+                    <Label FontSize="16">更新提交信息 :</Label>
+                    <Label x:Name="lblCurrMessage"></Label>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <ui:SymbolIcon Symbol="ZoomIn20" Width="40" />
+                    <Label FontSize="16">本地代码版本 :</Label>
+                    <Label x:Name="lblCurrHash"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label FontSize="16">云端提交日期 :</Label>
+                    <Label x:Name="lblCurrDate"></Label>
+
+                </StackPanel>
+
+            </StackPanel>
+        </ui:Card>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Margin="0,0,6,0" Symbol="DeveloperBoard24" />
+                        <TextBlock Text="稳定版(main) " FontSize="16"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <ui:DataGrid x:Name="commit2"
+                    AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="短Hash" Binding="{Binding Hash}" Width="80" />
+                        <DataGridTextColumn Header="信息" Binding="{Binding Message}" Width="*" />
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="140" />
+                        <DataGridCheckBoxColumn Header="当前" Binding="{Binding Checked}" Width="35"/>
+                        <DataGridTemplateColumn Header="操作" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Content="安装此版本" Tag="{Binding Hash}" Click="setup_Click" Width="100"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </ui:DataGrid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Margin="0,0,6,0" Symbol="DeveloperBoardLightning20" />
+                        <TextBlock Text="开发版(dev)" FontSize="16"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <ui:DataGrid x:Name="commit" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="650"
+                        AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="短Hash" Binding="{Binding Hash}" Width="80"/>
+                        <DataGridTextColumn Header="信息" Binding="{Binding Message}" Width="*"/>
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="140"/>
+                        <DataGridCheckBoxColumn Header="当前" Binding="{Binding Checked}" Width="35"/>
+                        <DataGridTemplateColumn Header="操作" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Content="安装此版本" Tag="{Binding Hash}" Click="setup_Click" Width="100"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </ui:DataGrid>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</ui:UiWindow>

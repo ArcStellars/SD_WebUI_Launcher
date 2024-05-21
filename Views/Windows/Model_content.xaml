@@ -15,7 +15,7 @@
     MinHeight="650" MinWidth="1200" MaxWidth="1200" MaxHeight="650"
     ExtendsContentIntoTitleBar="True"
     WindowCornerPreference="Round">
-    
+
     <ui:UiWindow.Background>
         <ImageBrush></ImageBrush>
     </ui:UiWindow.Background>

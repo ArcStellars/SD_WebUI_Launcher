@@ -149,57 +149,60 @@
                                 <StackPanel>
                                     <TextBlock Text="通用优化方案" Margin="0,0,0,2"/>
 
-                                    
+
                                     <ui:Card>
                                         <StackPanel Margin="0,0,0,5">
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(产生与no-half类似的结果,有更好性能及更少内存)</TextBlock>
+                                                <TextBlock Width="400">(与no-half类似的结果,有更好性能及更少内存(新版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="上投采样" VerticalAlignment="Center" Click="上投采样_Click" />
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(解决部分gtx16xx显卡黑图的问题,显存占用上升)</TextBlock>
+                                                <TextBlock Width="400">(解决部分gtx16xx显卡黑图的问题,显存占用上升(旧版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="关闭半精度计算" VerticalAlignment="Center" Click="关闭半精度计算_Click" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBlock Width="400">(实现内存高效的次二次交叉注意力层优化(旧版))</TextBlock>
+                                                <ui:ToggleSwitch x:Name="内存优化" VerticalAlignment="Center" Click="内存优化_Click" />
                                             </StackPanel>
                                         </StackPanel>
 
-                                        
+
                                     </ui:Card>
                                     <TextBlock Text="A卡 | I卡优化方案" Margin="0,5,0,2" Visibility="Visible"/>
                                     <ui:Card Visibility="Visible">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(默认情况下,当CUDA不可用时,它处于打开状态)</TextBlock>
+                                                <TextBlock Width="400">(默认情况下,当CUDA不可用时,它处于打开状态(旧版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="启用InvokeAI" VerticalAlignment="Center" Click="启用InvokeAI_Click" />
                                             </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(实现内存高效的次二次交叉注意力层优化)</TextBlock>
-                                                <ui:ToggleSwitch x:Name="内存优化" VerticalAlignment="Center" Click="内存优化_Click" />
-                                            </StackPanel>
                                         </StackPanel>
-                                        
-                                        
+
+
                                     </ui:Card>
                                     <TextBlock Text="N卡优化方案" Margin="0,5,0,2" Visibility="Visible"/>
                                     <ui:Card Visibility="Visible">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(使图像生成具有确定性,需要PyTorch2.X)</TextBlock>
+                                                <TextBlock Width="400">(使图像生成具有确定性,需要PyTorch2.X(旧版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="缩放点积" VerticalAlignment="Center" Click="缩放点积_Click" />
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(SDP无内存优化，可提高生成速度)</TextBlock>
+                                                <TextBlock Width="400">(SDP无内存优化，可提高生成速度(旧版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="SDP优化" VerticalAlignment="Center" Click="SDP优化_Click" />
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(为交叉注意力图层启用 xformers)</TextBlock>
+                                                <TextBlock Width="400">(为交叉注意力图层启用 xformers(旧版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="启用xformers" VerticalAlignment="Center" Click="启用xformers_Click" />
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                                <TextBlock Width="400">(在具有Tensor核心16xx及更高版本N卡上实现更快推理)</TextBlock>
+                                                <TextBlock Width="400">(在具有Tensor核心16xx及更高版本N卡上实现更快推理(旧版))</TextBlock>
                                                 <ui:ToggleSwitch x:Name="启用替代布局" VerticalAlignment="Center" Click="启用替代布局_Click" />
                                             </StackPanel>
-                                            
-                                           
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBlock Width="400">(Doggettx的交叉注意力层优化(旧版))</TextBlock>
+                                                <ui:ToggleSwitch x:Name="Doggettx启用" VerticalAlignment="Center" Click="Doggettx启用_Click" />
+                                            </StackPanel>
+
 
                                         </StackPanel>
                                     </ui:Card>

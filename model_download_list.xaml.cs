@@ -34,44 +34,56 @@ namespace Awake
         string 模型保存名称 = string.Empty;
         string _uuid = string.Empty;
         string _Hash = "";
+        private string 下载路径;
+
         public model_download_list(string _versionDesc, string uuid, string _模型名, string _modelname, string _modelVersionId, string _modelSourceName, string _modelSource, string _modelSourceSize, string _modelSourceHash, string _modelType)
         {
             InitializeComponent();
             _uuid = uuid;
             _Hash = GenerateHash(initialize.工作路径);
+
+            if (initialize.工作路径.Length == 3)
+            {
+                下载路径 = initialize.工作路径.Substring(0, initialize.工作路径.Length - 1);
+            }
+            else
+            {
+                下载路径 = initialize.工作路径;
+            }
+
             if (_modelType == "Checkpoint")
             {
-                模型保存路径 = initialize.工作路径 + "\\models\\Stable-diffusion";
+                模型保存路径 = 下载路径 + "\\models\\Stable-diffusion";
                 模型保存名称 = _模型名 + _modelname + ".safetensors";
             }
             if (_modelType == "LORA")
             {
-                模型保存路径 = initialize.工作路径 + "\\models\\Lora";
+                模型保存路径 = 下载路径 + "\\models\\Lora";
                 模型保存名称 = _模型名 + _modelname + ".safetensors";
 
             }
 
             if (_modelType == "Textual Inversion")
             {
-                模型保存路径 = initialize.工作路径 + "\\embeddings";
+                模型保存路径 = 下载路径 + "\\embeddings";
                 模型保存名称 = _模型名 + _modelname + ".pt";
 
             }
             if (_modelType == "LyCORIS")
             {
-                模型保存路径 = initialize.工作路径 + "\\models\\LyCORIS";
+                模型保存路径 = 下载路径 + "\\models\\LyCORIS";
                 模型保存名称 = _模型名 + _modelname + ".safetensors";
 
             }
             if (_modelType == "Controlnet")
             {
-                模型保存路径 = initialize.工作路径 + "\\models\\ControlNet";
+                模型保存路径 = 下载路径 + "\\models\\ControlNet";
                 模型保存名称 = _模型名 + _modelname + ".safetensors";
 
             }
             if (_modelType == "Hypernetwork")
             {
-                模型保存路径 = initialize.工作路径 + "\\models\\ControlNet";
+                模型保存路径 = 下载路径 + "\\models\\ControlNet";
                 模型保存名称 = _模型名 + _modelname + ".safetensors";
 
             }
@@ -118,6 +130,7 @@ namespace Awake
 
 
         bool is_downloaded = false;
+
         //下面是一些与下载有关的code
         private async void Download_Click(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,4 @@
-﻿using Awake.Views.Windows;
+﻿﻿using Awake.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -73,47 +73,47 @@ namespace Awake.Views.Pages
 
         public webpp()
         {
+            InitializeComponent();
+            GetSystemInfo();
 
             if (File.Exists(@".AI_launther_log\startpath.txt") == false)
-            {
-
-                InitializeComponent();
-                GetSystemInfo();
+            {    
                 File.WriteAllText(@".AI_launther_log\startpath.txt", "暂未设置部署路径");
                 磁盘剩余显示.Text = "磁盘剩余空间：未知";
 
-                工作路径展示.Text = initialize.工作路径;
+                工作路径展示.Text = "暂未设置部署路径";
+            }
+            else
+            {
+                工作路径展示.Text =initialize.工作路径;
+            }
+            if (initialize.gitPath != "")
+            {
+                Git路径展示.Text = initialize.gitPath;
+            }
+            else
+            {
+                Git路径展示.Text = "暂未设置部署路径";
+            }
 
-                if (initialize.gitPath != "")
-                {
-                    Git路径展示.Text = initialize.gitPath;
-                }
-                else
-                {
-                    Git路径展示.Text = "暂未设置部署路径";
-                }
+            if (initialize.venvPath != "")
+            {
+                VENV路径展示.Text = initialize.venvPath;
 
-                if (initialize.venvPath != "")
-                {
-                    VENV路径展示.Text = initialize.venvPath;
+            }
+            else
+            {
+                VENV路径展示.Text = "暂未设置部署路径";
+            }
 
-                }
-                else
-                {
-                    VENV路径展示.Text = "暂未设置部署路径";
-                }
+            if (initialize.本地路径 != "")
+            {
+                本地工作路径展示.Text = initialize.本地路径;
 
-                if (initialize.本地路径 != "")
-                {
-                    本地工作路径展示.Text = initialize.本地路径;
-
-                }
-                else
-                {
-                    本地工作路径展示.Text = "暂未设置部署路径";
-                }
-
-
+            }
+            else
+            {
+                本地工作路径展示.Text = "暂未设置部署路径";
             }
 
             try
@@ -512,9 +512,6 @@ namespace Awake.Views.Pages
             解压魔法.BeginOutputReadLine();//开始读取输出流
             解压魔法.BeginErrorReadLine();//开始读取错误流
 
-
-
-
         }
 
         private void OutputHandler(object sender, DataReceivedEventArgs e)
@@ -585,28 +582,27 @@ namespace Awake.Views.Pages
             下载组.Visibility = Visibility.Visible;
             WebUI下载按钮.Content = "安装完毕，点击一键启动";
             initialize.已安装WebUI = true;
-
-            if (File.Exists(initialize.工作路径 + @"\WebUIpackcatch.7z"))
+            //删除文件
+            if (File.Exists(initialize.工作路径 + @"\WebUIpack.7z"))
             {
 
-                File.Delete(initialize.工作路径 + @"\WebUIpackcatch.7z");
+                File.Delete(initialize.工作路径 + @"\WebUIpack.7z");
 
             }
-            if (File.Exists(initialize.工作路径 + @"WebUIpackcatch.7z"))
+            if (File.Exists(initialize.工作路径 + @"WebUIpack.7z"))
             {
 
-                File.Delete(initialize.工作路径 + @"WebUIpackcatch.7z");
+                File.Delete(initialize.工作路径 + @"WebUIpack.7z");
 
             }
-
+            //删除文件夹
             if (Directory.Exists(initialize.工作路径 + @"\2.0.9"))
             {
-                // 3.1、删除文件夹
                 Directory.Delete((initialize.工作路径 + @"\2.0.9"), true);
             }
             if (Directory.Exists(initialize.工作路径 + @"2.0.9"))
             {
-                // 3.1、删除文件夹
+
                 Directory.Delete((initialize.工作路径 + @"2.0.9"), true);
             }
 

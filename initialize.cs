@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -48,14 +49,15 @@ namespace Awake
         //优化
         public static bool 上投采样 = false;
         public static bool 关闭半精度计算 = false;
+        public static bool 内存优化 = false;
 
         public static bool 启用InvokeAI = false;
-        public static bool 内存优化 = false;
 
         public static bool SDP优化 = false;
         public static bool 缩放点积 = false;
         public static bool 启用xformers = false;
         public static bool 启用替代布局 = false;
+        public static bool Doggettx优化 = false;
 
         //下面是一些参数的字符串预设
         public static string 命令列表 = "";
@@ -77,9 +79,12 @@ namespace Awake
         public static int _UseGPUindex = 0;
         public static string 相册图片数量 = "";
         public static string 参数列表 = "";//所有启动时传递的参数挂到这里，全局可编辑与访问
+        public static string 加载路径;
+        public static string gitPath_use;
 
         public static void Read_setting()
         {
+
             string filePath = @".AI_launther_log\setting.txt"; // 文本文件路径
 
             try
@@ -175,7 +180,11 @@ namespace Awake
                 initialize.显卡类型名 = lines_setting[16];
                 initialize._显卡类型 = lines_setting[17];
                 initialize._WebUI显存压力优化设置 = lines_setting[18];
-                initialize._WebUI主题颜色 = lines_setting[19]; 
+                initialize._WebUI主题颜色 = lines_setting[19];
+                if (lines_setting[20] == "True")
+                {
+                    initialize.Doggettx优化 = true;
+                }
 
             }
             catch
@@ -184,8 +193,6 @@ namespace Awake
             }
         }
 
-
-
         public static void 选择工作路径()
         {
             FolderBrowserDialog folder = new FolderBrowserDialog();
@@ -193,6 +200,10 @@ namespace Awake
             if (folder.ShowDialog() == DialogResult.OK)
             {
                 initialize.工作路径 = folder.SelectedPath;
+                if (initialize.工作路径.Length == 3)
+                {
+                    initialize.工作路径 = initialize.工作路径.Substring(0, initialize.工作路径.Length - 1);
+                }
                 File.WriteAllText(@".AI_launther_log\startpath.txt", initialize.工作路径);
             }
         }
@@ -222,10 +233,14 @@ namespace Awake
         public static void 本地运行路径()
         {
             FolderBrowserDialog folder = new FolderBrowserDialog();
-            folder.Description = "请选择本地SD所在目录";
+            folder.Description = "请选择自定义SD所在目录";
             if (folder.ShowDialog() == DialogResult.OK)
             {
                 initialize.本地路径 = folder.SelectedPath;
+                if (initialize.本地路径.Length == 3)
+                {
+                    initialize.本地路径 = initialize.本地路径.Substring(0, initialize.本地路径.Length - 1);
+                }
                 File.WriteAllText(@".AI_launther_log\startpath_local.txt", initialize.本地路径);
 
             }
@@ -298,7 +313,11 @@ namespace Awake
             {
                 // 如果文件存在，读取其中的内容到startpath全局变量中
                 initialize.工作路径 = File.ReadAllText(@".AI_launther_log\startpath.txt");
-
+              
+                if (initialize.工作路径.Length == 3)
+                {
+                    initialize.工作路径 = initialize.工作路径.Substring(0, initialize.工作路径.Length - 1);
+                }              
             }
 
 
@@ -308,7 +327,7 @@ namespace Awake
             if (File.Exists(@".AI_launther_log\gitpath.txt"))
             {
                 // 如果文件存在，读取其中的内容到gitpath全局变量中
-                initialize.gitPath = File.ReadAllText(@".AI_launther_log\gitpath.txt");
+                initialize.gitPath = File.ReadAllText(@".AI_launther_log\gitpath.txt");   
             }
         }
         public static void CheckVENVPathFile()//这里在初始化后从log里读取VENV的路径
@@ -326,6 +345,10 @@ namespace Awake
             {
                 // 如果文件存在，读取其中的内容到venvpath全局变量中
                 initialize.本地路径 = File.ReadAllText(@".AI_launther_log\startpath_local.txt");
+                if (initialize.本地路径.Length == 3)
+                {
+                    initialize.本地路径 = initialize.本地路径.Substring(0, initialize.本地路径.Length - 1);
+                }
             }
         }
         public static void 相册计数()

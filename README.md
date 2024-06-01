@@ -1,4 +1,4 @@
-## 绘梦启动器3.1.0更新 SD-WenUI-Launcher 3.1.0 UpData
+## 绘梦启动器3.2.0更新 SD-WenUI-Launcher 3.2.0 UpData
 
 ### 下载链接&&DownloadLink
 #### https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/releases/

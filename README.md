@@ -1,8 +1,9 @@
-## 绘梦启动器3.2.0更新 SD-WenUI-Launcher 3.2.0 UpData
+## 绘梦AI绘画启动器3.2.0更新 SD-WenUI-Launcher 3.2.0 UpData
 
 ### 下载链接&&DownloadLink
 #### https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/releases/
 ### About
+### #SD启动器 #AI绘画启动器 #StableDiffusion启动器 #开源 #绘梦AI启动器
 #### 添加了对于SDWebUI插件与官方仓库源拉取的支持
 
 We are excited to introduce SDWebUI Launcher, a cutting-edge solution for simplifying the deployment and utilization of SDWebUI, a popular platform for AI-powered art generation. Developed using .NET Core C# with a WPF-UI, SDWebUI Launcher offers a seamless experience for users of all levels.

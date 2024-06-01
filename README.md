@@ -3,7 +3,7 @@
 ### 下载链接&&DownloadLink
 #### https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/releases/
 ### About
-
+#### 添加了对于SDWebUI插件与官方仓库源拉取的支持
 
 We are excited to introduce SDWebUI Launcher, a cutting-edge solution for simplifying the deployment and utilization of SDWebUI, a popular platform for AI-powered art generation. Developed using .NET Core C# with a WPF-UI, SDWebUI Launcher offers a seamless experience for users of all levels.
 

@@ -29,6 +29,8 @@ Internationalization: As we strive to make the Open-AIGC-Launcher accessible to 
 Your feedback will be carefully considered and incorporated into our development plans. We believe that by working together, we can create a launcher that meets the needs and exceeds the expectations of our diverse community.
 Please feel free to share your thoughts and suggestions by responding to this email or posting in our designated feedback forum. We look forward to hearing from you and thank you for your support in making the Open-AIGC-Launcher even better!
 Best regards,
+![image](https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcher/assets/115577936/eab974aa-4e36-4bd7-859b-c39bc124c862)
+![image](https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcher/assets/115577936/d5724148-1eb6-48d5-84c6-8e3779ca5668)
 ![屏幕截图 2024-04-22 220928](https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/assets/115577936/1febf6b7-9726-4bb5-82fb-bd7d1f6453d1)
 ![屏幕截图 2024-04-22 221054](https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/assets/115577936/97ae2256-e42d-421b-a5d5-97be559d9481)
 ![屏幕截图 2024-04-22 221111](https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/assets/115577936/a2ed5730-8053-479f-8752-194d906294c1)

@@ -1,7 +1,7 @@
 ## 绘梦AI绘画启动器3.5.5 SD-WenUI-Launcher 3.5.5 UpData
 
 ### #SD启动器 #AI绘画启动器 #StableDiffusion启动器 #开源 #绘梦AI启动器
-### 下载链接&&DownloadLink 本地有整合包的用户请不用选择3.0.9 （3.0.9是为全新部署贴吧包准备的
+### 下载链接&&DownloadLink
 #### https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher/releases/
 ### About
 #### 添加了对于SDWebUI插件与官方仓库源拉取的支持
@@ -22,7 +22,5 @@ SDWebUI Launcher is the perfect companion for anyone interested in exploring the
 ![屏幕截图 2024-06-03 212819](https://github.com/SeiranHorizon/SD_WebUI_Launcher/assets/115577936/64acaa0d-336e-43e5-8863-47aa104af00e)
 ![屏幕截图 2024-06-03 210243](https://github.com/SeiranHorizon/SD_WebUI_Launcher/assets/115577936/ac958882-a922-4f63-a6b5-7e9e231ef9a5)
 ![屏幕截图 2024-06-03 231259](https://github.com/SeiranHorizon/SD_WebUI_Launcher/assets/115577936/de2d2ca0-13be-4a3f-a001-d2de9e2d12c9)
-
-![image](https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcher/assets/115577936/eab974aa-4e36-4bd7-859b-c39bc124c862)
-![image](https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcher/assets/115577936/d5724148-1eb6-48d5-84c6-8e3779ca5668)
+### 感谢支持
 

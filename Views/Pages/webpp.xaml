@@ -6,18 +6,18 @@
       xmlns:local="clr-namespace:Awake.Views.Pages"
                xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
-      d:DesignHeight="1200" d:DesignWidth="1010"
+      d:DesignHeight="1200" d:DesignWidth="1120"
       Title="webpp"
             
 
   
 >
 
-    <Grid Width="1010" HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Center">
 
 
-        <ScrollViewer Grid.RowSpan="2" HorizontalAlignment="Center" Width="1000" >
-            <Grid Width="930" HorizontalAlignment="Center">
+        <ScrollViewer Grid.RowSpan="2" HorizontalAlignment="Center" Width="1120" >
+            <Grid  HorizontalAlignment="Center">
                 <StackPanel>
 
                     <ui:Card  Height="100" Background="#0CFFFFFF" Margin="0,10,0,2" >
@@ -33,11 +33,11 @@
                                 <TextBlock x:Name="磁盘剩余显示" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,0,0"/>
 
                             </StackPanel>
-                            <TextBlock Text="在这里管理StableDiffusionWebUI的路径与位置|第三方整合包需单独在下方配置环境" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
+                            <TextBlock Text="在这里管理StableDiffusionWebUI的路径与位置 | 第三方整合包需单独在下方配置环境" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
                         </StackPanel>
 
                     </ui:Card>
-                    <ui:CardExpander x:Name="sysinfoshow" IsExpanded="True" Width="930" Margin="0,0,0,2" Background="#0FFFFFFF">
+                    <ui:CardExpander x:Name="sysinfoshow" IsExpanded="True" Width="1110" Margin="0,0,0,2" Background="#0FFFFFFF">
                         <ui:CardExpander.BorderBrush>
                             <LinearGradientBrush EndPoint="0,3" MappingMode="Absolute">
                                 <GradientStop Color="#18FFFFFF" Offset="0.33"/>
@@ -67,9 +67,9 @@
 
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
-                            <ui:CardAction x:Name="运行路径选择" Click="运行路径选择_Click" Width="930" Height="75" HorizontalAlignment="Center" Background="#0FFFFFFF">
+                            <ui:CardAction x:Name="运行路径选择" Click="运行路径选择_Click" Width="1110" Height="75" HorizontalAlignment="Center" Background="#0FFFFFFF">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock TextWrapping="Wrap" Text="&#xED25;" FontFamily="Segoe MDL2 Assets"   FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40"/>
+                                    <ui:SymbolIcon Symbol="FolderAdd20" Width="36" Height="36" FontSize="36"/>
                                     <StackPanel Margin="15,0,0,0" Width="350">
                                         <TextBlock Text="选择SD的部署位置"   FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="全新安装WebUI路径" FontSize="12"/>
@@ -99,7 +99,7 @@
                             <StackPanel x:Name="模型下载卡片列表">
                                 <TextBlock x:Name="模型版本ID" FontSize="12">V2.0.9.7 全量StableDiffusion WebUI整合包大小：15.6 GB 运行所需空间：60 GB  支持NVIDIA | AMD |intel显卡运行</TextBlock>
                                 <StackPanel Orientation="Horizontal">
-                                    <ScrollViewer x:Name="命令行区域" Height="80" HorizontalAlignment="Center" Width="850">
+                                    <ScrollViewer x:Name="命令行区域" Height="80" HorizontalAlignment="Center" Width="1080">
                                         <TextBlock TextWrapping="Wrap"  x:Name="标准输出流" FontSize="12"><Run Text="下载过程中请勿离开本页面"/><Run Language="zh-cn" Text="，防止下载文件损坏"/></TextBlock>
                                     </ScrollViewer>
                                     <TextBlock TextWrapping="Wrap"  x:Name="标准报错流" Width="440" Visibility="Collapsed"/>
@@ -109,19 +109,19 @@
                                         <StackPanel x:Name="下载组" HorizontalAlignment="Center">
 
                                             <ProgressBar x:Name="progressBar" Value="0" 
-                                             Height="40"  Width="700" />
-                                            <Button Content="步骤1/3，点击按钮 一键安装"  x:Name="WebUI下载按钮" Height="40" Margin="0,-40,0,0" Click="Download_Click" HorizontalAlignment="Stretch" Width="700" />
+                                             Height="40"  Width="900" />
+                                            <Button Content="步骤1/3，点击按钮 一键安装"  x:Name="WebUI下载按钮" Height="40" Margin="0,-40,0,0" Click="Download_Click" HorizontalAlignment="Stretch" Width="900" />
                                         </StackPanel>
                                         <StackPanel x:Name="解压组" HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,40,0,0">
 
 
-                                            <Button Content="步骤2/3，点击按钮 一键解压" x:Name="WebUI安装按钮" Height="40" Margin="0,-40,0,0" HorizontalAlignment="Stretch" Width="700" Click="WebUI安装按钮_Click" />
+                                            <Button Content="步骤2/3，点击按钮 一键解压" x:Name="WebUI安装按钮" Height="40" Margin="0,-40,0,0" HorizontalAlignment="Stretch" Width="900" Click="WebUI安装按钮_Click" />
                                         </StackPanel>
                                         <StackPanel x:Name="安装组" HorizontalAlignment="Center" Margin="0,0,0,0" Visibility="Collapsed">
                                             <ProgressBar x:Name="安装progressBar" Value="0" 
-     Height="40"  Width="700" />
+     Height="40"  Width="900" />
 
-                                            <Button Content="步骤3/3，点击按钮 一键安装" x:Name="WebUI复制按钮" Height="40" Margin="0,-40,0,0" HorizontalAlignment="Stretch" Width="700" Click="WebUI复制按钮_Click" />
+                                            <Button Content="步骤3/3，点击按钮 一键安装" x:Name="WebUI复制按钮" Height="40" Margin="0,-40,0,0" HorizontalAlignment="Stretch" Width="900" Click="WebUI复制按钮_Click" />
                                         </StackPanel>
                                         <Button x:Name="打开部署文件夹" Content="打开文件夹" Height="40" Width="150" Margin="15,0,0,0" Click="打开部署文件夹_Click" Background="#0FFFFFFF" >
                                             <Button.BorderBrush>
@@ -136,7 +136,7 @@
                             </StackPanel>
                         </Expander>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,2" Visibility="Visible">
-                            <ui:Card  Height="145" Background="#0CFFFFFF" Width="931" RenderTransformOrigin="0.5,0.5" >
+                            <ui:Card  Height="100" Background="#0CFFFFFF" Width="1110" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,0" >
                                 <ui:Card.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -178,10 +178,10 @@
                             </ui:Card>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,60" Orientation="Horizontal" Visibility="Visible">
-                            <ui:Card Width="932" Visibility="Visible">
+                            <ui:Card Background="#0FFFFFFF" Width="1110" Visibility="Visible">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="Location20" Width="36" Height="36" FontSize="36"/>
-                                    <StackPanel Margin="15,0,0,0" Width="780">
+                                    <StackPanel Margin="15,0,0,0" Width="950">
                                         <TextBlock Text="启用自定义路径" FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="请确保自己知道怎么做,若是下载上述整合包则不用启用" FontSize="12"/>
 
@@ -192,16 +192,11 @@
 
                         </StackPanel>
                         <StackPanel Margin="0,-58,0,60" Orientation="Horizontal" Visibility="Visible">
-                            <ui:CardAction x:Name="Git路径选择" VerticalAlignment="Stretch" Click="Git路径选择_Click" Width="932" Height="75" Margin="0,0,10,0"  >
+                            <ui:CardAction Background="#0FFFFFFF" x:Name="Git路径选择" VerticalAlignment="Stretch" Click="Git路径选择_Click" Width="1110" Height="75" Margin="0,0,10,0"  >
                                 <StackPanel Orientation="Horizontal">
-                                    <Canvas Width="40" Height="40" >
-                                        <Canvas.Background>
-                                            <ImageBrush Stretch="Uniform" ImageSource="/Assets/git_logo.png">
+                                    <ui:SymbolIcon Symbol="ArrowBetweenDown20" Width="36" Height="36" FontSize="36"/>
 
-                                            </ImageBrush>
-                                        </Canvas.Background>
-                                    </Canvas>
-                                    <StackPanel Margin="15,0,0,0" Width="350">
+                                    <StackPanel Margin="15,0,0,0" Width="650">
                                         <TextBlock Text="配置Git路径"   FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="路径下必须有bin,mingw64文件夹" FontSize="12"/>
 
@@ -216,10 +211,10 @@
 
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,-58,0,10" Visibility="Visible">
-                            <ui:CardAction x:Name="VENV路径选择" VerticalAlignment="Stretch" Click="VENV路径选择_Click" Width="932" Height="75" Margin="0,0,10,0" >
+                            <ui:CardAction x:Name="VENV路径选择" Background="#0FFFFFFF" VerticalAlignment="Stretch" Click="VENV路径选择_Click" Width="1110" Height="75" Margin="0,0,10,0" >
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock TextWrapping="Wrap" Text="&#xF6FA;" FontFamily="Segoe MDL2 Assets"   FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <StackPanel Margin="15,0,0,0" Width="350">
+                                    <ui:SymbolIcon Symbol="BoxEdit20" Width="36" Height="36" FontSize="36"/>
+                                    <StackPanel Margin="15,0,0,0" Width="650">
                                         <TextBlock Text="配置虚拟环境路径"   FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="路径下必须存在Scripts文件夹" FontSize="12"/>
 
@@ -232,10 +227,10 @@
                             </ui:CardAction>
 
                         </StackPanel>
-                        <ui:CardAction x:Name="本地运行路径" Click="本地运行路径_Click" Width="930" Height="75" Background="#0FFFFFFF"  Margin="0,-8,0,0" >
+                        <ui:CardAction x:Name="本地运行路径" Click="本地运行路径_Click" Width="1110" Height="75" Background="#0FFFFFFF"  Margin="0,-8,0,8" >
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="&#xED25;" FontFamily="Segoe MDL2 Assets"   FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40"/>
-                                <StackPanel Margin="15,0,0,0" Width="350">
+                                <ui:SymbolIcon Symbol="FolderAdd20" Width="36" Height="36" FontSize="36"/>
+                                <StackPanel Margin="15,0,0,0" Width="650">
                                     <TextBlock Text="选择本地SD的位置"   FontSize="16" Margin="0,0,0,5"/>
                                     <TextBlock Text="选择已经部署WebUI" FontSize="12"/>
 

@@ -11,7 +11,7 @@
     xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
     d:DataContext="{d:DesignInstance local:DashboardPage, IsDesignTimeCreatable=False}"
     d:DesignHeight="650"
-    d:DesignWidth="1010"
+    d:DesignWidth="1110"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
@@ -81,33 +81,12 @@
 
 
                         <!--下面是模型资源中心的UI-->
-                        <Grid Height="350" Background="#00000000">
+                        <Grid  Background="#00000000">
 
-                            <StackPanel VerticalAlignment="Bottom">
-                                <StackPanel Height="190" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10
-                                            ">
-                                    <Border x:Name="宣传01" CornerRadius="15" Height="190" Width="920">
-                                        <Border.Background >
-                                            <ImageBrush x:Name="背景图"  Stretch="UniformToFill" ImageSource="/Views/Pages/004.png"/>
-                                        </Border.Background>
-
-                                        <Canvas>
-                                            <TextBlock Text="AIGODLIKE-开源AI冒险社区" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="627,10,0,0" FontSize="20" Foreground="#FF9A33A5" FontFamily="Alimama ShuHeiTi Bold"/>
-
-                                            <Border CornerRadius="10" Style="{DynamicResource 按钮容器样式2}" Canvas.Left="673" Canvas.Top="113" Width="190" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" MouseDown="Border_MouseDown" >
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <ui:SymbolIcon Symbol="Send20" Foreground="#FF420936" Width="35" Height="35" FontSize="35" Margin="0,0,10,0"/>
-                                                    <TextBlock Text="立即挑战" Foreground="#FF420936" FontSize="22" FontFamily="Alimama ShuHeiTi Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                                                </StackPanel>
-                                            </Border>
-
-                                        </Canvas>
-                                    </Border>
-                                </StackPanel>
+                            <StackPanel VerticalAlignment="Bottom" Margin="20,0,0,0">
 
 
-                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
+                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,5">
 
                                     <StackPanel Orientation="Horizontal" Height="140">
                                         <Border x:Name="统计生成图片数量"   Style="{DynamicResource 按钮容器样式}" CornerRadius="15,0,0,15"  Width="110" Height="140" HorizontalAlignment="Left" Margin="0,0,2,0" MouseDown="统计生成图片数量_MouseDown" VerticalAlignment="Center">
@@ -242,6 +221,18 @@
                                             </Border>
 
                                         </StackPanel>
+                             
+                                            <Border Margin="16,0,0,0" Width="140" CornerRadius="15" Style="{DynamicResource 按钮容器样式}">
+                                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  >
+                                             
+                                                <TextBlock x:Name="计算机名称类型"     Margin="5,1,0,0"/>
+                                                <TextBlock Width="135" TextWrapping="Wrap" x:Name="计算机CPU信息"  Margin="5,1,0,0"/>
+                                                <TextBlock x:Name="计算机内存信息"  Margin="5,1,0,0"/>
+                                                <TextBlock TextWrapping="Wrap" Width="135" x:Name="计算机显卡信息"    Margin="5,1,0,0"/>
+                                            </StackPanel>
+
+                                        </Border>
+                                
                                     </StackPanel>
                                 </StackPanel>
 
@@ -252,8 +243,8 @@
 
 
                         <!--下面是模型资源中心的UI-->
-                        <StackPanel x:Name="搜索栏" Height="35" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,10,8,5" HorizontalAlignment="Center" Width="930" IsVisibleChanged="搜索栏_IsVisibleChanged">
-                            <ComboBox x:Name="模型类型选择器"  SelectedIndex="0" Width="200" VerticalAlignment="Center" DropDownClosed="模型类型选择器_DropDownClosed" Margin="8,0,0,0" >
+                        <StackPanel x:Name="搜索栏" Height="35" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,10,8,5" Width="1110" IsVisibleChanged="搜索栏_IsVisibleChanged">
+                            <ComboBox x:Name="模型类型选择器"  SelectedIndex="0" Width="300" VerticalAlignment="Center" DropDownClosed="模型类型选择器_DropDownClosed" Margin="8,0,0,0" >
                                 <ComboBoxItem Content="模型类型：全部类型"/>
                                 <ComboBoxItem Content="LoRA"/>
                                 <ComboBoxItem Content="LyCORIS"/>
@@ -262,7 +253,7 @@
                                 <ComboBoxItem Content="Textual Inversion"/>
                             </ComboBox>
 
-                            <ui:TextBox x:Name="搜索框"  PlaceholderText="搜索模型关键词,作者或模型类型"  Width="300" Margin="5,0,10,0" GotFocus="搜索框_GotFocus" IsVisibleChanged="搜索框_IsVisibleChanged" LostFocus="搜索框_LostFocus"/>
+                            <ui:TextBox x:Name="搜索框"  PlaceholderText="搜索模型关键词,作者或模型类型"  Width="400" Margin="5,0,10,0" GotFocus="搜索框_GotFocus" IsVisibleChanged="搜索框_IsVisibleChanged" LostFocus="搜索框_LostFocus"/>
                             <ui:Button x:Name="搜素按钮" Height="35" Click="搜素按钮_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="Search24" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
@@ -289,12 +280,12 @@
                             <StackPanel Margin="0,150,0,0">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="TagQuestionMark32" Width="20" Height="20" FontSize="20"/>
-                                    <ui:Hyperlink NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki" FontSize="14" HorizontalAlignment="Center" Content="获取帮助"/>
+                                    <ui:Hyperlink NavigateUri="https://space.bilibili.com/666714573" FontSize="14" HorizontalAlignment="Center" Content="获取帮助"/>
 
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="CommentCheckmark24" Width="20" Height="20" FontSize="20"/>
-                                    <ui:Hyperlink FontSize="14" NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues" Content="提供反馈"/>
+                                    <ui:Hyperlink FontSize="14" NavigateUri="https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcher/issues" Content="提供反馈"/>
 
                                 </StackPanel>
                             </StackPanel>
@@ -324,12 +315,41 @@
             </Grid>
         </ScrollViewer>
 
-        <StackPanel   x:Name="搜索栏2"   Height="60"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" >
+        <StackPanel   x:Name="搜索栏2"   Height="70"  HorizontalAlignment="Center"  Margin="0,0,0,8" VerticalAlignment="Top" Visibility="Visible" >
 
-            <StackPanel Height="60" Width="1000" HorizontalAlignment="Center"/>
+            <StackPanel Height="70" Width="1000" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ProgressBar VerticalAlignment="Center" Value="100" Height="70" Width="1000"/>
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="1000" Margin="0,-70,0,0"  >
+                    <ComboBox x:Name="模型类型选择器2"  SelectedIndex="0" Width="200" VerticalAlignment="Center" DropDownClosed="模型类型选择器2_DropDownClosed" Margin="8,0,0,0" Background="#33FFFFFF" Foreground="White" >
+                        <ComboBoxItem Content="模型类型：全部类型"/>
+                        <ComboBoxItem Content="LoRA"/>
+                        <ComboBoxItem Content="LyCORIS"/>
+                        <ComboBoxItem Content="Controlnet"/>
+                        <ComboBoxItem Content="Checkpoint"/>
+                        <ComboBoxItem Content="Textual Inversion"/>
+                    </ComboBox>
+
+                    <ui:TextBox x:Name="搜索框2"  PlaceholderText="搜索模型关键词,作者或模型类型"  Width="300" Margin="5,0,10,0"   LostFocus="搜索框2_LostFocus" SelectionTextBrush="#FF375398" Background="#33FFFFFF" Height="36" Cursor="IBeam"/>
+                    <ui:Button  x:Name="搜素按钮2" Height="35" Click="搜素按钮2_Click" Background="#33FFFFFF">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Search24" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+                            <TextBlock Text="搜索模型" Foreground="White"/>
+                        </StackPanel>
+                    </ui:Button>
+                    <TextBlock Text="排序方式" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14" Foreground="White"/>
+                    <StackPanel x:Name="排序表2" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+
+                        <RadioButton x:Name="推荐2" IsChecked="True"  Content="推荐" Click="推荐_Click" Background="White" Foreground="White"  />
+                        <RadioButton x:Name="最新2" Content="最新" Margin="-45,0,0,0" Click="最新_Click" Background="White" Foreground="White"/>
+                        <RadioButton x:Name="最热2" Content="最热" Margin="-45,0,0,0" Click="最热_Click" Background="White" Foreground="White" />
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
 
 
         </StackPanel>
+
 
 
 

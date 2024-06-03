@@ -47,23 +47,8 @@ namespace Awake.Views.Pages
             {
                 ViewModel = viewModel;
                 InitializeComponent();
-                _imagePaths = new List<string> { "pack://application:,,,/Views/Pages/001.png",
-                "pack://application:,,,/Views/Pages/002.png",
-                "pack://application:,,,/Views/Pages/003.png",
-                "pack://application:,,,/Views/Pages/004.png",
-                "pack://application:,,,/Views/Pages/005.png",
-                "pack://application:,,,/Views/Pages/006.png",
-                "pack://application:,,,/Views/Pages/007.png",
-                "pack://application:,,,/Views/Pages/008.png",
-                "pack://application:,,,/Views/Pages/009.png",
-                "pack://application:,,,/Views/Pages/010.png",
-                "pack://application:,,,/Views/Pages/011.png",
-                "pack://application:,,,/Views/Pages/012.png"
-            };
-                _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
-                _timer.Tick += TimerTick;
-                _timer.Start();
-                loatmodel(0, "", "[]", 1);
+                GetSystemInfo();
+                loatmodel(0, "", "[]", 1);//试图自动调用模型请求API函数，传参列表为空
             }
             catch (Exception ex)
             {
@@ -71,26 +56,18 @@ namespace Awake.Views.Pages
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        public async void GetSystemInfo()
         {
-            // 随机选择一张图片作为初始的背景  
-            SetRandomImage();
-        }
-
-        private void TimerTick(object sender, EventArgs e)
-        {
-            // 每10秒更换一次背景图片  
-            SetRandomImage();
-        }
-
-        private void SetRandomImage()
-        {
-            if (_imagePaths.Any())
-            {
-                var randomImageIndex = _random.Next(_imagePaths.Count);
-                var randomImagePath = _imagePaths[randomImageIndex];
-                背景图.ImageSource = new BitmapImage(new Uri(randomImagePath));
-            }
+            string cpuname = await Task.Run(() => hardinfo.GetCpuName());
+            string Machinename = await Task.Run(() => hardinfo.GetComputerName());
+            string systemType = await Task.Run(() => hardinfo.GetSystemType());
+            float memorysize = await Task.Run(() => hardinfo.GetPhysicalMemory());
+            int memorynum = await Task.Run(() => hardinfo.MemoryNumberCount());
+            string gpuname = await Task.Run(() => hardinfo.GPUName());
+            计算机CPU信息.Text = "CPU：" + cpuname;
+            计算机名称类型.Text = "系统：" + systemType;
+            计算机内存信息.Text = "内存：" + memorysize + " GB";
+            计算机显卡信息.Text = "显卡：" + gpuname;
         }
 
 
@@ -192,16 +169,18 @@ namespace Awake.Views.Pages
             if (搜索框.Text != null)
             {
                 模型资源列表.Children.Clear();
+                _searchName = "";
                 _searchName = 搜索框.Text;
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
         }
         private void 搜素按钮2_Click(object sender, RoutedEventArgs e)
         {
-            if (搜索框.Text != null)
+            if (搜索框2.Text != null)
             {
                 模型资源列表.Children.Clear();
-                _searchName = 搜索框.Text;
+                _searchName = "";
+                _searchName = 搜索框2.Text;
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
         }
@@ -223,6 +202,27 @@ namespace Awake.Views.Pages
 
 
         private void 推荐_Click(object sender, RoutedEventArgs e)
+        {
+            模型资源列表.Children.Clear();
+            模型排列 = 0;
+            loatmodel(模型排列, _searchName, 模型种类, 1);
+        }       
+        private void 最新2_Click(object sender, RoutedEventArgs e)
+        {
+            模型资源列表.Children.Clear();
+            模型排列 = 1;
+            loatmodel(模型排列, _searchName, 模型种类, 1);
+        }
+
+        private void 最热2_Click(object sender, RoutedEventArgs e)
+        {
+            模型资源列表.Children.Clear();
+            模型排列 = 2;
+            loatmodel(模型排列, _searchName, 模型种类, 1);
+        }
+
+
+        private void 推荐2_Click(object sender, RoutedEventArgs e)
         {
             模型资源列表.Children.Clear();
             模型排列 = 0;
@@ -288,7 +288,7 @@ namespace Awake.Views.Pages
         }
         private void 搜索框2_LostFocus(object sender, RoutedEventArgs e)
         {
-            _searchName = 搜索框.Text;
+            _searchName = 搜索框2.Text;
         }
 
         private void 加载更多_Click(object sender, RoutedEventArgs e)
@@ -306,7 +306,7 @@ namespace Awake.Views.Pages
         //这里是希望在屏幕前的你翻模型列表时把滚动搜索栏滑动到不可见区域时new 一个悬浮搜索栏
         private void 总滚动列表_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (总滚动列表.VerticalOffset > 430)
+            if (总滚动列表.VerticalOffset > 230)
             {
                 // 如果  （搜索栏） 的高度大于  （总滚动列表）  的视口高度，则将搜索栏2的可见性设置为 Visible。  
 
@@ -325,37 +325,37 @@ namespace Awake.Views.Pages
         private void 模型类型选择器2_DropDownClosed(object sender, EventArgs e)
 
         {
-            if (模型类型选择器.SelectedIndex == 0)
+            if (模型类型选择器2.SelectedIndex == 0)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器.SelectedIndex == 1)
+            if (模型类型选择器2.SelectedIndex == 1)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[5]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器.SelectedIndex == 2)
+            if (模型类型选择器2.SelectedIndex == 2)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[6]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器.SelectedIndex == 3)
+            if (模型类型选择器2.SelectedIndex == 3)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[7]";
                 loatmodel(模型排列, "", 模型种类, 1);
             }
-            if (模型类型选择器.SelectedIndex == 4)
+            if (模型类型选择器2.SelectedIndex == 4)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[1]";
                 loatmodel(模型排列, _searchName, 模型种类, 1);
             }
-            if (模型类型选择器.SelectedIndex == 5)
+            if (模型类型选择器2.SelectedIndex == 5)
             {
                 模型资源列表.Children.Clear();
                 模型种类 = "[2]";

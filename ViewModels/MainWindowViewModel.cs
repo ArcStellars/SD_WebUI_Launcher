@@ -44,7 +44,7 @@ namespace Awake.ViewModels
             {
                 new NavigationItem()
                 {
-                    Width = 140,
+         
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "盒子首页",
                     PageTag = "dashboard",
@@ -63,7 +63,7 @@ namespace Awake.ViewModels
 
                 new NavigationItem()
                 {
-                    Width = 140,
+                
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "高级选项",
                     PageTag = "data",
@@ -72,7 +72,7 @@ namespace Awake.ViewModels
                 },
                 new NavigationItem()
                 {
-                    Width = 140,
+                 
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "版本修改",
                     PageTag = "Code",
@@ -81,7 +81,7 @@ namespace Awake.ViewModels
                 },
                                 new NavigationItem()
                 {
-                    Width = 140,
+              
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "插件修改",
                     PageTag = "Exts",
@@ -90,7 +90,7 @@ namespace Awake.ViewModels
                 },
                 new NavigationItem()
                 {
-                    Width = 140,
+             
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "安装中心",
                     PageTag = "web",
@@ -104,9 +104,9 @@ namespace Awake.ViewModels
             {
                 new NavigationItem()
                 {
-                    Width = 140,
+            
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                    Content = "关于盒子",
+                    Content = "关于绘梦",
                     PageTag = "settings",
                     Icon = SymbolRegular.Info24,
                     PageType = typeof(Views.Pages.SettingsPage)

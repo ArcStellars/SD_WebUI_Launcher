@@ -11,18 +11,22 @@
     d:DataContext="{d:DesignInstance local:DataPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="1800"
-    d:DesignWidth="1010"
+    d:DesignWidth="1200"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Width="1010" HorizontalAlignment="Center">
+    <Grid Width="1130" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="687*"/>
+            <ColumnDefinition Width="443*"/>
+        </Grid.ColumnDefinitions>
 
-        <ScrollViewer >
+        <ScrollViewer Grid.ColumnSpan="2" >
             <Grid >
                 <StackPanel>
 
-                    <ui:CardExpander x:Name="sysinfoshow" IsExpanded="True" Width="910" Background="#0FFFFFFF">
+                    <ui:CardExpander x:Name="sysinfoshow" IsExpanded="True" Width="1110" Background="#0FFFFFFF">
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal" Height="35"  >
                                 <ui:SymbolIcon Symbol="Info20" FontSize="24"/>
@@ -42,31 +46,10 @@
                         </StackPanel>
 
                     </ui:CardExpander>
-                    <ui:Card Width="910"  Height="100" Margin="0,10,0,2" Background="#0FFFFFFF" >
-                        <StackPanel Height="100">
-                            <TextBlock Text="生成引擎设置" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                            <TextBlock Text="配置SD使用的显卡" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
-                        </StackPanel>
-
-                    </ui:Card>
-                    <ui:Card VerticalAlignment="Stretch" Width="910" Margin="0,10,0,0" Background="#0FFFFFFF">
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="Engine20" Width="36" Height="36" FontSize="36"/>
-                            <StackPanel Margin="15,0,0,0" Width="490">
-                                <TextBlock Text="选择生成引擎" FontSize="16" Margin="0,0,0,5"/>
-                                <TextBlock Text="选择一张显卡作为SD的生成引擎" FontSize="12"/>
-
-                            </StackPanel>
-                            <ComboBox x:Name="显卡选择器"  Width="330" DropDownClosed="显卡选择器_DropDownClosed" Background="#0FFFFFFF">
-
-                            </ComboBox>
-
-                        </StackPanel>
-                    </ui:Card>
-                    <ui:Card VerticalAlignment="Stretch" Width="910" Margin="0,10,0,0" Background="#0FFFFFFF">
+                    <ui:Card VerticalAlignment="Stretch" Width="1110" Margin="0,10,0,0" Background="#0FFFFFFF">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="PhoneDesktop16" Width="36" Height="36" FontSize="36"/>
-                            <StackPanel Margin="15,0,0,0" Width="490">
+                            <StackPanel Margin="15,0,0,0" Width="695">
                                 <TextBlock Text="选择显卡类型" FontSize="16" Margin="0,0,0,5"/>
                                 <TextBlock Text="用于启动器设置相关选项" FontSize="12"/>
 
@@ -80,9 +63,24 @@
                         </StackPanel>
                     </ui:Card>
 
+                    <ui:Card VerticalAlignment="Stretch" Width="1110" Margin="0,10,0,0" Background="#0FFFFFFF">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Engine20" Width="36" Height="36" FontSize="36"/>
+                            <StackPanel Margin="15,0,0,0" Width="695">
+                                <TextBlock Text="选择生成引擎" FontSize="16" Margin="0,0,0,5"/>
+                                <TextBlock Text="选择一张显卡作为SD的生成引擎" FontSize="12"/>
+
+                            </StackPanel>
+                            <ComboBox x:Name="显卡选择器"  Width="330" DropDownClosed="显卡选择器_DropDownClosed" Background="#0FFFFFFF">
+
+                            </ComboBox>
+
+                        </StackPanel>
+                    </ui:Card>
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                        <StackPanel Width="450" HorizontalAlignment="Left">
-                            <ui:Card Width="450"  Height="100" Margin="0,0,0,2" Background="#0FFFFFFF" >
+                        <StackPanel Width="550" HorizontalAlignment="Left">
+                            <ui:Card Width="550"  Height="100" Margin="0,0,0,2" Background="#0FFFFFFF" >
                                 <StackPanel Height="100">
                                     <TextBlock Text="常用设置" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                                     <TextBlock Text="WebUI通用设置(旧版本中部分参数并不生效,请删减参数)" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
@@ -92,7 +90,7 @@
                             <ui:Card VerticalAlignment="Stretch" Margin="0,0,0,2" Height="75" Background="#0FFFFFFF">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="SlideArrowRight20" Width="36" Height="36" FontSize="36"/>
-                                    <StackPanel Margin="15,0,0,0" Width="320">
+                                    <StackPanel Margin="15,0,0,0" Width="420">
                                         <TextBlock Text="启动完成自动打开浏览器"   FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="在WebUI启动完成后自动打开界面" FontSize="12"/>
 
@@ -103,7 +101,7 @@
                             <ui:Card Height="75" Background="#0FFFFFFF">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="TextBulletListSquare20" Width="36" Height="36" FontSize="36"/>
-                                    <StackPanel Margin="15,0,0,0" Width="320">
+                                    <StackPanel Margin="15,0,0,0" Width="420">
                                         <TextBlock Text="关闭模型hash值计算"   FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="可以优化WebUI启动速度" FontSize="12"/>
 
@@ -111,10 +109,10 @@
                                     <ui:ToggleSwitch x:Name="关闭模型hash计算" IsChecked="False" IsEnabled="True" Click="关闭模型hash计算_Click" />
                                 </StackPanel>
                             </ui:Card>
-                            <ui:Card Height="75" Background="#0FFFFFFF">
+                            <ui:Card Height="75" Background="#0FFFFFFF" Margin="0,2,0,0">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="TriangleRight20" Width="36" Height="36" FontSize="36"/>
-                                    <StackPanel Margin="15,0,0,0" Width="320">
+                                    <StackPanel Margin="15,0,0,0" Width="420">
                                         <TextBlock Text="快速启动"   FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="不要加载模型以快速启动UI" FontSize="12"/>
 
@@ -125,8 +123,8 @@
 
                         </StackPanel>
 
-                        <StackPanel Margin="10,0,0,0" Width="450" HorizontalAlignment="Center" >
-                            <ui:Card Width="450"  Height="100" Margin="0,0,0,2" Background="#0FFFFFFF" >
+                        <StackPanel Margin="10,0,0,0" Width="550" HorizontalAlignment="Center" >
+                            <ui:Card Width="550"  Height="100" Margin="0,0,0,2" Background="#0FFFFFFF" >
                                 <StackPanel Height="100">
                                     <TextBlock Text="性能设置" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                                     <TextBlock Text="WebUI性能设置(旧版本中部分优化并不生效,请删减参数)" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
@@ -141,7 +139,7 @@
                                         <TextBlock Text="加速出图速度" FontSize="12"/>
 
                                     </StackPanel>
-                                    <Button x:Name="性能优化器配置面板" Width="137" Height="35" Content="配置性能优化器" Click="性能优化器配置面板_Click" Background="#0FFFFFFF" Margin="70,0,0,0"/>
+                                    <Button x:Name="性能优化器配置面板" Width="234" Height="35" Content="配置性能优化器" Click="性能优化器配置面板_Click" Background="#0FFFFFFF" Margin="70,0,0,0"/>
                                 </StackPanel>
 
                             </ui:Card>
@@ -220,7 +218,7 @@
                                         <TextBlock Text="通过牺牲速度来达到优化显存占用" FontSize="12" Width="191"/>
 
                                     </StackPanel>
-                                    <ComboBox x:Name="WebUI显存压力优化设置" SelectedIndex="2" Width="140" DropDownClosed="WebUI显存压力优化设置_DropDownClosed" Background="#0FFFFFFF" Margin="50,0,0,0">
+                                    <ComboBox x:Name="WebUI显存压力优化设置" SelectedIndex="2" Width="235" DropDownClosed="WebUI显存压力优化设置_DropDownClosed" Background="#0FFFFFFF" Margin="50,0,0,0">
                                         <ComboBoxItem Content="显存|4GB以下" />
                                         <ComboBoxItem Content="显存|6GB以下"/>
                                         <ComboBoxItem Content="显存|8GB以上" />
@@ -232,7 +230,7 @@
                             <ui:Card VerticalAlignment="Stretch" Margin="0,0,0,0" Height="75" Background="#0FFFFFFF">
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="DeveloperBoard20" Width="36" Height="36" FontSize="36"/>
-                                    <StackPanel Margin="15,0,0,0" Width="320">
+                                    <StackPanel Margin="15,0,0,0" Width="420">
                                         <TextBlock Text="使用CPU进行推理" FontSize="16" Margin="0,0,0,5"/>
                                         <TextBlock Text="没有独立显卡时启用 (不推荐)" FontSize="12"/>
 
@@ -246,17 +244,17 @@
 
                     </StackPanel>
                     <StackPanel>
-                        <ui:Card Width="910"  Height="100" Margin="0,10,0,2" Background="#0FFFFFFF" >
+                        <ui:Card Width="1110"  Height="100" Margin="0,10,0,2" Background="#0FFFFFFF" >
                             <StackPanel Height="100">
                                 <TextBlock Text="高级设置" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                                 <TextBlock Text="WebUI特殊参数" FontSize="14" HorizontalAlignment="Left" Margin="10,15,0,0"/>
                             </StackPanel>
 
                         </ui:Card>
-                        <ui:Card VerticalAlignment="Stretch" Margin="0,0,0,2" Width="910" Background="#0FFFFFFF">
+                        <ui:Card VerticalAlignment="Stretch" Margin="0,0,0,2" Width="1110" Background="#0FFFFFFF">
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="Color20" Height="36" Width="36" FontSize="36"/>
-                                <StackPanel Margin="15,0,0,0" Width="490">
+                                <StackPanel Margin="15,0,0,0" Width="695">
                                     <TextBlock Text="WebUI主题颜色设置" FontSize="16" Margin="0,0,0,5"/>
                                     <TextBlock Text="更改Webui的背景颜色" FontSize="12"/>
 
@@ -269,10 +267,10 @@
 
                             </StackPanel>
                         </ui:Card>
-                        <ui:Card VerticalAlignment="Stretch" Margin="0,0,0,2" Width="910" Background="#0FFFFFFF">
+                        <ui:Card VerticalAlignment="Stretch" Margin="0,0,0,2" Width="1110" Background="#0FFFFFFF">
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="VirtualNetwork20" Height="36" Width="36" FontSize="36"/>
-                                <StackPanel Margin="15,0,0,0" Width="780">
+                                <StackPanel Margin="15,0,0,0" Width="950">
                                     <TextBlock Text="API支持模式" FontSize="16" Margin="0,0,0,5"/>
                                     <TextBlock Text="启用API接口供PS等应用程序使用" FontSize="12"/>
 
@@ -280,10 +278,10 @@
                                 <ui:ToggleSwitch x:Name="开启API" IsChecked="False" Click="开启API_Click" Background="#FFFF3D48" />
                             </StackPanel>
                         </ui:Card>
-                        <ui:Card Width="910" Background="#0FFFFFFF">
+                        <ui:Card Width="1110" Background="#0FFFFFFF">
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="WifiLock20" Height="36" Width="36" FontSize="36"/>
-                                <StackPanel Margin="15,0,0,0" Width="780">
+                                <StackPanel Margin="15,0,0,0" Width="950">
                                     <TextBlock Text="分享WebUI到公网" FontSize="16" Margin="0,0,0,5"/>
                                     <TextBlock Text="不推荐,这将会导致你的数据危险" FontSize="12"/>
 
@@ -291,10 +289,10 @@
                                 <ui:ToggleSwitch x:Name="分享WebUI到公网" IsChecked="False" Click="分享WebUI到公网_Click" Background="#FFFF3D48" />
                             </StackPanel>
                         </ui:Card>
-                        <ui:Card Width="910" Background="#0FFFFFFF">
+                        <ui:Card Width="1110" Background="#0FFFFFFF" Margin="0,2,0,0">
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="WeatherSnowflake20" Height="36" Width="36" FontSize="36"/>
-                                <StackPanel Margin="15,0,0,0" Width="780">
+                                <StackPanel Margin="15,0,0,0" Width="950">
                                     <TextBlock Text="冻结设置" FontSize="16" Margin="0,0,0,5"/>
                                     <TextBlock Text="禁用编辑设置" FontSize="12"/>
 
@@ -304,15 +302,15 @@
                         </ui:Card>
 
                     </StackPanel>
-                    <StackPanel Width="910" Margin="0,50,0,50">
-                        <StackPanel Orientation="Horizontal" Width="910">
+                    <StackPanel Width="1110" Margin="0,50,0,50" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal" Width="1110">
                             <ui:SymbolIcon Symbol="TagQuestionMark32" Width="20" Height="20" FontSize="20"/>
-                            <ui:Hyperlink FontSize="14" HorizontalAlignment="Center" NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki">获取帮助</ui:Hyperlink>
+                            <ui:Hyperlink FontSize="14" HorizontalAlignment="Center" NavigateUri="https://space.bilibili.com/666714573">获取帮助</ui:Hyperlink>
 
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Width="910">
+                        <StackPanel Orientation="Horizontal" Width="1110">
                             <ui:SymbolIcon Symbol="CommentCheckmark24" Width="20" Height="20" FontSize="20"/>
-                            <ui:Hyperlink FontSize="14" HorizontalAlignment="Center" NavigateUri="https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues">提供反馈</ui:Hyperlink>
+                            <ui:Hyperlink FontSize="14" HorizontalAlignment="Center" NavigateUri="https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcher/issues">提供反馈</ui:Hyperlink>
 
                         </StackPanel>
                     </StackPanel>

@@ -10,8 +10,8 @@
     Title="SettingsPage"
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="700"
-    d:DesignWidth="980"
+    d:DesignHeight="2000"
+    d:DesignWidth="1120"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
@@ -20,93 +20,101 @@
     </ui:UiPage.Resources>
     <ScrollViewer HorizontalAlignment="Center">
 
-        <StackPanel Width="980" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,50">
-            <TextBlock Text="光源绘梦Release Version" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,5,15,0"/>
-
+        <StackPanel Width="1110" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,50">
+         
             <Border CornerRadius="5" Margin="15,0,15,0">
                 <Border.Background>
-                    <ImageBrush Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="/Views/Pages/lable.png" Stretch="UniformToFill"/>
                 </Border.Background>
+                <StackPanel>
+                    <StackPanel Height="150" Background="#99000000"></StackPanel>
+                    <StackPanel Height="150" Margin="0,-150,0,0">
 
-                <StackPanel Margin="0,0,0,0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal">
-                            <Border BorderThickness="1"  CornerRadius="65" Height="130" Width="130">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="/Views/Pages/Ray_Source.png"/>
-                                </Border.Background>
-                                <ui:SymbolIcon Symbol="Group20" FontSize="85" HorizontalAlignment="Left" Margin="56,52,0,0" VerticalAlignment="Top"/>
 
-                            </Border>
-                            <StackPanel Width="704">
-                                <TextBlock Text="光源绘梦-SD-WebUI-启动器" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="5,0,0,0"/>
-                                <TextBlock Text="开源的AI绘画启动器|工具箱|基于GPL v3许可证开源" FontSize="16" Width="396" Height="18"/>
-                                <ui:Hyperlink NavigateUri="https://space.bilibili.com/666714573" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Content="Astro Artistry | 绘梦星空"/>
-                                <ui:Hyperlink NavigateUri="https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher" FontSize="16" FontWeight="Bold" Width="677" Content="https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher" Margin="25,0,0,0"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="50,10,0,0">
 
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderThickness="1"  CornerRadius="65" Height="130" Width="130">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/Views/Pages/SeiranHorizon0.png"/>
+                                    </Border.Background>
+
+                                </Border>
+                                <StackPanel Width="704" VerticalAlignment="Center">
+
+                                    <ui:Hyperlink NavigateUri="https://space.bilibili.com/666714573" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" Content="晴岚Horizon" Foreground="#FFA7D5FF"/>
+                                    <ui:Hyperlink NavigateUri="https://space.bilibili.com/666714573" FontSize="16" FontWeight="Bold"  Content="https://space.bilibili.com/666714573" HorizontalAlignment="Left" Foreground="#FFA7D5FF"/>
+                                    <TextBlock Text="所爱隔山海，山海不可平，海有舟可渡，山有路可行" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="White" />
+
+                                </StackPanel>
                             </StackPanel>
+
                         </StackPanel>
 
                     </StackPanel>
 
                 </StackPanel>
+
+     
             </Border>
-            <TextBlock Text="用算法雕琢AI世界，用技术一同改变生活" FontSize="22" HorizontalAlignment="Center" Margin="160,0,0,0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <ui:CardAction x:Name="光源的魔法小镇" Width="480" Click="光源的魔法小镇_Click" Background="#0FFFFFFF">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <ui:CardAction x:Name="参与建设" Width="1080" Click="参与建设_Click" Background="#0FFFFFFF">
                     <StackPanel Orientation="Horizontal">
                         <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
-                            <ui:SymbolIcon Symbol="ChannelShare20" FontSize="63"/>
+                            <ui:SymbolIcon Symbol="Apps20" FontSize="63"/>
                         </Border>
-                        <StackPanel Margin="20,0,0,0">
-                            <TextBlock Text="[社区]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock Text="https://pd.qq.com/s/g4et2xo0m" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                            <TextBlock Text="BUG故障反馈与功能建议" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
+                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
+                            <TextBlock Text="参与绘梦启动器的开发" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock TextWrapping="Wrap" Text="https://github.com/Astroluminous-WorkShop/Open-SD-WebUI-Launcherr" FontSize="14" HorizontalAlignment="Center"/>
+                            <TextBlock Text="使用.NET C# 构建 FluentUI风格"></TextBlock>
                         </StackPanel>
                     </StackPanel>
 
                 </ui:CardAction>
-                <ui:CardAction x:Name="光源的AI魔法小镇" Width="480" Margin="2,0,0,0" Click="光源的AI魔法小镇_Click" Background="#0FFFFFFF">
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <ui:CardAction x:Name="反馈群" Width="1080" Click="反馈群_Click" Background="#0FFFFFFF">
                     <StackPanel Orientation="Horizontal">
                         <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
                             <ui:SymbolIcon Symbol="Fluid20" FontSize="63"/>
                         </Border>
                         <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
-                            <TextBlock Text="[反馈]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock Text="227356139" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Text="启动器问题反馈与交流" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="QQ群 782833642" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
                             <TextBlock Text="BUG故障反馈与功能建议" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
 
                         </StackPanel>
                     </StackPanel>
 
                 </ui:CardAction>
+
             </StackPanel>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                <ui:CardAction x:Name="AIGC炼丹技术交流群" Width="480" Click="AIGC炼丹技术交流群_Click" Background="#0FFFFFFF">
+                <ui:CardAction x:Name="晴岚Horizon的观测枢" Width="540" Click="晴岚Horizon的观测枢_Click" Background="#0FFFFFFF">
                     <StackPanel Orientation="Horizontal">
                         <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
-                            <ui:SymbolIcon Symbol="DatabasePlugConnected20" FontSize="63"/>
+                            <ui:SymbolIcon Symbol="ChannelShare20" FontSize="63"/>
                         </Border>
                         <StackPanel Margin="20,0,0,0">
-                            <TextBlock Text="[群组]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock Text="720697178" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Text="晴岚Horizon的观测枢" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="https://pd.qq.com/s/g4et2xo0m" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
 
-                            <TextBlock Text="模型制作与技术交流" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Text="欢迎来找晴岚Horizon玩" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
 
                         </StackPanel>
                     </StackPanel>
 
                 </ui:CardAction>
-                <ui:CardAction x:Name="NovelAI中文频道" Width="480" Margin="2,0,0,0" Click="NovelAI中文频道_Click" Background="#0FFFFFFF">
+                <ui:CardAction x:Name="NovelAI中文频道" Width="540" Margin="2,0,0,0" Click="NovelAI中文频道_Click" Background="#0FFFFFFF">
                     <StackPanel Orientation="Horizontal">
                         <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
                             <ui:SymbolIcon Symbol="ChannelShare20" FontSize="63"/>
 
                         </Border>
                         <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
-                            <TextBlock Text="[社区]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="NovelAI中文频道" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
                             <TextBlock Text="https://pd.qq.com/s/eqo0vw7yi" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
                             <TextBlock Text="最大的AI绘画中文社区" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
 
@@ -114,58 +122,31 @@
                     </StackPanel>
 
                 </ui:CardAction>
+
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                <ui:CardAction x:Name="参与建设" Width="480" Click="参与建设_Click" Background="#0FFFFFFF">
-                    <StackPanel Orientation="Horizontal">
-                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
-                            <ui:SymbolIcon Symbol="Apps20" FontSize="63"/>
-                        </Border>
-                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
-                            <TextBlock Text="[项目]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock TextWrapping="Wrap" Text="https://github.com/Astro-Artistry-Dev-Team/Open-SD-WebUI-Launcher" FontSize="14" HorizontalAlignment="Center" Width="266"/>
-
-                        </StackPanel>
-                    </StackPanel>
-
-                </ui:CardAction>
-                <ui:CardAction x:Name="支持光源盒子开发" Width="480" Margin="2,0,0,0" Click="支持光源盒子开发_Click" Background="#0FFFFFFF">
-                    <StackPanel Orientation="Horizontal">
-                        <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
-                            <ui:SymbolIcon Symbol="MoneyHand20" FontSize="63"/>
-                        </Border>
-                        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
-                            <TextBlock Text="[捐助]  支持光源绘梦开发" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock TextWrapping="Wrap" Text="[爱发电]  https://afdian.net/a/Ray_Source" FontSize="14" HorizontalAlignment="Center"/>
-
-                        </StackPanel>
-                    </StackPanel>
-
-                </ui:CardAction>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                <ui:CardAction x:Name="解构原典" Width="480" Click="解构原典_Click" Background="#0FFFFFFF">
+                <ui:CardAction x:Name="解构原典" Width="540" Click="解构原典_Click" Background="#0FFFFFFF">
                     <StackPanel Orientation="Horizontal">
                         <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
                             <ui:SymbolIcon Symbol="BookmarkAdd20" FontSize="63"/>
                         </Border>
                         <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
-                            <TextBlock Text="[网站]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock TextWrapping="Wrap" Text="解构原典——NAI3.0进阶魔法书" FontSize="14" HorizontalAlignment="Center"/>
+                            <TextBlock Text="解构原典" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock TextWrapping="Wrap" Text="NAI3.0进阶魔法书" FontSize="14" HorizontalAlignment="Center"/>
 
                         </StackPanel>
                     </StackPanel>
 
                 </ui:CardAction>
 
-                <ui:CardAction x:Name="元素法典" Width="480" Click="元素法典_Click" Margin="2,0,0,0" Background="#0FFFFFFF">
+                <ui:CardAction x:Name="元素法典" Width="540" Click="元素法典_Click" Margin="2,0,0,0" Background="#0FFFFFFF">
                     <StackPanel Orientation="Horizontal">
                         <Border BorderThickness="1"  CornerRadius="15" Height="65" Width="65" HorizontalAlignment="Left">
 
                             <ui:SymbolIcon Symbol="Bookmark20" FontSize="63"/>
                         </Border>
                         <StackPanel Margin="20,0,0,0" HorizontalAlignment="Left">
-                            <TextBlock Text="[网站]元素法典" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Text="元素法典" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,0,5"/>
                             <TextBlock TextWrapping="Wrap" Text="Novel AI 元素魔法全收录" FontSize="14" HorizontalAlignment="Center" Width="266"/>
 
                         </StackPanel>
@@ -173,10 +154,11 @@
 
                 </ui:CardAction>
             </StackPanel>
-            <ui:Hyperlink NavigateUri="https://www.kdocs.cn/l/cre0TwbMkdx3" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" Margin="0,16,0,0">NovelAI信息并联计划</ui:Hyperlink>
-            <ui:Hyperlink NavigateUri="https://www.114514123.xyz" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold">NovelAI资源站</ui:Hyperlink>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
+                <ui:Hyperlink NavigateUri="https://www.kdocs.cn/l/cre0TwbMkdx3" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold">NovelAI信息并联计划</ui:Hyperlink>
+                <ui:Hyperlink NavigateUri="https://www.114514123.xyz" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold">NovelAI资源站</ui:Hyperlink>
 
-            <TextBlock Text="开放源代码许可" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,20" ></TextBlock>
+            </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                 <StackPanel Orientation="Horizontal">
@@ -186,17 +168,17 @@
                         </Border.Background>
                     </Border>
                     <StackPanel  >
-                        <TextBlock TextWrapping="Wrap" Text=".NET Community Toolkit"   FontSize="16" FontWeight="Bold" Width="750"/>
+                        <TextBlock TextWrapping="Wrap" Text=".NET Community Toolkit"   FontSize="16" FontWeight="Bold" Width="950"/>
                         <TextBlock TextWrapping="Wrap" Text="Copyright © .NET Foundation and Contributors
-"   FontSize="12"  Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="All rights reserved."   FontSize="12"  Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="URL：https://github.com/CommunityToolkit/dotnet"   FontSize="12"  Width="750" Foreground="#FF00D6FF"/>
+"   FontSize="12"  Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="All rights reserved."   FontSize="12"  Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="URL：https://github.com/CommunityToolkit/dotnet"   FontSize="12"  Width="950" Foreground="#FF00D6FF"/>
                         <TextBlock TextWrapping="Wrap" Text="MIT License (MIT)
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."   FontSize="12"  Width="750"/>
+THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."   FontSize="12"  Width="950"/>
 
 
                     </StackPanel>
@@ -208,14 +190,14 @@ THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED
                         </Border.Background>
                     </Border>
                     <StackPanel  >
-                        <TextBlock TextWrapping="Wrap" Text="Newtonsoft.Json"   FontSize="16" FontWeight="Bold" Width="750"/>
+                        <TextBlock TextWrapping="Wrap" Text="Newtonsoft.Json"   FontSize="16" FontWeight="Bold" Width="950"/>
                         <TextBlock TextWrapping="Wrap" Text="CJson.NET is a popular high-performance JSON framework for .NET
-"   FontSize="12"  Width="750"/>
+"   FontSize="12"  Width="950"/>
                         <TextBlock TextWrapping="Wrap" Text="Copyright (c) 2007 James Newton-King
-"   FontSize="12"  Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="URL：https://www.newtonsoft.com/json"   FontSize="12"  Width="750" Foreground="#FF00D6FF"/>
+"   FontSize="12"  Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="URL：https://www.newtonsoft.com/json"   FontSize="12"  Width="950" Foreground="#FF00D6FF"/>
                         <TextBlock TextWrapping="Wrap" Text ="Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the Software), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."   FontSize="12"  Width="750"/>
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."   FontSize="12"  Width="950"/>
 
 
                     </StackPanel>
@@ -227,12 +209,12 @@ The above copyright notice and this permission notice shall be included in all c
                         </Border.Background>
                     </Border>
                     <StackPanel  >
-                        <TextBlock TextWrapping="Wrap" Text="WPF-UI"   FontSize="16" FontWeight="Bold" Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar."   FontSize="12"  Width="750"/>
+                        <TextBlock TextWrapping="Wrap" Text="WPF-UI"   FontSize="16" FontWeight="Bold" Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar."   FontSize="12"  Width="950"/>
                         <TextBlock TextWrapping="Wrap" Text="lepo.co
-"   FontSize="12"  Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="URL：https://github.com/lepoco/wpfui"   FontSize="12"  Width="750" Foreground="#FF00D6FF"/>
-                        <TextBlock TextWrapping="Wrap" Text ="wpf, ui, wpfui, fluent, design, winui, windows, controls, custom, metro, modern, xaml, toolkit, color, dark, theme, lepo, net6, net5, net"   FontSize="12"  Width="750"/>
+"   FontSize="12"  Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="URL：https://github.com/lepoco/wpfui"   FontSize="12"  Width="950" Foreground="#FF00D6FF"/>
+                        <TextBlock TextWrapping="Wrap" Text ="wpf, ui, wpfui, fluent, design, winui, windows, controls, custom, metro, modern, xaml, toolkit, color, dark, theme, lepo, net6, net5, net"   FontSize="12"  Width="950"/>
 
 
                     </StackPanel>
@@ -244,16 +226,16 @@ The above copyright notice and this permission notice shall be included in all c
                         </Border.Background>
                     </Border>
                     <StackPanel  >
-                        <TextBlock TextWrapping="Wrap" Text="System.Management"   FontSize="16" FontWeight="Bold" Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="Provides access to a rich set of management information and management events about the system, devices, and applications instrumented to the Windows Management Instrumentation (WMI) infrastructure."   FontSize="12"  Width="750"/>
+                        <TextBlock TextWrapping="Wrap" Text="System.Management"   FontSize="16" FontWeight="Bold" Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="Provides access to a rich set of management information and management events about the system, devices, and applications instrumented to the Windows Management Instrumentation (WMI) infrastructure."   FontSize="12"  Width="950"/>
                         <TextBlock TextWrapping="Wrap" Text="Microsoft
-"   FontSize="12"  Width="750"/>
-                        <TextBlock TextWrapping="Wrap" Text="URL：https://dot.net/"   FontSize="12"  Width="750" Foreground="#FF00D6FF"/>
+"   FontSize="12"  Width="950"/>
+                        <TextBlock TextWrapping="Wrap" Text="URL：https://dot.net/"   FontSize="12"  Width="950" Foreground="#FF00D6FF"/>
                         <TextBlock TextWrapping="Wrap" Text ="
 Commonly Used Types:
 System.Management.ManagementClass
 System.Management.ManagementObject
-System.Management.SelectQuery"   FontSize="12"  Width="750"/>
+System.Management.SelectQuery"   FontSize="12"  Width="950"/>
 
 
                     </StackPanel>

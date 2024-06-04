@@ -1,4 +1,4 @@
-## 绘梦AI绘画启动器3.5.5 SD-WenUI-Launcher 3.5.5 UpData
+## 绘梦AI绘画启动器3.5.5 SD-WenUI-Launcher 3.5.5 
 
 ### #SD启动器 #AI绘画启动器 #StableDiffusion启动器 #开源 #绘梦AI启动器
 ### 下载链接&&DownloadLink

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Awake.Views.Pages;
 using Awake.Models;
 using System.Collections.ObjectModel;
-using Awake.Models;
+
 
 namespace Awake.Services
 {

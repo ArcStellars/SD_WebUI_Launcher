@@ -16,7 +16,7 @@
 
                 <StackPanel Orientation="Horizontal" Height="214" Width="214">
                     <StackPanel.Background>
-                        <ImageBrush ImageSource="/Views/Pages/toolkit.png"/>
+                        <ImageBrush ImageSource="/img/toolkit.png"/>
                     </StackPanel.Background>
                     <StackPanel Width="210" Height="210">
                     </StackPanel>

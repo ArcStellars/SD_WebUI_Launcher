@@ -44,26 +44,26 @@ namespace Awake.ViewModels
             {
                 new NavigationItem()
                 {
-         
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "盒子首页",
                     PageTag = "dashboard",
                     Icon = SymbolRegular.Desktop24,
                     PageType = typeof(Views.Pages.DashboardPage)
                 },
-                //                new NavigationItem()
-                //{
-                //    Width = 140,
-                //    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                //    Content = "作品灵感",
-                //    PageTag = "a2",
-                //    Icon = SymbolRegular.DeveloperBoard24,
-                //    PageType = typeof(Views.Pages.a2)
-                //},
-
                 new NavigationItem()
                 {
-                
+                    Width = 140,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    Content = "安装中心",
+                    PageTag = "web",
+                    Icon = SymbolRegular.WrenchScrewdriver24,
+                    PageType = typeof(Views.Pages.webpp)
+
+                },
+                new NavigationItem()
+                {
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "高级选项",
                     PageTag = "data",
@@ -72,16 +72,16 @@ namespace Awake.ViewModels
                 },
                 new NavigationItem()
                 {
-                 
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "版本修改",
                     PageTag = "Code",
                     Icon = SymbolRegular.BranchFork20,
                     PageType = typeof(Views.Pages.Code)
                 },
-                                new NavigationItem()
+                new NavigationItem()
                 {
-              
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     Content = "插件修改",
                     PageTag = "Exts",
@@ -90,23 +90,23 @@ namespace Awake.ViewModels
                 },
                 new NavigationItem()
                 {
-             
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                    Content = "安装中心",
-                    PageTag = "web",
-                    Icon = SymbolRegular.WrenchScrewdriver24,
-                    PageType = typeof(Views.Pages.webpp)
+                    Content = "模型管理",
+                    PageTag = "Models",
+                    Icon = SymbolRegular.Cube12,
+                    PageType = typeof(Views.Pages.Models)
+                },
 
-                }
             };
 
             NavigationFooter = new ObservableCollection<INavigationControl>
             {
                 new NavigationItem()
                 {
-            
+                    Width = 140,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                    Content = "关于绘梦",
+                    Content = "关于盒子",
                     PageTag = "settings",
                     Icon = SymbolRegular.Info24,
                     PageType = typeof(Views.Pages.SettingsPage)

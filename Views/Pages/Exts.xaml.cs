@@ -48,27 +48,22 @@ namespace Awake.Views.Pages
             {
                 if (!File.Exists(initialize.gitPath_use + @"\mingw64\libexec\git-core\git.exe"))
                 {
-                    System.Windows.MessageBox.Show("自定义GIT路径错误或未选择");
-                  //  Process.GetCurrentProcess().Kill();
+                    System.Windows.MessageBox.Show("自定义GIT路径错误或未选择，程序错误即将关闭！");
+                    Process.GetCurrentProcess().Kill();
                 }
             }
             else
             {
                 if (!File.Exists(initialize.工作路径 + @"\GIT\mingw64\libexec\git-core\git.exe"))
                 {
-                    System.Windows.MessageBox.Show("工作路径下即整合包未存在GIT");
-                 //   Process.GetCurrentProcess().Kill();
+                    System.Windows.MessageBox.Show("工作路径下即整合包未存在GIT，程序错误即将关闭！");
+                    Process.GetCurrentProcess().Kill();
                 }
 
             }
 
             InitializeComponent();
-           async Task getdata()
-            {
-                Init.InitExtData();
-
-            }
-            getdata();
+            Init.InitExtData();
             exts.ItemsSource = Store.extLocal;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -148,7 +143,7 @@ namespace Awake.Views.Pages
             {
                 System.Windows.MessageBox.Show("获取失败,可能是插件问题");
             }
-            
+
         }
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {

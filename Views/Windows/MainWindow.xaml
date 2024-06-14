@@ -9,9 +9,11 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="光源AI绘画启动器"
     x:Name="basewindow"
-
+    Width="1200"
+    Height="700"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=True}"
+
     ExtendsContentIntoTitleBar="True"
   WindowBackdropType="Auto"
     WindowCornerPreference="Round"
@@ -26,7 +28,7 @@
     </ui:UiWindow.Background>
     <Grid >
         <Grid.Background >
-            <ImageBrush x:Name="主题背景图" Stretch="UniformToFill" Opacity="1.0" ImageSource="/Views/Windows/mainback.png" />
+            <ImageBrush x:Name="主题背景图" Stretch="UniformToFill" Opacity="1.0" ImageSource="/img/backui.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -40,33 +42,45 @@
             Grid.Row="1"
             Margin="0" Opacity="0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="190" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Margin="5,0,5,0">
+            <Grid Grid.Column="0" Margin="15,0,0,18">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="130" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                
-                    <RowDefinition Height="125" />
-                    <RowDefinition Height="70" />
                 </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0" Margin="0,12" Orientation="Horizontal">
+                    <ui:SymbolIcon Symbol="Group20" FontSize="50"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="盒子在手 AI我有 &#x0a; Release Version" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,4"/>
+                        <TextBlock Text="" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+                    </StackPanel>
+
+
+
+                </StackPanel>
 
 
                 <!--  This is the main navigation of the application.  -->
+                <TextBlock Grid.Row="1" Text="探索" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Margin="15,0,0,10" Opacity="0.6"/>
 
-                <ui:NavigationStore
+                <ui:NavigationFluent
                     
                     x:Name="RootNavigation"
-                    Grid.Row="0" Grid.RowSpan="3"
+                    Grid.Row="1" Grid.RowSpan="2"
                     Footer="{Binding ViewModel.NavigationFooter, Mode=TwoWay}"
                     Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
-                    Items="{Binding ViewModel.NavigationItems, Mode=TwoWay}" HorizontalAlignment="Center" 
+                    Items="{Binding ViewModel.NavigationItems, Mode=TwoWay}"  Margin="0,30,0,0" 
                         
                     />
 
-                <ui:Flyout Grid.Row="0" x:Name="安装提示" HorizontalAlignment="Center" VerticalAlignment="Top" Width="180" Margin="0,250,0,0">
+                <ui:Flyout Grid.Row="1" x:Name="安装提示" HorizontalAlignment="Center" VerticalAlignment="Top" Width="180" Margin="0,100,0,0">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="还没有安装SD-WebUI" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="请前往安装中心进行安装" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -119,17 +133,23 @@
                         <Slider  Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" x:Name="图片亮度" Width="230" MouseLeave="图片亮度_MouseLeave" MouseMove="图片亮度_MouseMove" MouseEnter="图片亮度_MouseEnter" />
                     </StackPanel>
                 </ui:Flyout>
-                <StackPanel  Grid.Row="1">
-                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,5">
+                <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,120">
+                    <TextBlock Text="创作" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Margin="15,0,0,10" Opacity="0.6"/>
 
-                    <Canvas Width="60" Height="60">
-                        <ProgressBar Width="60" Height="60" Value="100"/>
-                        <Button  x:Name="一键启动按钮"   HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontSize="20" Click="一键启动按钮_Click" Margin="0,0,0,0" Width="60" Height="60">
-                                <StackPanel Orientation="Vertical">
-                                    <ui:SymbolIcon Symbol="Power20" FontSize="30" HorizontalAlignment="Center" Height="30" Width="30"/>
-                                    <TextBlock Text= "启动" FontSize="15"></TextBlock>
+                    <Canvas Width="150" Height="50">
+                        <ProgressBar Width="150" Height="50" Value="100"/>
+                        <Button  x:Name="一键启动按钮"   HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="50" FontSize="20" Click="一键启动按钮_Click" Width="150" Margin="0,0,0,5">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <ui:SymbolIcon Symbol="Power20" Width="30" Height="30" FontSize="30" Margin="0,0,5,0"/>
+                                <StackPanel Width="90">
+                                    <TextBlock Text="一键启动" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <TextBlock Text="启动本地WebUI" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Opacity="0.8"/>
+
                                 </StackPanel>
-                            </Button>
+
+                            </StackPanel>
+
+                        </Button>
 
                     </Canvas>
 
@@ -138,13 +158,12 @@
 
                 </StackPanel>
 
-                <Button x:Name="主题切换"  Width="60" Height="60" VerticalAlignment="Bottom" Click="主题切换_Click" HorizontalAlignment="Center"  >
-                    <StackPanel Orientation="Vertical">
+                <Button x:Name="主题切换"  Grid.Row="2" Width="140" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="主题切换_Click"  >
+                    <StackPanel Orientation="Horizontal">
                         <ui:SymbolIcon Symbol="WeatherSunny16" />
-                        <TextBlock Text= "主题"></TextBlock>
+                        <TextBlock Text= "主题中心"></TextBlock>
                     </StackPanel>
                 </Button>
-                </StackPanel>
             </Grid>
 
 
@@ -174,7 +193,7 @@
 
 
         <ui:TitleBar
-            Title="绘梦 3.5.5（FluentDesign测试）  |  开源SD启动器     关注BiliBili @晴岚Horizon 获取最新支持  "  
+            Title="光源绘梦 Release Version |  开源SD盒子，辅助工具&amp;启动器"
             Grid.Row="0"
           
             UseSnapLayout="True">
@@ -193,7 +212,7 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
-        <Grid x:Name="开屏画面"  Grid.Row="1" Grid.RowSpan="2" >
+        <Grid x:Name="开屏画面"  Grid.Row="1" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="17*"/>
                 <ColumnDefinition Width="63*"/>
@@ -205,13 +224,13 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.ColumnSpan="2" Margin="0,552,0,0" Grid.RowSpan="2" >
-                <TextBlock x:Name="盒子C1" Text="绘梦启动器3.5.5 (Open-SD-WebUI-Launcher) for Windows10 and later" HorizontalAlignment="Center" FontSize="16" Margin="0,15,0,0"/>
-                <TextBlock x:Name="盒子C2" Text="copy right ©2022-2024 Astroluminous-WorkShop All right reserved" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="盒子C1" Text="光源绘梦启动器Release Version (Open-SD-WebUI-Launcher) for Windows10 and later" HorizontalAlignment="Center" FontSize="16" Margin="0,15,0,0"/>
+                <TextBlock x:Name="盒子C2" Text="copy right ©2022-2024 Astro-Artistry-Dev-Team All right reserved" HorizontalAlignment="Center"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="186,0,0,0">
                 <ui:SymbolIcon Symbol="Group20" FontSize="180" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.99"/>
                 <StackPanel>
-                    <TextBlock FontSize="60" HorizontalAlignment="Center"   FontFamily="Microsoft YaHei"   VerticalAlignment="Center" Margin="0,30,0,0">绘梦在手，AI我有！</TextBlock>
+                    <TextBlock FontSize="60" HorizontalAlignment="Center"   FontFamily="Microsoft YaHei"   VerticalAlignment="Center" Margin="0,30,0,0">盒子在手，AI我有!</TextBlock>
                     <TextBlock FontSize="36" HorizontalAlignment="Center"  Text="用算法雕琢AI世界，与技术一同改变生活"  FontFamily="Microsoft YaHei"   VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
 

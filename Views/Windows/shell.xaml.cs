@@ -15,16 +15,16 @@ namespace Awake.Views.Windows
     public partial class shell : UiWindow
     {
         public string 启动文件 = "launch.py";//这里是默认的启动文件
-        string cpuname = "";
-        string Machinename = "";
-        string systemType = "";
+        string cpuname = string.Empty;
+        string Machinename = string.Empty;
+        string systemType = string.Empty;
         float memorysize = 1;
         int memorynum = 1;
-        string gpuname = "";
-        private DispatcherTimer _timer;
-        private Process _process;
-        private Process 启动魔法;
-        private string 工作路径_start;
+        string gpuname = string.Empty;
+        private DispatcherTimer _timer = null;
+        private Process _process = null;
+        private Process 启动魔法 = null;
+        private string 工作路径_start = null;
 
         public shell()
         {
@@ -101,10 +101,10 @@ namespace Awake.Views.Windows
                 memorynum = await Task.Run(() => hardinfo.MemoryNumberCount());
                 gpuname = await Task.Run(() => hardinfo.GPUName());
                 标准输出流.AppendText("StableDiffusionWebUI正在启动，请耐心等待" + Environment.NewLine);
-                标准输出流.AppendText("绘梦AI启动器核心版本：beta Version 2024/6/3" + Environment.NewLine);
-                标准输出流.AppendText("关注bilibili@晴岚Horizon 获取最新支持" + Environment.NewLine);
+                标准输出流.AppendText("光源AI绘画启动核心版本：Release Version 2024/4/8" + Environment.NewLine);
+                标准输出流.AppendText("关注bilibili@Ray_Source光源 获取最新支持" + Environment.NewLine);
 
-                标准输出流.AppendText("<绘梦AI绘画启动器核心 | [硬件检测]>" + Environment.NewLine);
+                标准输出流.AppendText("<光源AI绘画启动器核心 | [硬件检测]>" + Environment.NewLine);
                 标准输出流.AppendText("CPU信息：" + cpuname + Environment.NewLine);
                 标准输出流.AppendText("系统名称：" + Machinename + "   系统类型：" + systemType + Environment.NewLine);
                 标准输出流.AppendText("内存信息：" + memorynum + " 插槽" + "  共计" + memorysize + " GB" + Environment.NewLine);
@@ -274,12 +274,9 @@ namespace Awake.Views.Windows
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                System.Windows.MessageBox.Show("进程出现问题,请查看报错日志!");
-                string str1 = ex.Message;
-                File.WriteAllText(@".\logs\error.txt", str1);
-                throw;
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
         }
         private void TimerTick(object sender, EventArgs e)
@@ -390,7 +387,7 @@ namespace Awake.Views.Windows
                     if (e.Data.Contains(" git_clone(stable_diffusion_repo, repo_dir('stable-diffusion-stability-ai'), \"Stable Diffusion\", stable_diffusion_commit_hash)"))//
                     {
                         标准报错流.AppendText("" + Environment.NewLine);
-                        标准报错流.AppendText("<绘梦AI绘画启动器核心 | [操作提示]>：这个错误提示表明在执行Git命令时出现了问题" + Environment.NewLine);
+                        标准报错流.AppendText("<光源AI绘画启动器核心 | [操作提示]>：这个错误提示表明在执行Git命令时出现了问题" + Environment.NewLine);
                         标准报错流.AppendText("要解决这个问题，你可以尝试以下几个步骤：" + Environment.NewLine);
                         标准报错流.AppendText("1,确保Git已经正确安装并配置在你的计算机上。你可以检查Git的安装路径和环境变量是否正确设置。" + Environment.NewLine);
                         标准报错流.AppendText("2,检查Git仓库的路径是否正确。根据错误信息中的路径，请确保该路径存在并且是一个有效的Git仓库。" + Environment.NewLine);
@@ -404,13 +401,13 @@ namespace Awake.Views.Windows
                     if (e.Data.Contains("HTTPSConnectionPool(host='huggingface.co', port=443"))
                     {
                         标准报错流.AppendText("" + Environment.NewLine);
-                        标准报错流.AppendText("        <绘梦AI绘画启动器核心 [级别：重要]>：连接超时，请断开网络连接以修复" + Environment.NewLine);
+                        标准报错流.AppendText("        <光源AI绘画启动器核心 [级别：重要]>：连接超时，请断开网络连接以修复" + Environment.NewLine);
                         标准报错流.AppendText("" + Environment.NewLine);
                     }
                     if (e.Data.Contains("fatal: not a git repository (or any of the parent directories): .git"))
                     {
                         标准报错流.AppendText("" + Environment.NewLine);
-                        标准报错流.AppendText("        <绘梦AI绘画启动器核心 [级别：可忽略]>：这个错误提示表示当前目录不是一个Git仓库，或者其父目录中没有找到.git文件夹。请确保在正确的Git仓库目录下执行此命令。\r\n\r\n" + Environment.NewLine);
+                        标准报错流.AppendText("        <光源AI绘画启动器核心 [级别：可忽略]>：这个错误提示表示当前目录不是一个Git仓库，或者其父目录中没有找到.git文件夹。请确保在正确的Git仓库目录下执行此命令。\r\n\r\n" + Environment.NewLine);
                         标准报错流.AppendText("" + Environment.NewLine);
                     }
 

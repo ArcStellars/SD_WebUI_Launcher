@@ -313,11 +313,11 @@ namespace Awake
             {
                 // 如果文件存在，读取其中的内容到startpath全局变量中
                 initialize.工作路径 = File.ReadAllText(@".AI_launther_log\startpath.txt");
-              
+
                 if (initialize.工作路径.Length == 3)
                 {
                     initialize.工作路径 = initialize.工作路径.Substring(0, initialize.工作路径.Length - 1);
-                }              
+                }
             }
 
 
@@ -327,7 +327,7 @@ namespace Awake
             if (File.Exists(@".AI_launther_log\gitpath.txt"))
             {
                 // 如果文件存在，读取其中的内容到gitpath全局变量中
-                initialize.gitPath = File.ReadAllText(@".AI_launther_log\gitpath.txt");   
+                initialize.gitPath = File.ReadAllText(@".AI_launther_log\gitpath.txt");
             }
         }
         public static void CheckVENVPathFile()//这里在初始化后从log里读取VENV的路径

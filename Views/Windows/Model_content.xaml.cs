@@ -120,9 +120,9 @@ namespace Awake.Views.Windows
 
 
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
             try
             {
@@ -137,10 +137,9 @@ namespace Awake.Views.Windows
                 image1.EndInit();
                 作者头像.ImageSource = image1;
             }
-            catch (
-            Exception ex)
+            catch (Exception error)
             {
-
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
         }
         async Task _GetModelDetals(string uuid)
@@ -230,17 +229,14 @@ namespace Awake.Views.Windows
                         模型下载列表.Children.Add(model_Download_List);
                     }
                 }
-                catch
+                catch (Exception error)
                 {
-                    报错指示器.Visibility = Visibility.Visible;
-
-
+                    File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
                 }
-
             }
-            catch (Exception ex)//捕获异常拿去调试或者控制404一类的UI动画逻辑
+            catch (Exception error)
             {
-                System.Windows.MessageBox.Show(ex.Message);//开发中调试窗口
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
         }
         protected override void OnClosed(EventArgs e)

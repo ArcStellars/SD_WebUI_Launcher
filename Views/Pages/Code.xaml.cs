@@ -43,15 +43,15 @@ namespace Awake.Views.Pages
             {
                 if (!File.Exists(initialize.gitPath_use + @"\mingw64\libexec\git-core\git.exe"))
                 {
-                    System.Windows.MessageBox.Show("自定义GIT路径错误或未选择,请在安装中心里选择合适的整合包或者本地Git路径");
-                   Process.GetCurrentProcess().Kill();
+                    System.Windows.MessageBox.Show("自定义GIT路径错误或未选择，程序错误即将关闭！");
+                    Process.GetCurrentProcess().Kill();
                 }
             }
             else
             {
                 if (!File.Exists(initialize.工作路径 + @"\GIT\mingw64\libexec\git-core\git.exe"))
                 {
-                    System.Windows.MessageBox.Show("工作路径下即整合包未存在GIT，请检查后重新打开启动器");
+                    System.Windows.MessageBox.Show("工作路径下即整合包未存在GIT，程序错误即将关闭！");
                     Process.GetCurrentProcess().Kill();
                 }
 
@@ -78,20 +78,11 @@ namespace Awake.Views.Pages
             startInfo1.WorkingDirectory = initialize.加载路径;
 
             process1.StartInfo = startInfo1;
-            try
-            {
-                process1.Start();
-                process1.WaitForExit();
-          
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            process1.Start();
+            process1.WaitForExit();
+
             string msg1 = process1.StandardOutput.ReadToEnd();
             currHash = msg1.Split("^^")[0];
-
-
             //Debug.WriteLine(msg);
 
             process1 = new Process();
@@ -105,14 +96,8 @@ namespace Awake.Views.Pages
             startInfo1.WorkingDirectory = initialize.加载路径;
 
             process1.StartInfo = startInfo1;
-            try
-            {
-                process1.Start();
-                process1.WaitForExit();
-
-            }catch(Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
+            process1.Start();
+            process1.WaitForExit();
 
             string msg12 = process1.StandardOutput.ReadToEnd();
 
@@ -135,7 +120,6 @@ namespace Awake.Views.Pages
             startInfo1.WorkingDirectory = initialize.加载路径;
 
             process1.StartInfo = startInfo1;
-
             process1.Start();
             process1.WaitForExit();
 

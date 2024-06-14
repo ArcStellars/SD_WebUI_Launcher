@@ -14,7 +14,7 @@ x:Class="Awake.Views.Windows.shell"
 
     WindowCornerPreference="Round"
     
-          Title="绘梦AI绘画启动器   |   启动控制台" Height="700" Width="1200" WindowStartupLocation="CenterScreen" MinWidth="1200" MinHeight="700">
+          Title="光源绘梦Release Version   |   启动控制台" Height="700" Width="1200" WindowStartupLocation="CenterScreen" MinWidth="1200" MinHeight="700">
 
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
@@ -24,7 +24,7 @@ x:Class="Awake.Views.Windows.shell"
 
         <Grid x:Name="启动器终端" Grid.ColumnSpan="2">
             <ui:TitleBar
-    Title="绘梦3.5.5  |  启动控制台"
+    Title="光源  |  启动控制台"
     Grid.Row="0"
   
     UseSnapLayout="True" Foreground="White" Background="#FF1F1F1F"/>
@@ -111,7 +111,7 @@ x:Class="Awake.Views.Windows.shell"
 
         <Grid x:Name="SD启动" Grid.ColumnSpan="2">
             <Grid.Background>
-                <ImageBrush ImageSource="/Views/Windows/SD启动.png" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="/img/SD启动.png" Stretch="UniformToFill"/>
             </Grid.Background>
 
         </Grid>

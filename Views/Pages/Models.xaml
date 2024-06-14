@@ -1,0 +1,155 @@
+﻿<ui:UiPage x:Class="Awake.Views.Pages.Models"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:Background="{DynamicResource ApplicationBackgroundBrush}"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      d:DesignHeight="700"
+      d:DesignWidth="980"
+      Title="模型管理">
+    <TabControl x:Name="tabs" SelectionChanged="TabControl_SelectionChanged">
+        <TabItem Margin="0,0,-80,0">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="StableDiffusion"/>
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Click="OpenCkpt_Click" Width="250">打开目录</Button>
+                </StackPanel>
+                <DataGrid x:Name="cks" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="文件名" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="描述" Binding="{Binding  Desc}" Width="*" />
+                        <DataGridTextColumn Header="短Hash" Binding="{Binding ShortHash}" Width="*" />
+                        <DataGridTextColumn Header="大小|MB" Binding="{Binding Size}" Width="*" />
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="*" />
+                        <DataGridTemplateColumn Header="操作" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Click="Delete_SD_Click" Content="删除模型" Tag="{Binding Name}"  Width="180"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Margin="80,0,-80,0">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Embedding"/>
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel>
+                <Button Click="OpenEmb_Click" Width="250">打开目录</Button>
+                <DataGrid x:Name="embs" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="文件名" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="描述" Binding="{Binding  Desc}" Width="*" />
+                        <DataGridTextColumn Header="大小|KB" Binding="{Binding Size}" Width="*" />
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="*" />
+                        <DataGridTemplateColumn Header="操作" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Click="Delete_EM_Click" Content="删除模型" Tag="{Binding Name}"  Width="180"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Margin="80,0,-80,0">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="HyperNetwork"/>
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel>
+                <Button Click="OpenHys_Click" Width="250">打开目录</Button>
+                <DataGrid x:Name="hys" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="文件名" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="描述" Binding="{Binding  Desc}" Width="*" />
+                        <DataGridTextColumn Header="大小|KB" Binding="{Binding Size}" Width="*" />
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="*" />
+                        <DataGridTemplateColumn Header="操作" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Click="Delete_HN_Click" Content="删除模型" Tag="{Binding Name}"  Width="180"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Margin="80,0,-80,0">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="VAE"/>
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Click="OpenVAE_Click" Width="250">打开目录</Button>
+                </StackPanel>
+                <DataGrid x:Name="vaes" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="文件名" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="描述" Binding="{Binding  Desc}" Width="*" />
+                        <DataGridTextColumn Header="大小|MB" Binding="{Binding Size}" Width="*" />
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="*" />
+                        <DataGridTemplateColumn Header="操作" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Click="Delete_VAE_Click" Content="删除模型" Tag="{Binding Name}"  Width="180"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Margin="80,0,-80,0">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Lora"/>
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel>
+                <Button Click="OpenLoRA_Click" Width="250">打开目录</Button>
+                <DataGrid x:Name="loras" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="文件名" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="描述" Binding="{Binding  Desc}" Width="*" />
+                        <DataGridTextColumn Header="大小|MB" Binding="{Binding Size}" Width="*" />
+                        <DataGridTextColumn Header="日期" Binding="{Binding Date}" Width="*" />
+                        <DataGridTemplateColumn Header="操作" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Click="Delete_Lora_Click" Content="删除模型" Tag="{Binding Name}"  Width="180"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</ui:UiPage>

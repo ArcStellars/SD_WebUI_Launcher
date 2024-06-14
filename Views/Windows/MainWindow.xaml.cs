@@ -56,7 +56,10 @@ namespace Awake.Views.Windows
                     {
                         _UseGPUindex = initialize.显卡列表.Count - 1;//默认启动后选最后一张GPU，核显什么的排在前面
                     }
-                    catch (Exception ex) { }
+                    catch (Exception error)
+                    {
+                        File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
+                    }
 
                     //计算机名称类型.Text = "系统名称：" + Machinename + "   系统类型：" + systemType;
                     //计算机内存信息.Text = "内存信息：" + memorynum + " 插槽" + "  共计" + memorysize + " GB";
@@ -193,9 +196,7 @@ namespace Awake.Views.Windows
             }
             catch (Exception error)
             {
-                string str1 = error.Message;
-                File.WriteAllText(@".\logs\error.txt", str1);
-                throw;
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
         }
         async Task _loadpage()
@@ -237,9 +238,7 @@ namespace Awake.Views.Windows
             }
             catch (Exception error)
             {
-                string str1 = error.Message;
-                File.WriteAllText(@".\logs\error.txt", str1);
-                throw;
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
 
         }
@@ -267,7 +266,7 @@ namespace Awake.Views.Windows
         #endregion INavigationWindow methods
         protected override void OnClosed(EventArgs e)
         {
-            
+
             base.OnClosed(e);
             File.WriteAllText(@".AI_launther_log\UIalpha.txt", initialize.图片亮度.ToString());
             File.WriteAllText(@".AI_launther_log\UI.txt", initialize.背景颜色);

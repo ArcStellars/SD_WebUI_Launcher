@@ -1,6 +1,4 @@
-﻿
-
-namespace Awake.Models
+﻿namespace Awake.Models
 {
     public struct CommitItem
     {

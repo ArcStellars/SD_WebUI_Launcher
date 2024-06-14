@@ -71,7 +71,7 @@ namespace Awake.Views.Windows
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = initialize.gitPath_use + @"\mingw64\libexec\git-core\git.exe";
-            startInfo.Arguments = " clone " + btn.Tag; 
+            startInfo.Arguments = " clone " + btn.Tag;
             startInfo.UseShellExecute = true;
             startInfo.RedirectStandardOutput = false;
             startInfo.CreateNoWindow = false;

@@ -56,7 +56,6 @@ namespace Awake
         public static string GPUName()//获得显卡名称
         {
             string DisplayName = "";
-            string 显卡名称 = "";
             ManagementClass m = new ManagementClass("Win32_VideoController");
             ManagementObjectCollection mn = m.GetInstances();
             DisplayName = "显卡数量：" + mn.Count.ToString() + "  " + "\n";

@@ -1,4 +1,4 @@
-﻿﻿using Awake.Views.Windows;
+﻿using Awake.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -77,7 +77,7 @@ namespace Awake.Views.Pages
             GetSystemInfo();
 
             if (File.Exists(@".AI_launther_log\startpath.txt") == false)
-            {    
+            {
                 File.WriteAllText(@".AI_launther_log\startpath.txt", "暂未设置部署路径");
                 磁盘剩余显示.Text = "磁盘剩余空间：未知";
 
@@ -85,7 +85,7 @@ namespace Awake.Views.Pages
             }
             else
             {
-                工作路径展示.Text =initialize.工作路径;
+                工作路径展示.Text = initialize.工作路径;
             }
             if (initialize.gitPath != "")
             {
@@ -455,7 +455,7 @@ namespace Awake.Views.Pages
 
 
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         MessageBox.Show("请先选择WebUI的工作路径");
                     }
@@ -571,11 +571,7 @@ namespace Awake.Views.Pages
             }
             catch (Exception error)
             {
-
-                string str1 = error.Message;
-                File.WriteAllText(@".\logs\error.txt", str1);
-                throw;
-                // 处理或显示异常信息  
+                File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
             }
 
             安装组.Visibility = Visibility.Collapsed;
@@ -642,9 +638,7 @@ namespace Awake.Views.Pages
                     }
                     catch (Exception error)
                     {
-                        string str1 = error.Message;
-                        File.WriteAllText(@".\logs\error.txt", str1);
-                        throw;
+                        File.WriteAllText(@".\logs\error.txt", error.Message.ToString());
                     }
                 }
 
